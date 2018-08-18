@@ -1,0 +1,8 @@
+addcoltotals : 
+
+index=main | table products,quarter,sales,quota | addcoltotals labelfield=quarter label=sales_total sales | addcoltotals labelfield=products label=quota_total quota
+
+
+addtotals:
+
+index=main | table products,quarter,sales,quota | addtotals fieldname=sid col=true labelfield=quarter label=total  sales quota
