@@ -1,0 +1,8 @@
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| search genre_id IN (18,27,99) 
+| table original_language, genre_id
+| stats count by  original_language, genre_id
+| xyseries original_language,genre_id,count
+| untable original_language,genre_id,count
