@@ -1,0 +1,59 @@
+map command:
+
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| rename id as movie_id 
+| table movie_id,genre_id,original_language,original_title 
+| head 10 
+| map search="|getgenre * | where id=$genre_id$ | eval movie_id = $movie_id$,original_language = $original_language$,original_title=$original_title$"
+
+
+join command:
+
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| rename id as movie_id 
+| table movie_id,genre_id,original_language,original_title 
+| head 10
+| join type=inner genre_id
+[ | getgenre * 
+| rename id as genre_id
+]
+
+
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| rename id as movie_id 
+| table movie_id,genre_id,original_language,original_title 
+| head 10
+| join type=outer genre_id
+[ | getgenre * 
+| rename id as genre_id
+| where genre_id IN(99,28)
+]
+
+
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| rename id as movie_id 
+| eval name = "test"
+| table movie_id,genre_id,original_language,original_title,name 
+| head 10
+| join max=0 type=outer overwrite=false    genre_id
+[ | getgenre * 
+| rename id as genre_id, name as name1
+| where genre_id IN(99,28)
+]
+
+
+selfjoin:
+
+index="main" | table employee_id,manager_id,name,title | sort employee_id | selfjoin overwrite=true max=0 keepsingle=1 title
+
+
+
+
