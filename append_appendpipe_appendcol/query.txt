@@ -1,0 +1,43 @@
+append:
+
+index="tmdb_index" | mvexpand genre_ids{} | rename genre_ids{} as genre_id | stats count by genre_id | where genre_id IN (99,28) |append [| getgenre * | rename id as genre_id | where genre_id IN (99,28)]  | selfjoin genre_id
+
+
+index="tmdb_index" | where original_language IN ("en","es","de") | stats count by original_language | append [search index="tmdb_index" | where original_language IN ("en","es","de") | stats count]
+
+
+index=_internal earliest=08/01/2018:00:00:00 latest=08/15/2018:11:59:00
+| append extendtimerange=true
+[search index=_internal earliest=08/10/2018:00:00:00 latest=08/19/2018:11:59:00]
+|timechart span=1d count
+
+
+appendpipe:
+
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| where genre_id IN (10402,10749,10751,10752) 
+| stats count by  original_language, genre_id 
+| appendpipe [stats sum(count) as count by original_language | eval genre_id = "All Languages"]
+| sort original_language
+
+
+appendcols:
+
+--negative use case
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| where genre_id IN (28,99) 
+| stats count by   genre_id
+| appendcols [| getgenre * | where id IN (99,28,12)]
+
+
+--positive use case
+index="tmdb_index"
+| rename id as movie_id
+| stats dc(movie_id) as total_movies
+| appendcols [search index="tmdb_index"
+| stats dc(original_language) as total_ol]
+| eval avg_movie_language = total_movies / total_ol
