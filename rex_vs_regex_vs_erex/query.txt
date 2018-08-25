@@ -1,0 +1,36 @@
+rex:
+
+index="main" | rex field=_raw "From:\s+<(?<from>.*)>\s+To:\s+<(?<to>.*)>\s+"
+
+| makeresults | eval text = "user_id=bob;search;my_saved_search" | rex field=text "user_id={1}(?<user>\w+);(?<app_name>\w+);(?<saved_search_name>\w+)"
+
+| makeresults | eval credit_card_number = "1234-5678-9101-1213" | rex field=credit_card_number max_match=0   "(?<digits>\d{4})"
+
+| makeresults | eval credit_card_number = "1234-5678-9101-1213" | rex field=credit_card_number offset_field="new_field" max_match=0  "(?<digits>\d{4})"
+
+"s/<regex>/<replacement>/<flags>"  -- replacement
+"y/<string1>/<string2>/" -- sustitute
+
+| makeresults | eval credit_card_number = "1234-5678-9101-1213" | rex field=credit_card_number mode=sed "s/(\d{4}-){3}/XXXX-XXXX-XXXX-/g"
+
+| makeresults | eval credit_card_number = "1234-5678-9101-1213" | rex field=credit_card_number mode=sed "s/(\d{4})/XXXX/4"
+
+| makeresults | eval credit_card_number = "1234-5678-9101-1213" | rex field=credit_card_number mode=sed "y/1234/XXXX/"
+
+
+regex:
+
+index=main | regex _raw = "From:\s+<[[:alnum:]]+@[[:alnum:]]+\.[[:alpha:]]+>"
+
+erex:
+
+index=main| erex emails examples="MariaDubois@example.com,Exit_Desk@sample.net,lyra@buttercupgames.com"
+
+index=main| erex fromfield=_raw emails  examples="MariaDubois@example.com,Exit_Desk@sample.net,lyra@buttercupgames.com"
+
+index=main| erex fromfield=_raw emails maxtrainers=5  examples="MariaDubois@example.com,Exit_Desk@sample.net,lyra@buttercupgames.com"
+
+| makeresults
+| eval month_text =  "07/02,11/03,13/3,01/03,99/3"
+| erex  months examples="07/02,01/03" counterexamples="99/3" fromfield=month_text
+
