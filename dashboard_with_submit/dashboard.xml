@@ -1,0 +1,99 @@
+<form>
+  <label>TMDB_First_dashboard</label>
+  <search id="base_search">
+    <query>index="tmdb_index" | table id,release_date,title,genre_ids{},original_language,original_title,overview,popularity | mvexpand genre_ids{} | rename genre_ids{} as genre_id  | eval release_date_epoc = strptime(release_date,"%Y-%m-%d") | eval release_year = strftime(release_date_epoc,"%Y")| fillnull value="not Defined" id, release_year, genre_id, original_language</query>
+  </search>
+  <fieldset submitButton="true" autoRun="true">
+    <input type="dropdown" token="release_year" searchWhenChanged="false">
+      <label>Release Year</label>
+      <search base="base_search">
+        <query>| stats count by release_year</query>
+      </search>
+      <fieldForLabel>release_year</fieldForLabel>
+      <fieldForValue>release_year</fieldForValue>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="genre_id" searchWhenChanged="false">
+      <label>Genre Id</label>
+      <search base="base_search">
+        <query>| stats count by genre_id</query>
+      </search>
+      <fieldForLabel>genre_id</fieldForLabel>
+      <fieldForValue>genre_id</fieldForValue>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="orig_ln" searchWhenChanged="false">
+      <label>Original Language</label>
+      <search base="base_search">
+        <query>| stats count by original_language</query>
+      </search>
+      <fieldForLabel>original_language</fieldForLabel>
+      <fieldForValue>original_language</fieldForValue>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Total Movies</title>
+        <search base="base_search">
+          <query>| search release_year=$release_year$ genre_id=$genre_id$ original_language=$orig_ln$ | dedup id | stats count</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0x006d9c"]</option>
+        <option name="underLabel">Movie Count</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Year Wise Breakup</title>
+        <search base="base_search">
+          <query>| search release_year=$release_year$ genre_id=$genre_id$ original_language=$orig_ln$  | dedup id | stats count by release_year</query>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Language Wise Breakup</title>
+        <search base="base_search">
+          <query>| search release_year=$release_year$ genre_id=$genre_id$ original_language=$orig_ln$  | dedup id | stats count by original_language</query>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Genre Wise Breakup</title>
+        <search base="base_search">
+          <query>| search release_year=$release_year$ genre_id=$genre_id$ original_language=$orig_ln$  | dedup id | stats count by genre_id</query>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Movie details</title>
+        <search base="base_search">
+          <query>| search release_year=$release_year$ genre_id=$genre_id$ original_language=$orig_ln$ | dedup id |table *</query>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>
