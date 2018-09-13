@@ -1,0 +1,125 @@
+| makeresults 
+| eval field1 = "1,2,3,4,5"
+| makemv delim="," field1
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@" field1
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="[[:alnum:]]+@([[:alnum:]]+)\.com" field1
+
+
+| makeresults  count=5
+| streamstats count as counter
+| eval field1 = "col1", field2="col2"
+| mvcombine delim=";" counter
+
+
+| makeresults  count=5
+| streamstats count as counter
+| eval field1 = "col1", field2="col2"
+| mvcombine delim=";" counter | nomv counter
+
+| makeresults  count=5
+| streamstats count as counter
+| eval field1 = "col1", field2="col2"
+| mvcombine delim=";" counter | mvexpand counter
+
+index="main" 
+| table "first name","last name",occupation,salary 
+| eval mv_field = mvappend("first name","last name",occupation,salary)
+
+
+index="main" | table "first name","last name",occupation,salary 
+| eval mv_field = mvappend("first name","last name",occupation,salary) 
+| eval count_mv = mvcount(mv_field)
+| eval count_normal = mvcount("first name")
+
+| makeresults 
+| eval field1 = "1,2,2,4,5"
+| makemv delim="," field1
+| eval dedup_field = mvdedup(field1)
+
+| makeresults 
+| eval field1 = "1,2,3,4,5"
+| makemv delim="," field1
+| eval filter_field = mvfilter(field1 IN (1,2))
+
+| makeresults 
+| eval field1 = "1,2,3,4,5"
+| makemv delim="," field1
+| eval filter_field = mvfilter(like(field1,"%5%"))
+
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+| eval filter_field = mvfilter(match(field1,".+1"))
+
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+| eval find_field = mvfind(field1,".+2")
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+| eval index_field = mvindex(field1,0,1)
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+| eval index_field = mvindex(field1,-2,-1)
+
+| makeresults 
+| eval field1 = "example1@test1.com,example2@test2.com,example3@test3.com"
+| makemv tokenizer="([[:alnum:]]+)@([[:alnum:]]+)\.com" field1
+| eval join_field = mvjoin(field1," OR ")
+
+| makeresults 
+| eval range = mvrange(1,10,2)
+
+| makeresults 
+| eval start_date = "09/01/2018", end_date = "09/11/2018"
+| eval start_date_epoc = strptime(start_date,"%m/%d/%Y"), end_date_epoc = strptime(end_date,"%m/%d/%Y")
+| eval date_range = mvrange(start_date_epoc,end_date_epoc,"1d")
+| eval date_range_readable = strftime(date_range,"%m/%d/%Y")
+
+| makeresults 
+| eval field1 = "C,B,A,D"
+| makemv delim="," field1
+| eval sorted_field1 = mvsort(field1)
+
+| makeresults 
+| eval field1 = "A,B,C,D"
+| eval field2 = "1,2,3,4"
+| makemv delim="," field1
+| makemv delim="," field2
+| eval zipped = mvzip(field1,field2,"|")
+
+| makeresults 
+| eval field1 = "A,B,C,D"
+| eval field2 = "1,2,3,4"
+| eval field3 = "$,#,@,&"
+| makemv delim="," field1
+| makemv delim="," field2
+| makemv delim="," field3
+| eval zipped = mvzip(mvzip(field1,field2),field3)
+
+| makeresults 
+| eval field1 = "1,2,3,4,5"
+| eval split = split(field1,",")
+
+| makeresults 
+| eval field1 = "1,2,3,4,5"
+| eval field1 = split(field1,",")
+
+
+index="tmdb_index" id=512898 | mvexpand genre_ids{} | rename genre_ids{} as genre_id | table id,genre_id
