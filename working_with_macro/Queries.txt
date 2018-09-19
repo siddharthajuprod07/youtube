@@ -1,0 +1,3 @@
+index="main" | table name,basic_salary,variable_percent | `total_sal_non_eval(basic_salary,variable_percent)`
+index="main" | table name,basic_salary,variable_percent | fillnull | `total_sal_non_eval(basic_salary,variable_percent)` | `bonus(variable_percent,"sid")`
+index="main" | table name,basic_salary,variable_percent  | `total_sal_non_eval(basic_salary,variable_percent)` | `bonus(variable_percent,7)`
