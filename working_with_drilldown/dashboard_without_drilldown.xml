@@ -1,0 +1,152 @@
+<form>
+  <label>GooglePlay</label>
+  <search id="base_search">
+    <query>
+      index="main" | table _time, App,Category,Rating,Reviews,Size,Installs,Type,Price,Content_Rating,Genres,Last_Updated,Current_Ver,Android_Ver,Country
+    </query>
+    <earliest>$time.earliest$</earliest>
+    <latest>$time.latest$</latest>
+  </search>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="time" searchWhenChanged="true">
+      <label>Time</label>
+      <default>
+        <earliest>0</earliest>
+        <latest></latest>
+      </default>
+    </input>
+    <input type="dropdown" token="category_name" searchWhenChanged="true">
+      <label>Category</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>Category</fieldForLabel>
+      <fieldForValue>Category</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | top Category</query>
+      </search>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="genre_name">
+      <label>Genre</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Genres</fieldForLabel>
+      <fieldForValue>Genres</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | top Genres</query>
+      </search>
+    </input>
+    <input type="dropdown" token="android_ver">
+      <label>Android Version</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Android_Ver</fieldForLabel>
+      <fieldForValue>Android_Ver</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | stats by Android_Ver</query>
+      </search>
+    </input>
+    <input type="dropdown" token="country">
+      <label>Country</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Country</fieldForLabel>
+      <fieldForValue>Country</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | stats by Country</query>
+      </search>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Total number of Apps</title>
+        <search base="base_search">
+          <query>| dedup App | stats count</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="underLabel">Apps</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Apps by Category</title>
+        <search base="base_search">
+          <query>| dedup App | top Category</query>
+        </search>
+        <option name="charting.axisTitleX.text">Category</option>
+        <option name="charting.axisTitleY.text">Count</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Genre Breakup</title>
+        <search base="base_search">
+          <query>| dedup App | top Genres</query>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Apps count by day</title>
+        <search base="base_search">
+          <query>| dedup App | timechart span=1mon count(App) by Android_Ver</query>
+        </search>
+        <option name="charting.chart">area</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <map>
+        <title>Geo Distribution</title>
+        <search base="base_search">
+          <query>| dedup App | stats count by Country | geom geo_countries featureIdField=Country</query>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="mapping.choroplethLayer.colorMode">divergent</option>
+        <option name="mapping.choroplethLayer.maximumColor">0x006D9C</option>
+        <option name="mapping.choroplethLayer.minimumColor">0xdc4e41</option>
+        <option name="mapping.type">choropleth</option>
+      </map>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Apps Details</title>
+        <search base="base_search">
+          <query>| dedup App | table *</query>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <option name="rowNumbers">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <event>
+        <title>Event Details</title>
+        <search base="base_search">
+          <query>| dedup App | fields *</query>
+        </search>
+        <option name="list.drilldown">none</option>
+        <option name="raw.drilldown">none</option>
+        <option name="rowNumbers">0</option>
+        <option name="table.drilldown">none</option>
+        <option name="type">list</option>
+      </event>
+    </panel>
+  </row>
+</form>
