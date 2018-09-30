@@ -1,0 +1,58 @@
+<form>
+  <label>demo</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="demo_search">
+      <label>new_col</label>
+      <search>
+        <query>index="main" | eval clicked_col = $clicked_col$ | search $clicked_col$ = "$clicked_cell$" | eval new_col_val = $form.new_col_name$ | dedup new_col_val  | table new_col_val</query>
+        <earliest>0</earliest>
+        <latest>now</latest>
+        <done>
+          <condition>
+            <set token="form.new_col_val">$result.new_col_val$</set> 
+          </condition>
+        </done>
+      </search>
+      <fieldForLabel>new_col_val</fieldForLabel>
+      <fieldForValue>new_col_val</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="new_col_name">
+      <default>nutral_col</default>
+    </input>
+    <input type="text" token="new_col_val">
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Data Details</title>
+        <search>
+          <query>index="main" | table nutral_col,col1,col1_new,col2,col2_new,col3,col3_new | search $new_col_name$ = $new_col_val$ | sort nutral_col</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="drilldown">cell</option>
+        <drilldown>
+          <set token="clicked_cell">$click.value2$</set>
+          <set token="clicked_col">$click.name2$</set>
+          <set token="clicked_nutral_cell">$click.value$</set>
+          <eval token="form.new_col_name">$click.name2$."_new"</eval>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>| makeresults | eval clicked_cell = "$clicked_cell$" | eval clicked_col = "$clicked_col$" | eval clicked_nutral_cell = "$clicked_nutral_cell$" | eval new_col_name = "$new_col_name$" | table clicked_nutral_cell,clicked_cell,clicked_col,new_col_name</query>
+          <earliest>0</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>
