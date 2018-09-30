@@ -1,0 +1,10 @@
+index="tmdb_index" 
+| mvexpand genre_ids{} 
+| rename genre_ids{} as genre_id 
+| table  genre_id,id 
+| fillnull value="Not Defined" genre_id 
+| search genre_id IN (18,27,99) 
+| eval {genre_id} = id
+| rename 18 as "Drama", 27 as "Documentary", 99 as "Thriller"
+| fields - genre_id,id
+| stats count(Documentary) as Documentary_count, count(Drama) as Drama_count, count(Thriller) as Thriller_count
