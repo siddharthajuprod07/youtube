@@ -1,0 +1,52 @@
+[commands/getgenrev2]
+access = read : [ * ], write : [ * ]
+export = system
+
+[commands/generatehello]
+access = read : [ * ], write : [ * ]
+export = system
+
+[app/ui]
+version = 7.1.2
+modtime = 1531760580.647432300
+
+[app/launcher]
+version = 7.1.2
+modtime = 1531760580.652473900
+
+[inputs/script%3A%2F%2F%24SPLUNK_HOME%5Cetc%5Capps%5Ctmdb%5Cbin%5Ctmdb_upcoming.py]
+version = 7.1.1
+modtime = 1537371386.334645800
+
+[views/dsd]
+access = read : [ * ], write : [ * ]
+export = none
+owner = admin
+version = 7.1.3
+modtime = 1536764459.404807300
+
+[macros/bonus%282%29]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 7.1.1
+modtime = 1537379705.261552300
+
+[macros/getgenre_or_main%281%29]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 7.1.1
+modtime = 1537379713.640984500
+
+[macros/total_salary%282%29]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 7.1.1
+modtime = 1537379723.791917700
+
+[views/dashboard]
+version = 7.1.1
+modtime = 1537722343.998641000
+
