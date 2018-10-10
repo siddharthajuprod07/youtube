@@ -1,0 +1,11 @@
+|makeresults 1| eval total=0 | eval test1=1 | eval test2=2 | eval test3=3 | foreach test* [eval total=total + <<FIELD>>]
+
+|makeresults 1 | eval test1=100 | eval test2=200 | eval test3=300 | foreach test* [eval <<FIELD>>=<<FIELD>>/60]
+
+|makeresults 1 | eval test1=100 | eval test2=200 | eval test3=300 | foreach test* [eval new_<<MATCHSTR>>= <<FIELD>> + <<MATCHSTR>>]
+
+|makeresults 1 | eval test1sid1=100 | eval test2sid2=200 | eval test3sid3=300 | foreach test*sid* [eval new_<<MATCHSTR>>=<<FIELD>> + <<MATCHSEG2>>]
+
+|makeresults 1 | eval test1sid1=100 | eval test2sid2=200 | eval test3sid3=300 | foreach test*sid* [eval new_<<MATCHSTR>>=<<FIELD>> + <<MATCHSTR>>]
+
+|makeresults 1 | eval test1sid1foo1=100 | eval test2sid2foo2=200 | eval test3sid3foo3=300 | foreach test*sid*foo* [eval new_<<MATCHSTR>>=<<FIELD>> + <<MATCHSEG3>>]
