@@ -1,0 +1,203 @@
+<form script="clear_filter.js">
+  <label>GooglePlay</label>
+<!--  <search id="save_search" ref="googleplay"></search> -->
+  <search id="base_search">
+    <query>| savedsearch googleplay category_name="$form.category_name$" genre_name="$form.genre_name$" android_ver="$form.android_ver$" country="$form.country$" content_rtng="$form.content_rtng$"
+    </query>
+   <earliest>$time.earliest$</earliest>
+    <latest>$time.latest$</latest> 
+  </search>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="time" searchWhenChanged="true">
+      <label>Time</label>
+      <default>
+        <earliest>0</earliest>
+        <latest></latest>
+      </default>
+    </input>
+    <input type="dropdown" token="category_name" searchWhenChanged="true">
+      <label>Category</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>Category</fieldForLabel>
+      <fieldForValue>Category</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | top Category</query>
+      </search>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="genre_name">
+      <label>Genre</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Genres</fieldForLabel>
+      <fieldForValue>Genres</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | top Genres</query>
+      </search>
+    </input>
+    <input type="dropdown" token="android_ver">
+      <label>Android Version</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Android_Ver</fieldForLabel>
+      <fieldForValue>Android_Ver</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | stats by Android_Ver</query>
+      </search>
+    </input>
+    <input type="dropdown" token="country">
+      <label>Country</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>Country</fieldForLabel>
+      <fieldForValue>Country</fieldForValue>
+      <search base="base_search">
+        <query>| dedup App | stats by Country</query>
+      </search>
+    </input>
+    <input type="text" token="content_rtng" depends="$hidden$">
+      <default>*</default>
+    </input>
+    <input type="text" token="show_clear_filter" depends="$hidden$"></input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Total number of Apps</title>
+        <search base="base_search">
+          <query>| dedup App | stats count</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">all</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="underLabel">Apps</option>
+        <option name="useColors">1</option>
+        <drilldown>
+          <link target="_blank">/app/search/integrity_check_of_installed_files</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Apps by Category</title>
+        <search base="base_search">
+          <query>| dedup App | top Category</query>
+        </search>
+        <option name="charting.axisTitleX.text">Category</option>
+        <option name="charting.axisTitleY.text">Count</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.drilldown">all</option>
+        <drilldown>
+          <set token="form.category_name">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Genre Breakup</title>
+        <search base="base_search">
+          <query>| dedup App | top Genres</query>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <drilldown>
+          <set token="form.genre_name">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Apps count by day</title>
+        <search base="base_search">
+          <query>| dedup App | timechart span=1mon count(App) by Android_Ver</query>
+        </search>
+        <option name="charting.chart">area</option>
+        <option name="charting.drilldown">all</option>
+        <drilldown>
+          <set token="form.android_ver">$click.name2$</set>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <map>
+        <title>Geo Distribution</title>
+        <search base="base_search">
+          <query>| dedup App | stats count by Country | geom geo_countries featureIdField=Country</query>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="mapping.choroplethLayer.colorMode">divergent</option>
+        <option name="mapping.choroplethLayer.maximumColor">0x006D9C</option>
+        <option name="mapping.choroplethLayer.minimumColor">0xdc4e41</option>
+        <option name="mapping.type">choropleth</option>
+        <drilldown>
+          <set token="form.country">$click.value$</set>
+        </drilldown>
+      </map>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Apps Details</title>
+        <search base="base_search">
+          <query>| dedup App | table *</query>
+        </search>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">cell</option>
+        <option name="rowNumbers">true</option>
+        <drilldown>
+          <!--         <condition field="Android_Ver">
+          <set token="form.android_ver">$click.value$</set>
+          </condition>
+          <condition field="App">
+          <set token="form.android_ver">$row.Android_Ver$</set>
+          </condition>
+          <condition field="Category">
+          </condition> -->
+          <condition field="Content_Rating">
+            <set token="form.content_rtng">$row.Content_Rating$</set>
+            <set token="form.show_clear_filter">*</set>
+          </condition>
+          <!--         <set token="form.category_name">$row.Category$</set>
+          <set token="form.genre_name">$row.Genres$</set>
+          <set token="form.android_ver">$row.Android_Ver$</set>
+          <set token="form.country">$row.Country$</set> -->
+        </drilldown>
+      </table>
+      <html depends="$form.show_clear_filter$">
+        <p>
+          <a href="#" data-set-token="form.content_rtng" data-value="*" data-unset-token="form.show_clear_filter" class="btn btn-secondary clear-filter">Clear Filter</a>
+        </p>        
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <event>
+        <title>Event Details</title>
+        <search base="base_search">
+          <query>| dedup App | fields *</query>
+        </search>
+        <option name="list.drilldown">full</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">0</option>
+        <option name="table.drilldown">none</option>
+        <option name="type">list</option>
+        <drilldown>
+<!--		  <link>
+                   <![CDATA[
+                 /app/search/search?q=search%20index=main%20$click.value$%20earliest=0%20latest=now()
+                  ]]>
+          </link> 
+		    <link target="_blank">search?q=index=main $click.value$&amp;earliest=$time.earliest$&amp;latest=$time.latest$</link> -->
+          <link target="_blank">https://play.google.com/store/search?q=$click.value$&amp;c=apps</link>
+        </drilldown>
+      </event>
+    </panel>
+  </row>
+</form>
