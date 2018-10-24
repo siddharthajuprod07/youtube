@@ -1,0 +1,1 @@
+index="tmdb_index"| mvexpand genre_ids{} | rename genre_ids{} as genre_id | table movie_id,genre_id,original_language,original_title | head 10 | getgenrestream
