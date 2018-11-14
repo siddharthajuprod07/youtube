@@ -1,0 +1,7 @@
+index=main| table VendorCountry,VendorCity, Weight | where VendorCountry IN ("Japan","Australia") | stats avg(Weight) by VendorCountry
+
+index=main| table VendorCountry,VendorCity, Weight  | where VendorCountry IN ("Japan","Australia") | eventstats avg(Weight) by VendorCountry
+
+index=main| table VendorCountry,VendorCity, Weight  | where VendorCountry IN ("Japan","Australia") | streamstats avg(Weight) by VendorCountry
+
+index=main| table VendorCountry,VendorCity, Weight  | where VendorCountry IN ("Japan","Australia") | streamstats count by VendorCountry,VendorCity
