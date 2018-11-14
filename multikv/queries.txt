@@ -1,0 +1,10 @@
+multikv :
+
+index=main | multikv copyattrs=false
+index=main | multikv copyattrs=true
+index=main | multikv copyattrs=true fields pctIdle,pctIowait
+index=main | multikv filter "1 "
+index=main | multikv forceheader=2
+index=main | multikv noheader=t
+index=main | multikv rmorig=false
+index=main | multikv conf=tab_mkv
