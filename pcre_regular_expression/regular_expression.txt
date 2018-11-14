@@ -1,0 +1,62 @@
+| makeresults | eval test = "siddhartha
+chakraborty" | rex field=test max_match=0 "(?<test1>.)"
+
+| makeresults | eval test = "siddhartha
+chakraborty" 
+| rex field=test max_match=0 "(?<test1>a)"
+
+| makeresults | eval test = "siddhartha
+chakraborty" 
+| rex field=test max_match=0 "(?<test1>rt)"
+
+| makeresults | eval test = "siddhartha
+chakraborty iosjsijsiox shsihdad 1223232" 
+| rex field=test max_match=0 (?<test1>rt)
+
+| makeresults | eval test = "siddhartha
+chakraborty" 
+| rex field=test max_match=0 "(?<test1>.a(r|b))"
+
+| makeresults | eval test = "121+111=234" 
+| rex field=test max_match=0 "(?<test1>1+1)"
+
+| makeresults | eval test = "121+111=234" 
+| rex field=test max_match=0 "(?<test1>1\+1)"
+
+| makeresults | eval test = "121.111=234" 
+| rex field=test max_match=0 "(?<test1>1.1)"
+
+| makeresults | eval test = "121.111=234" 
+| rex field=test max_match=0 "(?<test1>1\.1)"
+
+| makeresults | eval test = "121.111=234" 
+| rex field=test max_match=0 "(?<test1>1?)"
+
+| makeresults | eval test = "121.111=234" 
+| rex field=test max_match=0 "(?<test1>1{3})"
+
+| makeresults | eval test = "121.111=234" 
+| rex field=test max_match=0 "(?<test1>111)"
+
+| makeresults | eval test = "121+111+11=234" 
+| rex field=test max_match=0 "(?<test1>1{1,3})"
+
+| makeresults | eval test = "121+111+11+1111+111111=234" 
+| rex field=test max_match=0 "(?<test1>1{1,})"
+
+| makeresults | eval test = "121+111+11+1111+111111=234" 
+| rex field=test max_match=0 "(?<test1>1+)"
+
+| makeresults | eval test = "121+111+11+1111+111111=234" 
+| rex field=test max_match=0 "(?<test1>(1{2}){2})"
+
+| makeresults | eval test = "121+111+11+1111+111111=234" 
+| rex field=test max_match=0 "(?<test1>(?:1{2}){2})"
+
+| makeresults | eval test = "abcdvdvdff" 
+| rex field=test max_match=0 "(?<test>a(bc|b)c)"
+
+| makeresults | eval test = "abccdvdvdff" 
+| rex field=test max_match=0 "(?<test>a(?>bc|b)c)"
+
+^(START)?\d+(?(1)END|\b) conditional --> START123END
