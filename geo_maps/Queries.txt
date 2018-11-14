@@ -1,0 +1,7 @@
+index="main" | geostats latfield=VendorLatitude longfield=VendorLongitude count by VendorCountry
+
+index="main" | stats count by VendorCountry | geom geo_countries featureIdField=VendorCountry | geomfilter min_x=-90 min_y=-90 max_x=90 max_y=90
+
+| inputlookup geo_us_states
+
+| inputlookup geo_countries
