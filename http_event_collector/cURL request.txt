@@ -1,0 +1,30 @@
+--tokenize auth
+curl -k  http://localhost:8088/services/collector -H "Authorization:Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"trial\",\"event\":\"hello world!\"}"
+
+
+--basic auth
+curl -k  http://localhost:8088/services/collector -u "admin:d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"trial\",\"event\":\"hello world!\"}"
+
+--multiple events
+curl -k  http://localhost:8088/services/collector -u "admin:d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"trial\",\"event\":\"hello world!\"}{\"sourcetype\":  \"trial\",\"event\":\"hello sid!\"}"
+
+
+--raw text
+
+curl -k  "http://localhost:8088/services/collector/raw?sourcetype=trial" -H "Authorization:Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "1, 2, 3... Hello, world!"
+
+--indexer ack
+
+curl -k  "http://localhost:8088/services/collector?channel=00872DC6-AC83-4EDE-8AFE-8413C3825C4C" -H "Authorization:Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"trial\",\"event\":\"hello world!\"}"
+
+curl -k "http://localhost:8088/services/collector/ack?channel=00872DC6-AC83-4EDE-8AFE-8413C3825C4C" -H "Authorization: Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"acks\": [0]}"
+
+--JSON extraction
+
+curl -k  http://localhost:8088/services/collector -H "Authorization:Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"_json\",\"event\": {\"a\": \"value1\", \"b\": [\"value1_1\", \"value1_2\"]}}"
+
+--Explicit JSON extraction
+
+curl -k  http://localhost:8088/services/collector -H "Authorization:Splunk d4661317-2829-48c5-a1c6-e3aa2ff5f792" -d "{\"sourcetype\":  \"trial\",\"event\":\"hello world!\",\"fields\": {\"device\": \"macbook\", \"users\": [\"joe\", \"bob\"]}}"
+
+--debugging
