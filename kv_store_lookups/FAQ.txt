@@ -1,0 +1,6 @@
+1. Supported Datatypes in collections.conf:  number | bool | string | time
+
+2. Accelerated fields have a limitation of 1024 bytes per entry, so you cannot use fields that have more than 1024 bytes.
+
+3. Lookup configurations can reference fields that are added to events by field extractions, field aliases, and calculated fields. They cannot reference event types and tags.
+

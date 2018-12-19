@@ -1,0 +1,38 @@
+-- Populate KV Store Lookup using search query
+|  getgenre * 
+|  outputlookup kvstore_lookup
+
+-- Check whether KV Store Lookup populated
+
+|  inputlookup kvstore_lookup
+
+-- Lookup values in KV store Lookup
+
+index="tmdb_index" 
+|  mvexpand genre_ids{}
+| rename genre_ids{} as genre_id, id as movie_id
+| table movie_id,original_title,release_date, genre_id
+|  lookup kvstore_lookup id as genre_id OUTPUTNEW name
+
+-- Update KV store Lookup
+|  inputlookup kvstore_lookup
+| eval  Key = _key
+|  search Key = "5c1788c7db209b4994006ab3"
+|  eval name = "Sid"
+|  outputlookup kvstore_lookup append=true
+
+----*******************************-------------
+
+REST API :
+
+-- Rest API to list the collections available to tmdb app
+
+curl -k -u admin:monitor! https://localhost:8089/servicesNS/nobody/tmdb/storage/collections/config
+
+-- Rest API to populate the KV store lookup
+
+curl -k -u admin:monitor! https://localhost:8089/servicesNS/nobody/tmdb/storage/collections/data/kvstorecoll -H "Content-Type: application/json" -d "{ \"name\": \"Splunk HQ\", \"id\": 123, \"address\": { \"street\": \"250 Brannan Street\", \"city\": \"San Francisco\", \"state\": \"CA\", \"zip\": \"94107\" }}"
+
+-- Delete all the records from KV store lookup
+
+curl -k -u admin:monitor! -X DELETE https://localhost:8089/servicesNS/nobody/tmdb/storage/collections/data/kvstorecoll
