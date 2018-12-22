@@ -1,0 +1,9 @@
+index=main 
+|  table host,available_memory,used_memory
+|  rex field=available_memory "(?<avail>\d*\.?\d+)(?<avail_unit>[[:alpha:]]+)"
+|  rex field=used_memory "(?<used>\d*\.?\d+)(?<used_unit>[[:alpha:]]+)"
+|  eval avail_M = case(avail_unit="GB",avail * 1024,avail_unit="TB",avail * 1024 * 1024,1=1,avail)
+|  eval used_M = case(used_unit="GB",used * 1024,used_unit="TB",used * 1024 * 1024,1=1,used)
+|  eval total_M = round(avail_M,2) + round(used_M,2)
+|  eval total = total_M."MB"
+| table available_memory,used_memory,total

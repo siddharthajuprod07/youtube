@@ -1,0 +1,4 @@
+server,available_memory,used_memory
+host1,1.56GB,2MB
+host2,1.6MB,2MB
+host3,1.76TB,.56GB
