@@ -1,0 +1,24 @@
+<form theme="dark">
+  <label>run_batch_from_dashboard</label>
+  <search>
+    <query>| testcmd | eval ignore = $form.tokQuery$</query>
+  </search>
+  <fieldset submitButton="false">
+    <input type="checkbox" token="dummy" searchWhenChanged="true">
+      <label></label>
+      <choice value="run">Run</choice>
+      <delimiter> </delimiter>
+      <change>
+        <condition value="run">
+          <set token="form.tokQuery">nothing</set>
+        </condition>
+        <condition>
+          <unset token="form.tokQuery"></unset>
+        </condition>
+      </change>
+    </input>
+    <input type="text" token="tokQuery">
+      <label>tokQuery</label>
+    </input>
+  </fieldset>
+</form>
