@@ -1,0 +1,9 @@
+index=main
+| table id,filename
+|  dedup filename
+|  eval searchedfilename = "file7"
+|  where filename = searchedfilename
+| append [|makeresults | eval filename = "Not Defined" | table filename]
+| eval fileexists = if(filename=searchedfilename,"Yes","No")
+|  head 1
+|  table fileexists
