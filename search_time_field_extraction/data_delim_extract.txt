@@ -1,0 +1,17 @@
+ComponentId:	Application Server
+ProcessId:	5316
+ThreadId:	00000000
+ThreadName:	P=901265:O=0:CT
+SourceId:	com.ibm.ws.runtime.WsServerImpl
+ClassName:	
+MethodName:	
+Manufacturer:	IBM
+Product:	WebSphere
+Version:	Platform 7.0.0.7 [BASE 7.0.0.7 cf070942.55]
+ServerName:	sfeserv36Node01Cell\sfeserv36Node01\server1
+TimeStamp:	2010-04-27 09:15:57.671000000
+UnitOfWork:	
+Severity:	3
+Category:	AUDIT
+PrimaryMessage:	WSVR0001I: Server server1 open for e-business
+ExtendedMessage:	

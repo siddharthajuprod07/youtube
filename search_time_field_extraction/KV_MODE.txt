@@ -1,0 +1,9 @@
+  * none: if you want no field/value extraction to take place.
+  * auto: extracts field/value pairs separated by equal signs.
+  * auto_escaped: extracts fields/value pairs separated by equal signs and
+                  honors \" and \\ as escaped sequences within quoted
+                  values, e.g field="value with \"nested\" quotes"
+  * multi: invokes the multikv search command to expand a tabular event into
+           multiple events.
+  * xml : automatically extracts fields from XML data.
+  * json: automatically extracts fields from JSON data.

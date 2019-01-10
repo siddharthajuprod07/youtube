@@ -1,0 +1,23 @@
+props:
+
+REPORT-<class> = <transform_stanza_name>, <transform_stanza_name2>,...
+EXTRACT-<class> = [<regex>|<regex> in <src_field>]
+MATCH_LIMIT (optional)
+DEPTH_LIMIT (optional)
+KV_MODE = [none|auto|auto_escaped|multi|json|xml]
+KV_TRIM_SPACES = true|false
+FIELDALIAS-<class> = (<orig_field_name> AS <new_field_name>)+
+EVAL-<fieldname> = <eval statement>
+LOOKUP-<class> = $TRANSFORM (<match_field> (AS <match_field_in_event>)?)+ (OUTPUT|OUTPUTNEW (<output_field> (AS <output_field_in_event>)? )+ )?
+
+
+transforms:
+
+REGEX = <regular expression>
+FORMAT
+DELIMS 
+FIELDS
+MV_ADD
+CLEAN_KEYS
+KEEP_EMPTY_VALS
+

@@ -1,0 +1,19 @@
+* Modifies the behavior of KV_MODE when set to auto, and auto_escaped.
+* Traditionally, automatically identified fields have leading and trailing
+  whitespace removed from their values.
+  * Example event: 2014-04-04 10:10:45 myfield=" apples "
+    would result in a field called 'myfield' with a value of 'apples'.
+* If this value is set to false, then external whitespace then this outer
+  space is retained.
+  * Example: 2014-04-04 10:10:45 myfield=" apples "
+    would result in a field called 'myfield' with a value of ' apples '.
+* The trimming logic applies only to space characters, not tabs, or other
+  whitespace.
+* NOTE: Splunk Web currently has limitations with displaying and
+  interactively clicking on  fields that have leading or trailing
+  whitespace. Field values with leading or trailing spaces may not look
+  distinct in the event viewer, and clicking on a field value will typically
+  insert the term into the search string without its embedded spaces.
+  * These warts are not specific to this feature.  Any such embedded spaces
+    will behave this way.
+  * The Splunk search language and included commands will respect the spaces.
