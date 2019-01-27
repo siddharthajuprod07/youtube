@@ -1,0 +1,6 @@
+<nav search_view="search">
+<view name="flight_price_monitoring" default='true' />
+<view name="flight_price_change_delta_tracking"/>
+  <view name="search" default='true' />
+  <view name="dashboards" />
+</nav>

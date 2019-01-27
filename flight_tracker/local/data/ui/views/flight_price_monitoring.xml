@@ -1,0 +1,268 @@
+<form theme="dark" script="multiselect.js">
+  <label>Flight Price Monitoring</label>
+  <search>
+    <query>|makeresults
+     </query>
+    <earliest>$departure_date.earliest$</earliest>
+    <latest>$departure_date.latest$</latest>
+    <progress>
+      <eval token="tokEarliest">strptime($job.earliestTime$,"%Y-%m-%dT%H:%M:%S.%3N%z")</eval>
+      <eval token="tokLatest">strptime($job.latestTime$,"%Y-%m-%dT%H:%M:%S.%3N%z")</eval>
+    </progress>
+  </search>
+  <search id="filters_base">
+    <query>
+      index="flights"
+| stats count by flyFrom,flyTo
+    </query>
+  </search>
+  <search id="flights_base_search">
+    <query>
+      index=flights 
+| eval earliest = $tokEarliest$, latest = if ($tokLatest$ &lt; 0, now(),$tokLatest$)
+| where dTime &gt;= earliest AND dTime &lt;= latest
+|search flyFrom=$from_token$ flyTo=$to_token$  
+| dedup "airlines{}" "route{}.flight_no" flyFrom flyTo
+| rename "airlines{}" AS "airlines" , "route{}.flight_no" AS "flightNumber" , "departureTime" AS "departureDateTime" 
+| search $airlines_token$
+|  eval departureDate = strftime(dTime,"%Y-%m-%d"), departureTime = strftime(dTime,"%H:%M:%S")
+| eval bag_price = coalesce('bags_price.2','bags_price.1')
+| eval bag_price = if(bag_price="",0,bag_price)
+| eval luggage_token = "$luggage_token$"
+| eval is_bag = case (bag_price&gt;0 AND luggage_token = "*","(Extra Baggage Price Not Included)",bag_price&gt;0 AND luggage_token = "0","(Extra Baggage Price Included)",bag_price=0,"(Free Bag)",bag_price="","(Extra Baggage Not Allowed)")
+| lookup dA_flights_airlinelookup airline as airlines OUTPUTNEW name
+| eval flightLabel = name + " " + flightNumber + " at " + departureTime + is_bag
+| eval total_price = if(luggage_token = "0",price + bag_price,price)
+| table _time, airlines,flyFrom,flyTo,price,flightNumber,flightLabel, departureDate, departureTime, bag_price, is_bag, name , total_price
+    </query>
+  </search>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="departure_date" searchWhenChanged="true">
+      <label>Departure Date</label>
+      <default>
+        <earliest>-7d@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="from_token" searchWhenChanged="true">
+      <label>Fly From</label>
+      <choice value="*">All</choice>
+      <default>All</default>
+      <search base="filters_base">
+        <query>| stats count by flyFrom</query>
+      </search>
+      <fieldForLabel>flyFrom</fieldForLabel>
+      <fieldForValue>flyFrom</fieldForValue>
+    </input>
+    <input type="dropdown" token="to_token" searchWhenChanged="true">
+      <label>Fly To</label>
+      <choice value="*">All</choice>
+      <default>All</default>
+      <search base="filters_base">
+        <query>
+          | stats count by flyTo
+        </query>
+      </search>
+      <fieldForLabel>flyTo</fieldForLabel>
+      <fieldForValue>flyTo</fieldForValue>
+    </input>
+    <input id="multi1" type="multiselect" token="airlines_token" searchWhenChanged="true">
+      <label>Airlines</label>
+      <choice value="*">ALL</choice>
+      <choice value="0B">0B</choice>
+      <choice value="CY">CY</choice>
+      <choice value="OA">OA</choice>
+      <choice value="A3">A3</choice>
+      <choice value="ME">ME</choice>
+      <choice value="LY">LY</choice>
+      <choice value="IZ">IZ</choice>
+      <choice value="6H">6H</choice>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>airlines="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+      <default>*</default>
+    </input>
+    <input type="checkbox" token="luggage_token" searchWhenChanged="true">
+      <label></label>
+      <choice value="0">Add Bag</choice>
+      <delimiter> </delimiter>
+      <change>
+        <condition value="0">
+          <set token="form.luggage_token">0</set>
+        </condition>
+        <condition>
+          <unset token="form.luggage_token"></unset>
+        </condition>
+      </change>
+    </input>
+    <input type="text" token="luggage_token" searchWhenChanged="true" depends="$hidden$">
+      <label>Luggage</label>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Min Price for Flights</title>
+        <search base="flights_base_search">
+          <query>| eval lebel = name + " " + flightNumber
+| stats min(total_price) as flight_min_price by lebel
+| stats min(flight_min_price) as min_price
+| table min_price</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0.00</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[70,80,90,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Max Price for Flights</title>
+        <search base="flights_base_search">
+          <query>| eval lebel = name + " " + flightNumber
+| stats max(total_price) as flight_max_price by lebel
+| stats max(flight_max_price) as max_price
+| table max_price</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0.00</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[100,200,300,400]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Average Min Price for Airlines</title>
+        <search base="flights_base_search">
+          <query>
+| stats min(total_price) as flight_min_price by name
+| stats avg(flight_min_price) as min_price
+| table min_price</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0.00</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[100,200,300,400]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Average Max Price for Airlines</title>
+        <search base="flights_base_search">
+          <query>
+| stats max(total_price) as flight_max_price by name
+| stats avg(flight_max_price) as max_price
+| table max_price</query>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0.00</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Min. Prices per Flight</title>
+        <search base="flights_base_search">
+          <query>|chart min(total_price) over departureDate by flightLabel | fillnull </query>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.axisTitleX.text">Departure Date</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Min. Price</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.showDataLabels">minmax</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.legend.placement">top</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.splitBy">flightLabel</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Min. Price Comparison Bar Chart</title>
+        <search base="flights_base_search">
+          <query>| stats min(total_price) as total_price by flightLabel
+| sort - total_price</query>
+        </search>
+        <option name="charting.axisTitleX.text">Flights</option>
+        <option name="charting.axisTitleY.text">Min. Price</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Avg. Price per Airline</title>
+        <search base="flights_base_search">
+          <query>|chart avg(total_price) over departureDate by name | fillnull</query>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+        <option name="charting.axisTitleX.text">Departure Date</option>
+        <option name="charting.axisTitleY.text">Avg. Price</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.showDataLabels">minmax</option>
+        <option name="charting.drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Avg. Price per Airline Comparison Bar Chart</title>
+        <search base="flights_base_search">
+          <query>|  stats avg(total_price) as total_price by  name
+| sort - total_price</query>
+        </search>
+        <option name="charting.axisTitleX.text">Airlines</option>
+        <option name="charting.axisTitleY.text">Avg. Price</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.showDataLabels">all</option>
+        <option name="charting.drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Flight Details</title>
+        <search base="flights_base_search">
+          <query>|  table name,departureDate,departureTime, flightNumber, flyFrom,flyTo,flightLabel,price,total_price, bag_price
+| rename name as "Airlines Name", departureDate as "Departure Date",departureTime as "Departure Time",flightNumber as "FlightNumber", price as "Price Without Bag", bag_price as "Price For Bags", total_price as "Price with Bag"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">heatmap</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">false</option>
+      </table>
+    </panel>
+  </row>
+</form>
