@@ -199,6 +199,8 @@
         <option name="trellis.splitBy">flightLabel</option>
       </chart>
     </panel>
+  </row>
+  <row>
     <panel>
       <chart>
         <title>Min. Price Comparison Bar Chart</title>
