@@ -22,7 +22,7 @@
 | eval earliest = $tokEarliest$, latest = if ($tokLatest$ &lt; 0, now(),$tokLatest$)
 | where dTime &gt;= earliest AND dTime &lt;= latest
 |search flyFrom=$from_token$ flyTo=$to_token$  
-| dedup "airlines{}" "route{}.flight_no" flyFrom flyTo
+| dedup "airlines{}" "route{}.flight_no" flyFrom flyTo dTime
 | rename "airlines{}" AS "airlines" , "route{}.flight_no" AS "flightNumber" , "departureTime" AS "departureDateTime" 
 | search $airlines_token$
 |  eval departureDate = strftime(dTime,"%Y-%m-%d"), departureTime = strftime(dTime,"%H:%M:%S")
@@ -30,21 +30,21 @@
 | eval bag_price = if(bag_price="",0,bag_price)
 | eval luggage_token = "$luggage_token$"
 | eval is_bag = case (bag_price&gt;0 AND luggage_token = "*","(Extra Baggage Price Not Included)",bag_price&gt;0 AND luggage_token = "0","(Extra Baggage Price Included)",bag_price=0,"(Free Bag)",bag_price="","(Extra Baggage Not Allowed)")
-| lookup dA_flights_airlinelookup airline as airlines OUTPUTNEW name
+| eval name = case(airlines="OA","Olympic",airlines="CY","Cyprus",airlines="0B","Blue Air",airlines="ME","Middle East")
 | eval flightLabel = name + " " + flightNumber + " at " + departureTime + is_bag
 | eval total_price = if(luggage_token = "0",price + bag_price,price)
 | table _time, airlines,flyFrom,flyTo,price,flightNumber,flightLabel, departureDate, departureTime, bag_price, is_bag, name , total_price
     </query>
   </search>
-  <fieldset submitButton="false" autoRun="true">
-    <input type="time" token="departure_date" searchWhenChanged="true">
+  <fieldset submitButton="true" autoRun="true">
+    <input type="time" token="departure_date" searchWhenChanged="false">
       <label>Departure Date</label>
       <default>
         <earliest>-7d@h</earliest>
         <latest>now</latest>
       </default>
     </input>
-    <input type="dropdown" token="from_token" searchWhenChanged="true">
+    <input type="dropdown" token="from_token" searchWhenChanged="false">
       <label>Fly From</label>
       <choice value="*">All</choice>
       <default>All</default>
@@ -54,7 +54,7 @@
       <fieldForLabel>flyFrom</fieldForLabel>
       <fieldForValue>flyFrom</fieldForValue>
     </input>
-    <input type="dropdown" token="to_token" searchWhenChanged="true">
+    <input type="dropdown" token="to_token" searchWhenChanged="false">
       <label>Fly To</label>
       <choice value="*">All</choice>
       <default>All</default>
@@ -66,7 +66,7 @@
       <fieldForLabel>flyTo</fieldForLabel>
       <fieldForValue>flyTo</fieldForValue>
     </input>
-    <input id="multi1" type="multiselect" token="airlines_token" searchWhenChanged="true">
+    <input id="multi1" type="multiselect" token="airlines_token" searchWhenChanged="false">
       <label>Airlines</label>
       <choice value="*">ALL</choice>
       <choice value="0B">0B</choice>
@@ -84,7 +84,7 @@
       <delimiter> OR </delimiter>
       <default>*</default>
     </input>
-    <input type="checkbox" token="luggage_token" searchWhenChanged="true">
+    <input type="checkbox" token="luggage" searchWhenChanged="true">
       <label></label>
       <choice value="0">Add Bag</choice>
       <delimiter> </delimiter>
