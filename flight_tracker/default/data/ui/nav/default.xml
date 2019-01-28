@@ -1,7 +1,0 @@
-<nav search_view="search">
-  <view name="search" default='true' />
-  <view name="datasets" />
-  <view name="reports" />
-  <view name="alerts" />
-  <view name="dashboards" />
-</nav>
