@@ -1,0 +1,20 @@
+index="tmdb_index" 
+| table _time,id,genre_id,original_language,original_title,release_date
+
+
+index="tmdb_index"
+| sitop genre_id
+
+
+index="tmdb_index" earliest=0 latest=-15m
+| top genre_id
+| addinfo
+| collect index=tmdb_summary testmode=false
+
+
+splunk cmd python fill_summary_index.py -app tmdb -name populate_tmdb_summary -et -2d -lt -1d -j 8 -owner admin -auth admin:changeme -dedup true
+
+index="tmdb_index" earliest=0 latest=-15m
+| sitop genre_id
+| addinfo
+| collect index=tmdb_summary testmode=false marker="search_name=tmdb_populate_summary"
