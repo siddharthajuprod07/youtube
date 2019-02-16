@@ -1,0 +1,74 @@
+-- <startswith> | <endswith>
+sourcetype=access_* | transaction JSESSIONID clientip startswith="view" endswith="purchase" | where duration>0
+
+--<keeporphans>
+sourcetype=access_*
+| transaction action keeporphans=true
+| search action=*
+| highlight action
+
+--<maxspan>
+sourcetype=access_*
+| transaction action clientip JSESSIONID maxspan=1s 
+| highlight "POST /cart.do?action" "action"
+
+sourcetype=access_* action=purchase | transaction clientip maxspan=10m maxevents=3
+
+
+--<maxpause>
+sourcetype=access_*
+| transaction action maxspan=30s maxpause=1s
+| highlight "POST /cart.do?action" "action"
+
+--<maxevents>
+sourcetype=access_*
+| transaction action maxspan=30s maxevents=2
+| highlight "POST /cart.do?action" "action"
+
+--memory control
+--<keepevicted>
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase" keepevicted=true
+| search closed_txn=0
+| highlight "POST /cart.do?action" "action"
+
+--<maxopenevents>
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase" keepevicted=true maxopenevents=2
+| search closed_txn=0
+| highlight "POST /cart.do?action" "action"
+
+--rendering
+--<mvlist>
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase"  mvlist=true
+| where duration>0
+| highlight "POST /cart.do?action" "action"
+
+--<nullstr>
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase"  mvlist=true nullstr="Not Defined"
+| where duration>0
+| highlight "POST /cart.do?action" "action"
+
+--<delim><mvraw>
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase"  mvlist=true delim="<<<<<>>>>>" mvraw=true 
+| where duration>0
+| highlight "POST /cart.do?action" "action"
+
+
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase"  mvlist=true delim="<<<<<>>>>>" mvraw=true 
+| where duration>0
+| highlight "POST /cart.do?action" "action"
+| table action, duration, host
+
+sourcetype=access_* 
+| transaction JSESSIONID clientip startswith="view" endswith="purchase"  mvlist=false
+| where duration>0
+| highlight "POST /cart.do?action" "action"
+| table action, duration, host
+
+--using transactiontypes.conf file
+sourcetype=access_* | transaction name=online_shopping_demo
