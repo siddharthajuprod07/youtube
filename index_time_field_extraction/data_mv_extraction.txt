@@ -1,0 +1,1 @@
+2019-01-07 03:20:24,637 Outgoing UserId="9999999" Type="Main" To="user@example.com"  Key="1" Text="Value1" Key="2" Text="Value2" Key="3" Text="Value3" SessionId="1000"
