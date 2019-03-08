@@ -1,0 +1,2 @@
+index=main
+| table gender,race_ethnicity,"parental level of education",lunch,"test preparation course","math score","reading score","writing score"
