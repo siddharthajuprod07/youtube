@@ -1,0 +1,318 @@
+<form theme="dark">
+  <init>
+    <set token="form.test_prep">completed</set>
+  </init>
+  <search id="base_search">
+    <query>
+      index=main
+| table gender,race_ethnicity,"parental level of education",lunch,"test preparation course","math score","reading score","writing score"
+| search gender="$gender$" race_ethnicity="$ethinicity$" "parental level of education"="$parent_edu$" lunch="$lunch$" "test preparation course"="$test_prep$"
+    </query>
+    <earliest>0</earliest>
+    <latest>now</latest>
+  </search>
+  <label>Student Performance</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="gender">
+      <label>Gender</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>gender</fieldForLabel>
+      <fieldForValue>gender</fieldForValue>
+      <search base="base_search">
+        <query>|  stats count by gender </query>
+      </search>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="ethinicity">
+      <label>Ethinicity</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>race_ethnicity</fieldForLabel>
+      <fieldForValue>race_ethnicity</fieldForValue>
+      <search base="base_search">
+        <query>|  stats count by race_ethnicity</query>
+      </search>
+    </input>
+    <input type="dropdown" token="parent_edu">
+      <label>Parent Education</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>parental level of education</fieldForLabel>
+      <fieldForValue>parental level of education</fieldForValue>
+      <search base="base_search">
+        <query>| stats count by "parental level of education"</query>
+      </search>
+    </input>
+    <input type="dropdown" token="lunch">
+      <label>Lunch</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>lunch</fieldForLabel>
+      <fieldForValue>lunch</fieldForValue>
+      <search base="base_search">
+        <query>| stats count by lunch</query>
+      </search>
+    </input>
+    <input type="dropdown" token="test_prep">
+      <label>Test Preparation</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <fieldForLabel>test preparation course</fieldForLabel>
+      <fieldForValue>test preparation course</fieldForValue>
+      <search base="base_search">
+        <query>| stats count by "test preparation course"</query>
+      </search>
+    </input>
+    <input type="dropdown" token="score_graph_by">
+      <label>Score Graph By</label>
+      <choice value="*">All</choice>
+      <choice value="by_both">Both</choice>
+      <choice value="by_gender">Gender</choice>
+      <choice value="by_ethinicity">Ethinicity</choice>
+      <default>*</default>
+      <change>
+        <condition label="Gender">
+          <set token="show_gender_score_panel">y</set>
+          <unset token="show_ethinicity_score_panel"></unset>
+          <unset token="show_both_score_panel"></unset>
+        </condition>
+        <condition value="by_ethinicity">
+          <unset token="show_gender_score_panel"></unset>
+          <set token="show_ethinicity_score_panel">y</set>
+          <unset token="show_both_score_panel"></unset>
+        </condition>
+        <condition match="$value$==&quot;by_both&quot;">
+          <unset token="show_gender_score_panel"></unset>
+          <unset token="show_ethinicity_score_panel"></unset>
+          <set token="show_both_score_panel">y</set>
+        </condition>
+        <condition>
+          <set token="show_gender_score_panel">y</set>
+          <set token="show_ethinicity_score_panel">y</set>
+          <set token="show_both_score_panel">y</set>
+        </condition>
+      </change>
+    </input>
+  </fieldset>
+  <row>
+    <panel rejects="$hide_panel_male_singleval$">
+      <single>
+        <title>Male Student Count</title>
+        <search base="base_search">
+          <query>| stats count by gender
+| where gender="male"
+| table count</query>
+       <done>
+         <condition match="'job.resultCount'==0">
+         <set token="hide_panel_male_singleval"></set>
+         </condition>
+         <condition>
+           <unset token="hide_panel_male_singleval"></unset>
+         </condition>
+       </done>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="underLabel">Male Count</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel rejects="$hide_panel_female_singleval$">
+      <single>
+        <title>Female Student Count</title>
+        <search base="base_search">
+          <query>| stats count by gender
+| where gender="female"
+| table count</query>
+       <done>
+         <condition match="'job.resultCount'==0">
+         <set token="hide_panel_female_singleval"></set>
+         </condition>
+         <condition>
+           <unset token="hide_panel_female_singleval"></unset>
+         </condition>
+       </done>
+        </search>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="underLabel">Female Count</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$show_gender_score_panel$">
+      <input type="radio" token="score_of">
+        <label>Avg. Score Of</label>
+        <choice value="all">All</choice>
+        <choice value="math">Math</choice>
+        <choice value="reading">Reading</choice>
+        <choice value="writing">Writing</choice>
+        <default>all</default>
+        <change>
+          <condition value="math">
+            <set token="search_string">stats avg("math score") as avg_math_score by gender</set>
+          </condition>
+          <condition value="reading">
+            <set token="search_string">stats avg("reading score") as avg_reading_score by gender</set>
+          </condition>
+          <condition value="writing">
+            <set token="search_string">stats avg("writing score") as avg_writing_score by gender</set>
+          </condition>
+          <condition value="all">
+            <set token="search_string">stats avg("math score") as avg_math_score, avg("reading score") as avg_reading_score, avg("writing score") as avg_writing_score by gender</set>
+          </condition>
+        </change>
+      </input>
+      <chart>
+        <title>Average Score Graph By Gender</title>
+        <search base="base_search">
+          <query>| $search_string$ </query>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$show_ethinicity_score_panel$">
+      <input type="radio" token="all">
+        <label></label>
+        <change>
+          <condition value="all">
+            <set token="search_string1">stats avg("math score") as avg_math_score, avg("reading score") as avg_reading_score, avg("writing score") as avg_writing_score by race_ethnicity</set>
+            <unset token="math"></unset>
+            <unset token="form.math"></unset>
+            <unset token="reading"></unset>
+            <unset token="form.reading"></unset>
+            <unset token="writing"></unset>
+            <unset token="form.writing"></unset>
+          </condition>
+        </change>
+        <choice value="all">All</choice>
+        <initialValue>all</initialValue>
+      </input>
+      <input type="radio" token="math">
+        <label></label>
+        <change>
+          <condition value="math">
+            <set token="search_string1">stats avg("math score") as avg_math_score by race_ethnicity</set>
+            <unset token="all"></unset>
+            <unset token="form.all"></unset>
+            <unset token="reading"></unset>
+            <unset token="form.reading"></unset>
+            <unset token="writing"></unset>
+            <unset token="form.writing"></unset>
+          </condition>
+        </change>
+        <choice value="math">Math</choice>
+      </input>
+      <input type="radio" token="reading">
+        <label></label>
+        <change>
+          <condition value="reading">
+            <set token="search_string1">stats avg("reading score") as avg_reading_score by race_ethnicity</set>
+            <unset token="math"></unset>
+            <unset token="form.math"></unset>
+            <unset token="all"></unset>
+            <unset token="form.all"></unset>
+            <unset token="writing"></unset>
+            <unset token="form.writing"></unset>
+          </condition>
+        </change>
+        <choice value="reading">Reading</choice>
+      </input>
+      <input type="radio" token="writing">
+        <label></label>
+        <change>
+          <condition value="writing">
+            <set token="search_string1">stats  avg("writing score") as avg_writing_score by race_ethnicity</set>
+            <unset token="math"></unset>
+            <unset token="form.math"></unset>
+            <unset token="reading"></unset>
+            <unset token="form.reading"></unset>
+            <unset token="all"></unset>
+            <unset token="form.all"></unset>
+          </condition>
+        </change>
+        <choice value="writing">Writing</choice>
+      </input>
+      <chart>
+        <title>Average Score Graph By Ethinicity</title>
+        <search base="base_search">
+          <query>| $search_string1$ </query>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row depends="$show_both_score_panel$">
+    <panel>
+      <input type="radio" token="score_of_both">
+        <label>Avg. Score Of</label>
+        <choice value="all">All</choice>
+        <choice value="math">Math</choice>
+        <choice value="reading">Reading</choice>
+        <choice value="writing">Writing</choice>
+        <default>all</default>
+        <change>
+          <condition value="math">
+            <set token="search_string2">stats avg("math score") as avg_math_score by gender,race_ethnicity</set>
+          </condition>
+          <condition value="reading">
+            <set token="search_string2">stats avg("reading score") as avg_reading_score by gender,race_ethnicity</set>
+          </condition>
+          <condition value="writing">
+            <set token="search_string2">stats avg("writing score") as avg_writing_score by gender,race_ethnicity</set>
+          </condition>
+          <condition value="all">
+            <set token="search_string2">stats avg("math score") as avg_math_score, avg("reading score") as avg_reading_score, avg("writing score") as avg_writing_score by gender,race_ethnicity</set>
+          </condition>
+        </change>
+      </input>
+      <chart>
+        <title>Average Score Graph By Gender &amp; Ethinicity</title>
+        <search  base="base_search">
+          <query>| $search_string2$</query>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">collapsed</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="trellis.enabled">1</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trellis.splitBy">race_ethnicity</option>
+      </chart>
+    </panel>
+  </row>
+</form>
