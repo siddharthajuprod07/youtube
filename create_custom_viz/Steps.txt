@@ -1,0 +1,62 @@
+--in etc/system/local/web.conf
+
+[settings]
+minify_js = False
+minify_css = False
+js_no_cache = True
+cacheEntriesLimit = 0
+cacheBytesLimit = 0
+enableWebDebug = True
+
+--Download sample viz app
+
+https://docs.splunk.com/images/4/4f/Viz_tutorial_app.zip
+
+--install npm
+
+npm install
+
+--install d3
+npm install --save d3@3.5
+
+--install other packages
+
+npm install --save underscore
+npm install --save jquery
+
+
+
+-- manual build of visualization.js
+"%SPLUNK_HOME%/bin/splunk" cmd node ./node_modules/webpack/bin/webpack.js
+
+
+-- Basic SVG Arc creation
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg height="220" width="220" background="white">
+<g transform="translate(110,110)">
+<path d="M-60.104076400856556,60.104076400856535A85,85 0 1,1 60.10407640085654,60.104076400856535L49.49747468305833,49.49747468305832A70,70 0 1,0 -49.497474683058336,49.49747468305832Z" fill="lightgray">
+</path>
+<path d="M-60.104076400856556,60.104076400856535A85,85 0 0,1 38.58919247786148,-75.73555455601127L31.77933498176828,-62.370456693185744A70,70 0 0,0 -49.497474683058336,49.49747468305832Z" fill="green">
+</path>
+<text text-anchor="middle" fill="green" transform="translate(0,20)">
+60
+</text>
+</g>
+</svg>
+
+</body>
+</html>
+
+--Queries
+
+| makeresults count=60
+| stats count
+
+
+--Property namespacing follows this syntax for configuration file declarations.
+
+display.visualizations.custom.<app_name>.<visualization_ name>.<property_name>

@@ -1,0 +1,17 @@
+/*
+ * CSS rules for visualization.
+ * Class namespacing is good practice.
+ */
+
+/* Formatting for text element*/
+.meter-center-text {
+    font-size: 40px;
+    font-weight: 200;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* Center the main SVG in the page */
+.splunk-radial-meter svg {
+    display: block;
+    margin: auto;
+}
