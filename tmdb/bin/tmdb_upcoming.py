@@ -13,6 +13,7 @@ def tmdb_api_call(requestURL,parameters):
 
 def get_upcoming_movies_by_page(api_key,page_number=1):
     requestURL = "https://api.themoviedb.org/3/movie/upcoming"
+    #requestURL = "https://api.tmdb.org/3/movie/upcoming" #users in India please use this line of code for your requests
     parameters = {"api_key":api_key,"page":page_number}
     return tmdb_api_call(requestURL,parameters)
 
