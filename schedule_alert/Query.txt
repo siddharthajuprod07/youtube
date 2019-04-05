@@ -1,0 +1,4 @@
+-- Scheduled Alert
+
+index=_internal " error " NOT debug source=*splunkd.log* earliest=-5m latest=now
+| rex "mail\s+to:\s+(?<mail_id>.+@test.com)"
