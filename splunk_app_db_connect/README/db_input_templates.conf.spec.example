@@ -1,0 +1,7 @@
+[template_test]
+description = this is a demo template
+interval = 30
+index_time_mode = current
+sourcetype = demo
+mode = batch
+query = SELECT * FROM SAKILA.ACTOR

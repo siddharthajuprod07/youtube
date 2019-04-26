@@ -1,0 +1,9 @@
+#   use command to extract the strings
+    npm run extract_i18n
+
+#   use po editor to do the translation and put the translated files
+#   messages.mo and messages.po
+#   under corresponding language directory package/locale/<lang>/LC_MESSAGES
+
+#   you can generate messages.mo from .po files using the following command
+#   msgfmt -o lang.mo lang.po

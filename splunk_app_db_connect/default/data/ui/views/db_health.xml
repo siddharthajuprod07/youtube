@@ -1,0 +1,688 @@
+<form stylesheet="monitoring.css" script="monitoring.js">
+    <label>DB Connect Connection Health</label>
+    <description>Monitor DB Connect’s connections to databases</description>
+    <fieldset submitButton="false">
+        <input type="dropdown" token="connection_name" searchWhenChanged="true">
+            <label>Connection</label>
+            <choice value="*">All</choice>
+            <search>
+                <query>
+                    | datamodel DB_Health_Audit Audit_Record search
+                    | stats count by Audit_Record.connection_name
+                    | rename "Audit_Record.*" as *
+                </query>
+                <earliest>$Time.earliest$</earliest>
+                <latest>$Time.latest$</latest>
+            </search>
+            <fieldForLabel>connection_name</fieldForLabel>
+            <fieldForValue>connection_name</fieldForValue>
+            <default>*</default>
+        </input>
+        <input type="dropdown" token="operation" searchWhenChanged="true">
+            <label>Operation</label>
+            <choice value="*">All</choice>
+            <search>
+                <query>
+                    | datamodel DB_Health_Audit Audit_Record search
+                    | stats count by Audit_Record.operation
+                    | rename "Audit_Record.*" as *
+                </query>
+                <earliest>$Time.earliest$</earliest>
+                <latest>$Time.latest$</latest>
+            </search>
+            <fieldForLabel>operation</fieldForLabel>
+            <fieldForValue>operation</fieldForValue>
+            <default>*</default>
+        </input>
+        <input type="time" token="Time" searchWhenChanged="true">
+            <label></label>
+            <default>
+                <earliest>-24h@h</earliest>
+                <latest>now</latest>
+            </default>
+        </input>
+    </fieldset>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Total Errors</title>
+            <single>
+                <search>
+                    <query>
+                        <![CDATA[
+                        | pivot DB_Health_Audit Audit_Record count(state) AS "Total Errors"
+                        FILTER state is error
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                        ]]>
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="colorBy">value</option>
+                <option name="colorMode">none</option>
+                <option name="drilldown">none</option>
+                <option name="numberPrecision">0</option>
+                <option name="showSparkline">1</option>
+                <option name="showTrendIndicator">1</option>
+                <option name="trendColorInterpretation">standard</option>
+                <option name="trendDisplayMode">absolute</option>
+                <option name="unitPosition">after</option>
+                <option name="useColors">0</option>
+                <option name="useThousandSeparators">1</option>
+            </single>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - %Error</title>
+            <single>
+                <search>
+                    <query>
+                        <![CDATA[
+                        | pivot DB_Health_Audit Audit_Record count(state) AS state SPLITCOL state
+                        FILTER state in (success,error)
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                        | eval success=if(isnull(success), 0, success)
+                        | eval error=if(isnull(error), 0, error)
+                        | eval total=error+success
+                        | eval error_pct = round((error*100/total), 2)
+                        | fields error_pct
+                        | `display_zero_if_null`
+                        ]]>
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="colorBy">value</option>
+                <option name="colorMode">none</option>
+                <option name="drilldown">none</option>
+                <option name="numberPrecision">0.00</option>
+                <option name="rangeColors">["0x65a637","0x6db7c6","0xf7bc38","0xf58f39","0xd93f3c"]</option>
+                <option name="rangeValues">[0,30,70,100]</option>
+                <option name="showSparkline">1</option>
+                <option name="showTrendIndicator">1</option>
+                <option name="trendColorInterpretation">standard</option>
+                <option name="trendDisplayMode">absolute</option>
+                <option name="unit">%</option>
+                <option name="unitPosition">after</option>
+                <option name="useColors">0</option>
+                <option name="useThousandSeparators">0</option>
+            </single>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Connections</title>
+            <table>
+                <search>
+                    <query>
+                        <![CDATA[
+                          | pivot DB_Health_Audit Audit_Record count(state) AS state SPLITROW connection_name AS connection_name SPLITCOL state
+                          FILTER state in (success,error)
+                          FILTER connection_name is $connection_name$
+                          FILTER operation is $operation$
+                          SORT 100 connection_name ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                          | eval success=if(isnull(success), 0, success)
+                          | eval error=if(isnull(error), 0, error)
+                          | eval total=error+success
+                          | eval "% error" = round((error*100/total), 2)
+                          | table connection_name, total, success, error, "% error"
+                          ]]>
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="wrap">true</option>
+                <option name="rowNumbers">false</option>
+                <option name="dataOverlayMode">none</option>
+                <option name="count">10</option>
+            </table>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Operations</title>
+            <table>
+                <search>
+                    <query>
+                        <![CDATA[
+              | pivot DB_Health_Audit Audit_Record count(state) AS state SPLITROW operation AS operation SPLITCOL state
+              FILTER state in (success,error)
+              FILTER connection_name is $connection_name$
+              FILTER operation is $operation$
+              SORT 100 operation ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+              | eval success=if(isnull(success), 0, success)
+              | eval error=if(isnull(error), 0, error)
+              | eval total=error+success
+              | eval "% error" = round((error*100/total), 2)
+              | table operation, total, success, error, "% error"
+            ]]>
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="wrap">true</option>
+                <option name="rowNumbers">false</option>
+                <option name="dataOverlayMode">none</option>
+                <option name="drilldown">cell</option>
+                <option name="count">10</option>
+            </table>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Number of Each Connection over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Health_Audit Audit_Record count(connection_name) AS "Connection Numbers"
+                        SPLITROW _time AS _time PERIOD auto SPLITCOL connection_name
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Connections Errors over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Health_Audit Audit_Record count(state) AS "Connection Errors"
+                        SPLITROW _time AS _time PERIOD auto
+                        SPLITCOL connection_name
+                        FILTER state is error
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Number of Each Operation over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Health_Audit Audit_Record count(operation) AS "Operation Numbers"
+                        SPLITROW _time AS _time PERIOD auto SPLITCOL operation
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Operations Errors over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Health_Audit Audit_Record count(state) AS "Operation Errors" SPLITROW _time AS _time
+                        PERIOD auto SPLITCOL operation
+                        FILTER state is error
+                        FILTER connection_name is $connection_name$
+                        FILTER operation is $operation$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <html>
+                <h1 align="center">Connection Pool Health (scheduled inputs/outputs)</h1>
+            </html>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Active Connections over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(value) AS "Active Connections" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.ActiveConnections
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.ActiveConnections" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Idle Connections over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(value) AS "Idle Connections" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.IdleConnections
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.IdleConnections" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Pending Connections over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(value) AS "Pending Connections" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.PendingConnections
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.PendingConnections" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Total Connections Pool over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(value) AS "Total Connections" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.TotalConnections
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.TotalConnections" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Connections Wait Time</title>
+            <table>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics
+                        max(median) AS median
+                        max(p95) AS "95%"
+                        max(p99) AS "99%"
+                        max(max) AS max
+                        SPLITROW short_name_wait AS connection_name
+                        FILTER name is $connection_name$.pool.Wait
+                        SORT 100 short_name_wait ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="wrap">true</option>
+                <option name="rowNumbers">false</option>
+                <option name="dataOverlayMode">none</option>
+                <option name="drilldown">cell</option>
+                <option name="count">10</option>
+                <format type="color" field="median">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="95%">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="99%">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="max">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="number" field="median">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="95%">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="99%">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="max">
+                    <option name="unit">ms</option>
+                </format>
+            </table>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Connections Usage Time</title>
+            <table>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics
+                        max(median) AS median
+                        max(p95) AS "95%"
+                        max(p99) AS "99%"
+                        max(max) AS max
+                        SPLITROW short_name_usage AS connection_name
+                        FILTER name is $connection_name$.pool.Usage
+                        SORT 100 short_name_usage ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="wrap">true</option>
+                <option name="rowNumbers">false</option>
+                <option name="dataOverlayMode">none</option>
+                <option name="drilldown">cell</option>
+                <option name="count">10</option>
+                <format type="color" field="median">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="95%">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="99%">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="color" field="max">
+                    <colorPalette type="list">[#65A637,#F7BC38,#F58F39,#D93F3C]</colorPalette>
+                    <scale type="threshold">1000,5000,10000</scale>
+                </format>
+                <format type="number" field="median">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="95%">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="99%">
+                    <option name="unit">ms</option>
+                </format>
+                <format type="number" field="max">
+                    <option name="unit">ms</option>
+                </format>
+            </table>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Connection Health - Connections Wait Median Duration over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(median) AS "Median Wait Duration" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.Wait SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.Wait" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+        <panel>
+            <title>DBX - Connection Health - Connections Usage Median Duration over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DB_Connection_Metrics Connection_Metrics max(median) AS "Median Usage Duration" SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is $connection_name$.pool.Usage SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "*.pool.Usage" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+</form>

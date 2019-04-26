@@ -1,0 +1,10 @@
+<nav search_view="search" color="#63767A">
+  <view name="data_lab" default="true" />
+  <view name="configuration" />
+  <collection label="Health">
+    <view name="input_health" />
+    <view name="input_performance" />
+    <view name="db_health" />
+  </collection>
+  <view name="search" />
+</nav>

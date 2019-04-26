@@ -1,0 +1,138 @@
+{
+    "modelName": "DB_Health_Audit",
+    "displayName": "DB Health Audit",
+    "description": "This is a data model based on the audit log",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Audit_Record",
+            "displayName": "Audit Record",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "connection_name",
+                    "owner": "Audit_Record",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "connection_name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "operation",
+                    "owner": "Audit_Record",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "operation",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sql",
+                    "owner": "Audit_Record",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sql",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "state",
+                    "owner": "Audit_Record",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "state",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "message",
+                    "owner": "Audit_Record",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "message",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [
+                {
+                    "search": "index=_internal sourcetype=dbx_audit",
+                    "owner": "Audit_Record"
+                }
+            ],
+            "lineage": "Audit_Record"
+        }
+    ],
+    "objectNameList": [
+        "Audit_Record"
+    ]
+}

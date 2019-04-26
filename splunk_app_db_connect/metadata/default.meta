@@ -1,0 +1,42 @@
+[]
+access = read : [ db_connect_user, db_connect_admin, admin ], write : [ db_connect_admin, admin ]
+
+[app]
+access = read : [ * ], write : [ db_connect_admin, admin ]
+
+[transforms]
+export = system
+
+[searchscripts]
+export = system
+
+[commands]
+export = system
+
+[searchbnf]
+export = system
+
+[alert_actions/alert_output]
+export = system
+
+[checklist/dbx_java_installation_health_check]
+export = system
+
+[checklist/dbx_file_permission_health_check]
+export = system
+
+[checklist/dbx_driver_installation_health_check]
+export = system
+
+[checklist/dbx_kerberos_configuration_health_check]
+export = system
+
+[checklist/dbx_connections_configuration_health_check]
+export = system
+
+[checklist/dbx_data_lab_configuration_health_check]
+export = system
+
+[checklist/dbx_java_server_configuration_health_check]
+export = system
+

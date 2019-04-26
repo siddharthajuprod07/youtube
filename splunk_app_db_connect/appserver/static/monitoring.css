@@ -1,0 +1,9 @@
+.perm-error {
+    text-align: center
+}
+
+.perm-error .icon-alert {
+    position: relative;
+    top: 4px;
+    color: #d6563c;
+}

@@ -1,0 +1,106 @@
+server:
+  rootPath: /api/
+  applicationConnectors:
+    - type: http
+      port: 9998
+      # We bind to ipv4 IP address only, if modified to use ipv6 dbxproxy.py needs
+      # to be updated
+      bindHost: 127.0.0.1
+  # Task server can't start if the admin port is occupied. And it's not easy to explain it to user.
+  # The only usage of admin port is to update log level at runtime, and we can implement it in another way.
+  # So we disable admin port now, it may be reopened in the future if needed. More details, see DBX-3587
+  adminConnectors: []
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_server_access.log
+        archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_server_access.log.%i
+        archivedFileCount: 5
+        maxFileSize: 20MB
+        timeZone: UTC
+
+logging:
+    level: INFO
+    loggers:
+      "com.splunk.dbx.server.dbinput": ${DBINPUT_LOG_LEVEL:-INFO}
+      "com.splunk.dbx.server.dboutput": ${DBOUTPUT_LOG_LEVEL:-INFO}
+      "com.splunk.dbx.service.output": ${DBOUTPUT_LOG_LEVEL:-INFO}
+      "com.splunk.dbx.connector": ${CONNECTOR_LOG_LEVEL:-INFO}
+      "com.splunk.dbx.server.task.listeners.JobMetricsListener":
+        level: INFO
+        additive: false
+        appenders:
+          - type: file
+            logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS Z} %-5level %logger{50} - %msg%n"
+            currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_job_metrics.log
+            archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_job_metrics.log.%i
+            archivedFileCount: 5
+            maxFileSize: 20MB
+            timeZone: UTC
+      "com.splunk.dbx.connector.logger.AuditLogger":
+        level: INFO
+        additive: false
+        appenders:
+          - type: file
+            logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS Z} %X{pid} [%thread] %-5level %logger{50} - operation=%X{operation} connection_name=%X{connection_name} stanza_name=%X{stanza_name} %msg%n"
+            currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_audit_server.log
+            archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_audit_server.log.%i
+            archivedFileCount: 5
+            maxFileSize: 20MB
+            timeZone: UTC
+      "com.splunk.dbx.server.health.impl.HealthMetricsLogReporter":
+        level: INFO
+        additive: false
+        appenders:
+           - type: file
+             logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS Z} %msg%n"
+             currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_health_metrics.log
+             archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_health_metrics.log.%i
+             archivedFileCount: 5
+             maxFileSize: 20MB
+             timeZone: UTC
+      "com.splunk.dbx.connector.health.impl.ConnectionPoolMetricsLogReporter":
+          level: INFO
+          additive: false
+          appenders:
+             - type: file
+               logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS Z} %msg%n"
+               currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_connection_pool_metrics.log
+               archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_connection_pool_metrics.log.%i
+               archivedFileCount: 5
+               maxFileSize: 20MB
+               timeZone: UTC
+    appenders:
+      - type: file
+        logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS Z} %X{pid} [%thread] %-5level %logger{50} - %msg%n"
+        currentLogFilename: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_server.log
+        # Logback's Time Based Rolling Policy - archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}.log.gz
+        # Logback's Size and Time Based Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%d{yyyy-MM-dd}-%i.log.gz
+        # Logback's Fixed Window Rolling Policy -  archivedLogFilenamePattern: /tmp/application-%i.log.gz
+
+        archivedLogFilenamePattern: ${SPLUNK_HOME}/var/log/splunk/splunk_app_db_connect_server.log.%i
+        archivedFileCount: 5
+        maxFileSize: 20MB
+        timeZone: UTC
+
+
+httpClient:
+  timeout: 15000ms
+  connectionTimeout: 15000ms
+  timeToLive: 1h
+  cookiesEnabled: false
+  maxConnections: 32
+  maxConnectionsPerRoute: 32
+  keepAlive: 60s
+  retries: 3
+
+driversFolder: ${SPLUNK_HOME}/etc/apps/splunk_app_db_connect/drivers/
+
+schedulerThreadPoolSize: 32
+
+metricsCollectIntervalInSeconds: 60
+
+# when HEC failed to forward data to Splunk Indexer, it will return 503 error,
+# then DBX will retry 3 times with exponential backoff
+# range: 0 ~ 10
+maxRetryWhenHecUnavailable: 3

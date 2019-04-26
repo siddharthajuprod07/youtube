@@ -1,0 +1,348 @@
+<form stylesheet="monitoring.css" script="monitoring.js">
+    <label>DB Connect Input Performance</label>
+    <description>Monitor DB Connect's input performance</description>
+    <fieldset submitButton="false">
+        <input type="dropdown" token="input_name" searchWhenChanged="true">
+            <label>DB Input</label>
+            <choice value="*">All</choice>
+            <search>
+                <query>
+                    | datamodel DBX_Job_Metrics Job_Metrics search
+                    | rename "Job_Metrics.*" as *
+                    | stats count by input_name
+                </query>
+                <earliest>$Time.earliest$</earliest>
+                <latest>$Time.latest$</latest>
+            </search>
+            <fieldForLabel>input_name</fieldForLabel>
+            <fieldForValue>input_name</fieldForValue>
+            <default>*</default>
+        </input>
+        <input type="time" token="Time" searchWhenChanged="true">
+            <label></label>
+            <default>
+                <earliest>-24h@h</earliest>
+                <latest>now</latest>
+            </default>
+        </input>
+    </fieldset>
+
+    <row>
+        <panel>
+            <title>DBX - Input Performance - Input Jobs Median Duration over Time</title>
+            <chart>
+            <search>
+                <query>| pivot DBX_Job_Metrics Job_Metrics median(duration) AS "Median of duration" SPLITROW _time AS
+                    _time PERIOD auto SPLITCOL input_name
+                    FILTER status is COMPLETED
+                    FILTER input_name is $input_name$
+                    SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                </query>
+                <earliest>$Time.earliest$</earliest>
+                <latest>$Time.latest$</latest>
+                <sampleRatio>1</sampleRatio>
+            </search>
+            <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+            <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+            <option name="charting.axisTitleX.visibility">visible</option>
+            <option name="charting.axisTitleY.text">Median of duration</option>
+            <option name="charting.axisTitleY.visibility">visible</option>
+            <option name="charting.axisTitleY2.visibility">visible</option>
+            <option name="charting.axisX.scale">linear</option>
+            <option name="charting.axisY.scale">linear</option>
+            <option name="charting.axisY2.enabled">0</option>
+            <option name="charting.axisY2.scale">inherit</option>
+            <option name="charting.chart">line</option>
+            <option name="charting.chart.bubbleMaximumSize">50</option>
+            <option name="charting.chart.bubbleMinimumSize">10</option>
+            <option name="charting.chart.bubbleSizeBy">area</option>
+            <option name="charting.chart.nullValueMode">zero</option>
+            <option name="charting.chart.showDataLabels">none</option>
+            <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+            <option name="charting.chart.stackMode">default</option>
+            <option name="charting.chart.style">shiny</option>
+            <option name="charting.drilldown">all</option>
+            <option name="charting.layout.splitSeries">0</option>
+            <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+            <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+            <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Input Performance - Input Jobs Median Time Distribution</title>
+            <chart>
+                <search>
+                    <query>| pivot DBX_Job_Metrics Job_Metrics
+                        median(hec_upload_time) AS "Median HEC Upload Time(ms)"
+                        median(hec_record_process_time) AS "Median Record Process Time(ms)"
+                        median(db_read_time) AS "Median DB Read Time(ms)"
+                        SPLITROW input_name AS input_name
+                        FILTER status is COMPLETED
+                        FILTER input_name is $input_name$
+                        SORT 100 input_name ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">column</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">gaps</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">stacked</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+    <row>
+        <panel>
+            <title>DBX - Input Performance - HEC Median Duration</title>
+            <single>
+                <search>
+                    <query>| pivot DBX_Job_Metrics Job_Metrics
+                        median(hec_upload_time) AS "Median of hec_upload_time"
+                        FILTER status is COMPLETED
+                        FILTER input_name is $input_name$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="colorBy">value</option>
+                <option name="colorMode">none</option>
+                <option name="drilldown">none</option>
+                <option name="numberPrecision">0.00</option>
+                <option name="showSparkline">1</option>
+                <option name="showTrendIndicator">1</option>
+                <option name="trendColorInterpretation">standard</option>
+                <option name="trendDisplayMode">absolute</option>
+                <option name="trendInterval">auto</option>
+                <option name="unit">ms</option>
+                <option name="unitPosition">after</option>
+                <option name="useColors">0</option>
+                <option name="useThousandSeparators">1</option>
+            </single>
+        </panel>
+        <panel>
+            <title>DBX - Input Performance - HEC Median Throughput</title>
+            <single>
+                <search>
+                    <query>| pivot DBX_Job_Metrics Job_Metrics median(hec_upload_mb) AS "Median of hec_upload_mb"
+                        FILTER status is COMPLETED
+                        FILTER input_name is $input_name$
+                        SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 0 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                    <sampleRatio>1</sampleRatio>
+                </search>
+                <option name="colorBy">value</option>
+                <option name="colorMode">none</option>
+                <option name="drilldown">none</option>
+                <option name="numberPrecision">0.0000</option>
+                <option name="showSparkline">1</option>
+                <option name="showTrendIndicator">1</option>
+                <option name="trendColorInterpretation">standard</option>
+                <option name="trendDisplayMode">absolute</option>
+                <option name="trendInterval">auto</option>
+                <option name="unit">MB</option>
+                <option name="unitPosition">after</option>
+                <option name="useColors">0</option>
+                <option name="useThousandSeparators">1</option>
+            </single>
+        </panel>
+    </row>
+
+    <row>
+        <panel>
+            <title>DBX - Input Performance - HEC Connection Status over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DBX_Health_Metrics Health_Metrics
+                        max(value) AS "Connections" SPLITROW _time AS _time
+                        PERIOD auto
+                        SPLITCOL name
+                        FILTER name is "org.apache.http.conn.HttpClientConnectionManager.http-client.*-connections" SORT
+                        100 _time
+                        ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "org.apache.http.conn.HttpClientConnectionManager.http-client.*-connections" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+
+        <panel>
+            <title>DBX - Input Performance - HEC Upload Time over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DBX_Health_Metrics Health_Metrics
+                        max(median) AS median(ms)
+                        max(p95) AS "95%(ms)"
+                        max(p99) AS "99%(ms)"
+                        max(max) AS max(ms)
+                        SPLITROW _time AS _time PERIOD auto SPLITCOL name
+                        FILTER name is "org.apache.http.client.HttpClient.http-client.post-requests" SORT 100 _time
+                        ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                        | rename "org.apache.http.client.HttpClient.http-client.post-requests:::*" as *
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+
+    <row>
+        <panel>
+            <title>DBX - Input Performance - HEC Median Upload Time(ms) By Input Name over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DBX_Job_Metrics Job_Metrics
+                        median(hec_upload_time) AS hec_upload_time SPLITROW _time AS
+                        _time PERIOD auto
+                        FILTER status is COMPLETED
+                        FILTER input_name is $input_name$ SPLITCOL input_name SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0
+                        NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+
+        <panel>
+            <title>DBX - Input Performance - HEC Median Throughput(MB) By Input Name over Time</title>
+            <chart>
+                <search>
+                    <query>
+                        | pivot DBX_Job_Metrics Job_Metrics
+                        median(hec_upload_mb) AS hec_upload_mb SPLITROW _time AS _time
+                        PERIOD auto
+                        FILTER status is COMPLETED
+                        FILTER input_name is $input_name$
+                        SPLITCOL input_name SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1
+                    </query>
+                    <earliest>$Time.earliest$</earliest>
+                    <latest>$Time.latest$</latest>
+                </search>
+                <option name="charting.axisY2.enabled">0</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+                <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+                <option name="charting.axisTitleX.visibility">visible</option>
+                <option name="charting.axisTitleY.visibility">visible</option>
+                <option name="charting.axisTitleY2.visibility">visible</option>
+                <option name="charting.axisX.scale">linear</option>
+                <option name="charting.axisY.scale">linear</option>
+                <option name="charting.axisY2.scale">inherit</option>
+                <option name="charting.chart">line</option>
+                <option name="charting.chart.bubbleMaximumSize">50</option>
+                <option name="charting.chart.bubbleMinimumSize">10</option>
+                <option name="charting.chart.bubbleSizeBy">area</option>
+                <option name="charting.chart.nullValueMode">zero</option>
+                <option name="charting.chart.showDataLabels">none</option>
+                <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+                <option name="charting.chart.stackMode">default</option>
+                <option name="charting.chart.style">shiny</option>
+                <option name="charting.drilldown">all</option>
+                <option name="charting.layout.splitSeries">0</option>
+                <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+                <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+                <option name="charting.legend.placement">right</option>
+            </chart>
+        </panel>
+    </row>
+</form>

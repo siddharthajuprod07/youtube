@@ -1,0 +1,43 @@
+[app/install/install_source_checksum]
+version = 7.2.3
+modtime = 1556214112.491910800
+
+[inputs/http%3A%2F%2Fdb-connect-http-input]
+access = read : [ admin ], write : [ admin ]
+export = none
+owner = nobody
+version = 7.2.3
+modtime = 1556214120.423487800
+
+[ui-metrics-collector/collector]
+version = 7.2.3
+modtime = 1556214225.895096400
+
+[app/install/is_configured]
+version = 7.2.3
+modtime = 1556214238.772835500
+
+[dbx_settings/java]
+version = 7.2.3
+modtime = 1556214348.876632400
+
+[identities/mysql_identity]
+access = read : [ admin, db_connect_admin, db_connect_user ], write : [ admin, db_connect_admin ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1556216527.065422200
+
+[db_connections/mysql_conn]
+access = read : [ admin, db_connect_admin, db_connect_user ], write : [ admin, db_connect_admin ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1556216812.461871600
+
+[db_inputs/mysql_input]
+access = read : [ admin, db_connect_admin, db_connect_user ], write : [ admin, db_connect_admin ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1556269169.944442800

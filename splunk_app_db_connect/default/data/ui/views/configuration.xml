@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<view template="splunk_app_db_connect:templates/configuration.html" type="html" isDashboard="False">
+    <label>Configuration</label>
+</view>

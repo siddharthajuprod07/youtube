@@ -1,0 +1,23 @@
+[oracle_example]
+connection_type = oracle
+database = orcl
+disabled = 0
+host = oracle.host.com
+identity = oracle_identity
+jdbcUseSSL = true
+port = 2484
+readonly = false
+customizedJdbcUrl = jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=oracle.host.com)(PORT=2484))(CONNECT_DATA=(SERVICE_NAME=orcl)))
+connection_properties = {"oracle.net.authentication_services": "(TCPS)", "oracle.net.ssl_cipher_suites": "(SSL_DH_anon_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA)", "javax.net.ssl.trustStore": "/opt/splunk/cwallet/cwallet.sso", "javax.net.ssl.trustStoreType": "SSO", "javax.net.ssl.keyStore": "/opt/splunk/cwallet/cwallet.sso", "javax.net.ssl.keyStoreType": "SSO"}
+
+[informix_example]
+connection_type = informix
+database = test
+disabled = 0
+host = informix-demo.host.com
+identity = informix_win
+informixserver = demo_on
+jdbcUseSSL = false
+port = 9088
+readonly = false
+customizedJdbcUrl = jdbc:informix-sqli://informix-demo.host.com:9876/test:informixserver=demo_on;DELIMIDENT=Y

@@ -1,0 +1,29 @@
+# Version 2.2
+#
+# This is an example settings.conf.  Use this file to configure
+# Splunk DB Connect settings.
+#
+# To use one or more of these configurations, copy the configuration block
+# into settings.conf in $SPLUNK_HOME/etc/apps/splunk_app_db_connect/local/.
+# You must restart Splunk to enable configurations.
+#
+# To learn more about configuration files (including precedence) please see
+# the documentation located at
+# http://docs.splunk.com/Documentation/Splunk/latest/Admin/Aboutconfigurationfiles
+
+[settings]
+
+java_home = /usr/local/bin/java
+jvm_options = -Xmx256m -Dfile.encoding=UTF-8 -server -Duser.language=en -Duser.region=
+
+
+[usage_collection]
+
+# usage collection is enabled.
+mode = On
+
+# the automatically generated app ID.
+app_id = f2682864-5d3e-428c-a256-d51edbe3f90b
+
+# smallest interval of two system logs in seconds
+interval_system = 3600

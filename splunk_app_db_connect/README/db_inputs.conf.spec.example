@@ -1,0 +1,27 @@
+[test_input]
+interval = 3600
+index = main
+sourcetype = dummy_type
+mode = batch
+connection = test_connection
+query = SELECT * FROM `sakila`.`actor`
+max_rows = 100
+ui_query_catalog = sakila
+ui_query_mode = simple
+ui_query_schema = NULL
+ui_query_table = actor
+
+
+[test_advanced_input]
+interval = 3600
+index = main
+sourcetype = dummy_type
+mode = advanced
+connection = test_connection
+query = SELECT * FROM `sakila`.`actor` where actor_id >= ? order by actor_id
+max_rows = 100
+ui_query_catalog = sakila
+ui_query_mode = advanced
+ui_query_schema = NULL
+ui_query_table = actor
+tail_rising_column_name = actor_id

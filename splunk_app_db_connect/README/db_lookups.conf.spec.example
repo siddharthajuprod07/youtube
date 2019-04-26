@@ -1,0 +1,7 @@
+[test_lookup]
+lookupSQL = SELECT * FROM `sakila`.`actor`
+connection = test_connection
+output_column_map = [{"name":"actor_id","alias":"output_actor_id"}]
+input_column_map = [{"name":"test_input_field","alias":"test_input_field"}]
+ui_input_spl_search = index=main | stats count(*) by test_input_field
+ui_use_saved_search = 0

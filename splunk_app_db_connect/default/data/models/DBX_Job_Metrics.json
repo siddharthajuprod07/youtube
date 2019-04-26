@@ -1,0 +1,197 @@
+{
+    "modelName": "DBX_Job_Metrics",
+    "displayName": "DBX Job Metrics",
+    "description": "This datamodel is based on job metrics.",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Job_Metrics",
+            "displayName": "Job Metrics",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "hec_upload_bytes",
+                    "owner": "Job_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "hec_upload_bytes",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "hec_upload_time",
+                    "owner": "Job_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "hec_upload_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "input_name",
+                    "owner": "Job_Metrics",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "input_name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "connection",
+                    "owner": "Job_Metrics",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "connection",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "status",
+                    "owner": "Job_Metrics",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "status",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "duration",
+                    "owner": "Job_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "duration",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "db_read_time",
+                    "owner": "Job_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "db_read_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "hec_record_process_time",
+                    "owner": "Job_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "hec_record_process_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "hec_upload_mb",
+                            "owner": "Job_Metrics",
+                            "type": "number",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "hec_upload_mb",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "2q6b99oq658urwxt9m0hs0dx6r",
+                    "owner": "Job_Metrics",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "hec_upload_bytes/1024/1024"
+                }
+            ],
+            "constraints": [
+                {
+                    "search": "index=_internal sourcetype=dbx_job_metrics",
+                    "owner": "Job_Metrics"
+                }
+            ],
+            "lineage": "Job_Metrics"
+        }
+    ],
+    "objectNameList": [
+        "Job_Metrics"
+    ]
+}

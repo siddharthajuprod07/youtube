@@ -1,0 +1,162 @@
+{
+    "modelName": "DBX_Health_Metrics",
+    "displayName": "DBX Health Metrics",
+    "description": "This datamodel is based on health metrics.",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Health_Metrics",
+            "displayName": "Health Metrics",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "max",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "max",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "median",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "median",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "name",
+                    "owner": "Health_Metrics",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p75",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p75",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p95",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p95",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p99",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p99",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "value",
+                    "owner": "Health_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "value",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [
+                {
+                    "search": "index=_internal sourcetype=dbx_health_metrics",
+                    "owner": "Health_Metrics"
+                }
+            ],
+            "lineage": "Health_Metrics"
+        }
+    ],
+    "objectNameList": [
+        "Health_Metrics"
+    ]
+}

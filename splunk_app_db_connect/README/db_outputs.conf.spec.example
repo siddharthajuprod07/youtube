@@ -1,0 +1,15 @@
+[test_output]
+description = this is a test output
+interval = 40 * * * *
+connection = test_connection
+table_name = `test_table`
+using_upsert = 0
+search = index=main | stats count(*) by test_column
+is_saved_search = 0
+time_out = 6000
+customized_mappings = test_column:varchar_col:12
+ui_mappings = [{"inputField":"test_column","outputField":"test_output_column","valType":"VARCHAR","sqlType":"12"}]
+ui_selected_fields = [{"value":"skip","label":"Skip this Column"},{"value":"test_column","label":"test_column"}]
+ui_query_catalog = test_catalog
+ui_query_schema = NULL
+ui_query_table = output_test

@@ -1,0 +1,1 @@
+[alert_output]

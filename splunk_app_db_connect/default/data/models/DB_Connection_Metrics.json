@@ -1,0 +1,219 @@
+{
+    "modelName": "DB_Connection_Metrics",
+    "displayName": "DB Connection Metrics",
+    "description": "This datamodel is based on db connection metrics.",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Connection_Metrics",
+            "displayName": "Connection Metrics",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "count",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "count",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "max",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "max",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "median",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "median",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p75",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p75",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p95",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p95",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "p99",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "p99",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "value",
+                    "owner": "Connection_Metrics",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "value",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "name",
+                    "owner": "Connection_Metrics",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "short_name_wait",
+                            "owner": "Connection_Metrics",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "short_name_wait",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "dplazvhuw78r8y108q6cu9pb9",
+                    "owner": "Connection_Metrics",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "replace(name, \".pool.Wait\", \"\")"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "short_name_usage",
+                            "owner": "Connection_Metrics",
+                            "type": "string",
+                            "fieldSearch": "",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "short_name_usage",
+                            "comment": ""
+                        }
+                    ],
+                    "calculationID": "9tm6s696vy1n8bekg5019k9",
+                    "owner": "Connection_Metrics",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "replace(name, \".pool.Usage\", \"\")"
+                }
+            ],
+            "constraints": [
+                {
+                    "search": "index=_internal sourcetype=dbx_connection_pool_metrics",
+                    "owner": "Connection_Metrics"
+                }
+            ],
+            "lineage": "Connection_Metrics"
+        }
+    ],
+    "objectNameList": [
+        "Connection_Metrics"
+    ]
+}

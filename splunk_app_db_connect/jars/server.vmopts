@@ -1,0 +1,1 @@
+ -Ddw.server.applicationConnectors[0].port=9998
