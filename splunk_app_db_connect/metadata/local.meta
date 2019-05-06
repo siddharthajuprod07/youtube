@@ -41,3 +41,17 @@ export = none
 owner = admin
 version = 7.2.3
 modtime = 1556269169.944442800
+
+[savedsearches/mysql_saved_search]
+access = read : [ * ], write : [ * ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1557152072.857372200
+
+[db_outputs/mysql_output]
+access = read : [ admin, db_connect_admin, db_connect_user ], write : [ admin, db_connect_admin ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1557153488.100200700
