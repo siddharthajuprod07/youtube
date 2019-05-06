@@ -1,0 +1,6 @@
+index=main 
+| table month,tickets_created,tickets_resolved
+| eval month_num = case(month="Jan",01,month="Feb",02,month="Mar",03,month="Apr",04)
+| sort month_num
+| eval created_minus_resolved =tickets_created - tickets_resolved
+| accum created_minus_resolved as backlog
