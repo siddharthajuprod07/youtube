@@ -55,3 +55,10 @@ export = none
 owner = admin
 version = 7.2.3
 modtime = 1557153488.100200700
+
+[db_lookups/mysql_lookup]
+access = read : [ admin, db_connect_admin, db_connect_user ], write : [ admin, db_connect_admin ]
+export = none
+owner = admin
+version = 7.2.3
+modtime = 1557580778.669785600
