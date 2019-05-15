@@ -1,0 +1,56 @@
+-- Display each employee with departmentwise average salary
+
+index=main source="data.txt"
+| table empno,ename,job,mgr,hiredate,sal,deptno
+| streamstats avg(sal) as dept_avg_sal by deptno
+| eventstats last(dept_avg_sal) by deptno
+
+------------------------------------------------------------------------------------------------
+-- In last 4 min if any sensor is returning 0 , 4 or more times we should alert
+
+source="data1.txt"  sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats count as count_sensor1 by sensor1 reset_on_change=true
+| streamstats count as count_sensor2 by sensor2 reset_on_change=true
+| streamstats count as count_sensor3 by sensor3 reset_on_change=true
+| streamstats count as count_sensor4 by sensor4 reset_on_change=true
+| where (sensor1=0 AND count_sensor1 >=4) OR (sensor2=0 AND count_sensor2 >=4)  OR (sensor3=0 AND count_sensor3 >=4)  OR (sensor4=0 AND count_sensor4 >=4)
+
+source="data1.txt" sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats reset_on_change=true  time_window=4m window=5  count as count_sensor1 by sensor1
+| table _time,sensor1,count_sensor1
+
+source="data1.txt" host="BDC7-L-7041STD" sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats window=3  global=false reset_after="count_sensor1=2"  count as count_sensor1 by sensor1
+| table _time,sensor1,count_sensor1
+
+
+source="data1.txt"  sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats  window=3 global=false  count as count_sensor1 by sensor1
+| table _time,sensor1,count_sensor1
+
+source="data1.txt"  sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats  window=4 global=false current=false  count as count_sensor1 by sensor1
+| table _time,sensor1,count_sensor1
+
+source="data1.txt"  sourcetype="csv"
+| table _time,sensor1,sensor2,sensor3,sensor4
+| sort _time
+| streamstats window=2  global=false  count as count_sensor1 by sensor1
+| table _time,sensor1,count_sensor1
+
+index=main source="data2.txt"
+| table empno,ename,job,mgr,hiredate,sal,deptno
+| search ename IN ('SMITH','ALLEN')
+| sort _time
+| streamstats window=1 global=false current=false last(sal) as prev_sal by ename
+
