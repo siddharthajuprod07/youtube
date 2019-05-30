@@ -1,0 +1,36 @@
+http://35.200.240.191:8000 -- receiver2
+
+http://35.200.185.142:8000 --receiver
+
+http://34.74.92.141:8000 -- heavy forwader
+
+http://34.66.213.21:8000  --deployment server
+
+splunk set deploy-poll <IP_address/hostname>:<management_port>
+splunk reload deploy-server
+
+
+$SPLUNK_HOME/etc/deployment-apps/fwd_to_receiver
+    [tcpout]
+    defaultGroup=receiver
+    [tcpout:receiver]
+    server=35.200.185.142:9997
+	
+$SPLUNK_HOME/etc/deployment-apps/fwd_to_receiver2
+    [tcpout]
+    defaultGroup=receiver2
+    [tcpout:receiver2]
+    server=35.200.240.191:9997
+	
+$SPLUNK_HOME/etc/deployment-apps/winevt
+    [WinEventLog:Application]
+    disabled=0
+    [WinEventLog:Security]
+    disabled=0
+    [WinEventLog:System]
+    disabled=0
+	
+$SPLUNK_HOME/etc/deployment-apps/linmess
+    [monitor:///var/log/]
+    disabled=false
+    sourcetype=syslog
