@@ -1,0 +1,34 @@
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs --data-urlencode search="search index=_internal sourcetype=splunkd" -d id=mysearch_02151949 -d max_count=50000 -d status_buckets=300
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/control -d action=pause
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/control -d action=unpause
+
+curl -k -u admin:<password> --request DELETE https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949
+
+curl -k -u admin:<password> https://localhost:8089/services/search/jobs --data-urlencode search="search index=_internal sourcetype=splunkd_access" -d id=mysearch_02151950 -d max_count=50000 -d status_buckets=300
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/events --get -d f=host -d count=2
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/results --get -d count=3 -d output_mode=json
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/summary --get -d f=source -d f=sourcetype -d f=host -d top_count=5
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/timeline 
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/mysearch_02151949/search.log
+
+curl -k -u admin:<password> https://localhost:8089/servicesNS/admin/search/search/jobs/export -d search="search index=_internal sourcetype=splunkd"
+
+
+
+
+
+
+
+
+
+
+
