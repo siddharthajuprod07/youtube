@@ -1,0 +1,27 @@
+| tstats count
+
+| tstats count where index=_internal
+
+| tstats count where index=_internal by group (will not work as group is not an indexed field)
+
+| tstats values(source) where index=_internal sourcetype IN (dbx_health_metrics,splunkd)
+
+| tstats count  where index=_internal sourcetype IN (dbx_health_metrics,splunkd) by sourcetype
+
+| tstats count  where index=_internal sourcetype IN (dbx_health_metrics,splunkd) by _time span=2d (last 3 days)
+
+| tstats count  from datamodel=internal_server where nodename=server.scheduler (for accelerated and non-accelerated DM this will return result)
+
+| tstats summariesonly=true count  from datamodel=internal_server where nodename=server.scheduler (this will not return result for non-accelerated DM)
+
+| tstats prestats=true count from datamodel=internal_server by _time span=1h | timechart span=1h count
+
+| tstats prestats=true count from datamodel=internal_server where nodename=server.splunkdaccess
+| eval count_for="Total"
+| tstats prestats=true append=true count from datamodel=internal_server where nodename=server.splunkdaccess.job_endpoint
+| eval count_for=case(isnotnull(count_for), count_for, true(), "searchapi")
+| chart count by  count_for
+
+
+
+splunk cmd walklex "C:\Program Files\Splunk\var\lib\splunk\defaultdb\db\db_1560343200_1560340320_0\1560343200-1560340320-14072747864679273425.tsidx" "*"
