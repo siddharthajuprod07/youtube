@@ -1,0 +1,13 @@
+--server.conf config for cluster master
+
+[clustering]
+mode = master
+replication_factor = 4
+search_factor = 3
+pass4SymmKey = whatever
+cluster_label = cluster1
+
+--configure master node through CLI
+
+./splunk edit cluster-config -mode master -replication_factor 4 -search_factor 3 -secret your_key -cluster_label cluster1
+./splunk restart
