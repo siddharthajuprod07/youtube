@@ -1,0 +1,8 @@
+[alert_actions]
+export = system
+
+[alerts]
+export = system
+
+[restmap]
+export = system

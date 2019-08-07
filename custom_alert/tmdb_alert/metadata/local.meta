@@ -1,0 +1,13 @@
+[lookups/alert_status.csv]
+access = read : [ * ], write : [ * ]
+export = system
+owner = admin
+version = 7.3.1
+modtime = 1565025693.544459500
+
+[transforms/alert_status]
+access = read : [ * ], write : [ * ]
+export = system
+owner = admin
+version = 7.3.1
+modtime = 1565025726.831161000

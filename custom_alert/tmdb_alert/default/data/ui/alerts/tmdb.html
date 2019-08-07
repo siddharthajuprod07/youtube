@@ -1,0 +1,34 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="list_name">List Id</label>
+        <div class="controls">
+            <input type="text" name="action.tmdb.param.listid" id="list_name" />
+            <span class="help-block">
+              The name of a TMDB list
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="list_lang">Language</label>
+
+        <div class="controls">
+            <select id="list_lang" name="action.tmdb.param.listlang">
+                <option value="">en</option>
+                <option value="red">fr</option>
+                <option value="green">da</option>
+                <option value="blue">sa</option>
+                <option value="grey">bn</option>
+            </select>
+            <span class="help-block">Choose the language of the list</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="api_key">API Key</label>
+        <div class="controls">
+            <input type="text" name="action.tmdb.param.APIkey" id="api_key" />
+            <span class="help-block">
+              API Key
+            </span>
+        </div>
+    </div>
+</form>
