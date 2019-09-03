@@ -1,0 +1,5 @@
+[commands/getgenrestream]
+access = read : [ * ], write : [ * ]
+export = system
+
+

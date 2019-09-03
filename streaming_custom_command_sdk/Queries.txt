@@ -1,0 +1,6 @@
+index="tmdb_index"
+| rename genre_ids{} as genre_ids
+| mvexpand genre_ids
+| sort -id
+| table id,genre_ids,original_title
+| getgenrestream fieldname="genre_name"
