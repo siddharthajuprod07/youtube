@@ -1,0 +1,103 @@
+-- Last 4 days what is the total values of the item sold per hour
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart per_hour(price) as price
+
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=1h sum(price) as price
+
+-- Last 4 weeks what is the total values of the item sold per week
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=w@w1 sum(price) as price
+
+--minspan example
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart minspan=35m sum(price) as price
+
+-- aligntime where we are removing unnecessary result data
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=12h aligntime=@d sum(price) as price
+
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=12h aligntime=earliest sum(price) as price
+
+--eval expression
+index=main 
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=1h eval(round(sum(price),1)) as price
+
+index=main 
+| lookup prices productId as productId outputnew product_name,price
+| timechart per_hour(eval(method="GET")) AS Views, per_hour(eval(action="purchase")) AS Purchases
+
+--split by
+-- Last 4 weeks what is the total values of the item sold per week by product
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=1h sum(price) as price by product_name
+
+--otherstr
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart  span=1h sum(price) as price by product_name otherstr="All_other_products" 
+
+--useother
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart  span=1h sum(price) as price by product_name  useother=false
+
+--nullstr
+index=main 
+| lookup prices productId as productId outputnew product_name,price
+| timechart   span=1h sum(price) as price by VendorID nullstr="No Vendor"
+
+--usenull
+index=main 
+| lookup prices productId as productId outputnew product_name,price
+| timechart   span=1h sum(price) as price by VendorID usenull=false
+
+--limit
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart limit=0 span=1h sum(price) as price by product_name
+
+--where
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart  span=1h sum(price) as price by product_name where sum in top2
+
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart span=1h sum(price) as price by product_name where sum in bottom2
+
+index=_internal | timechart span=1h sum(eval(if(log_level=="INFO",1,0))) by source WHERE sum > 100
+
+--cont
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart cont=t span=1d sum(price) as price by product_name
+
+--fixedrange
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart fixedrange=f span=12h  sum(price) as price
+
+--format
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart format=$AGG$_$VAL$  span=1d sum(price) as price max(price) as m_price by product_name
+
+--sep
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart  sep="." span=1d sum(price) as price max(price) as m_price by product_name
+
+--partial
+index=main action="purchase"
+| lookup prices productId as productId outputnew product_name,price
+| timechart partial=false span=1d sum(price) as price by product_name
