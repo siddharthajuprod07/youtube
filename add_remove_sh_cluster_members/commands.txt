@@ -1,0 +1,96 @@
+
+
+--------------------------------------------------------------------------------------------------------------
+wget -O splunk-7.2.6-c0bf0f679ce9-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=7.2.6&product=splunk&filename=splunk-7.2.6-c0bf0f679ce9-linux-2.6-amd64.deb&wget=true'
+
+sudo su
+
+dpkg -i splunk-7.2.6-c0bf0f679ce9-linux-2.6-amd64.deb
+
+cd /opt/splunk/bin/
+
+./splunk enable boot-start
+
+./splunk start
+--------------------------------------------------------------------------------------------------------------
+## Add a new menber
+-- Init the sh cluster
+splunk init shcluster-config -auth <username>:<password> -mgmt_uri <URI>:<management_port> -replication_port <replication_port> -replication_factor <n> -conf_deploy_fetch_url <URL>:<management_port> -secret <security_key> -shcluster_label <label>
+
+splunk restart 
+
+
+--On new member 
+splunk add shcluster-member -current_member_uri <URI>:<management_port>
+
+
+--from any other member
+splunk add shcluster-member -new_member_uri <URI>:<management_port>
+
+./splunk show shcluster-status -auth admin:monitor!
+
+
+## remove a member
+
+To run the splunk remove command on the member that you are removing, use this version:
+./splunk remove shcluster-member
+
+To run the splunk remove command from another member, use this version:
+splunk remove shcluster-member -mgmt_uri <URI>:<management_port>
+
+splunk stop
+
+Remove and disable the member
+./splunk remove shcluster-member
+./splunk disable shcluster-config
+./splunk clean kvstore --cluster
+
+splunk show kvstore-status
+
+## To add a member that was both removed and disabled:
+
+1. Clean the instance to remove any existing configurations that could interfere with the cluster. See "Clean the instance."
+
+splunk stop
+
+splunk clean all
+
+splunk start
+
+2. Initialize the instance. See "Initialize the instance."
+
+splunk init shcluster-config -auth <username>:<password> -mgmt_uri <URI>:<management_port> -replication_port <replication_port> -replication_factor <n> -conf_deploy_fetch_url <URL>:<management_port> -secret <security_key> -shcluster_label <label>
+
+edit $SPLUNK_HOME/etc/system/local/user-seed.conf file as follows.
+[user_info]
+USERNAME = admin
+PASSWORD = <your password>
+
+
+3. Add the instance to the cluster. "Add the instance."
+splunk add shcluster-member -current_member_uri <URI>:<management_port>
+
+## To add a removed member:
+
+1. Clean the instance to remove any existing configurations that could interfere with the cluster. See "Clean the instance."
+splunk stop
+
+splunk clean all
+
+splunk start
+
+2. Add the instance to the cluster. "Add the instance."
+splunk add shcluster-member -current_member_uri <URI>:<management_port>
+
+## Add a member that left the cluster without being removed from it
+A typical reason for a member falling into this category is a temporary failure of the cluster member.
+
+For members that left the cluster without being explicitly removed from it:
+
+1. Start the instance with the splunk start command.
+
+2. Depending on how long the member has been down, you might need to run the splunk resync shcluster-replicated-config command to download the current set of configurations.
+
+./splunk resync shcluster-replicated-config 
+
+./splunk show shcluster-status
