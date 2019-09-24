@@ -1,0 +1,30 @@
+#Shortcomings of the static captain:
+1. It becomes a single point of failure for the cluster.
+
+2. The static captain does not check whether enough members are running to meet the replication factor. 
+
+#Switch to a static captain
+To switch to a static captain, reconfigure each cluster member to use a static captain:
+
+1. On the member that you want to designate as captain, run this CLI command:
+
+splunk edit shcluster-config -mode captain -captain_uri <URI>:<management_port> -election false
+
+2. On each non-captain member, run this CLI command:
+
+splunk edit shcluster-config -mode member -captain_uri <URI>:<management_port> -election false
+
+#Return single-site cluster to dynamic captain
+
+
+1. As members come back online, convert them one-by-one to point to the static captain:
+
+splunk edit shcluster-config -election false -mode member -captain_uri <URI>:<management_port> 
+
+2. Once the cluster has regained its majority, convert all members back to dynamic captain use. Convert the current, static captain last. To accomplish this, run this command on each member:
+
+splunk edit shcluster-config -election true -mgmt_uri <URI>:<management_port>
+
+3. Bootstrap one of the members. This member then becomes the first dynamic captain. It is recommended that you bootstrap the member that was previously serving as the static captain.
+
+splunk bootstrap shcluster-captain -servers_list "<URI>:<management_port>,<URI>:<management_port>,..." -auth <username>:<password>
