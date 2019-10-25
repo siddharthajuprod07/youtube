@@ -1,0 +1,34 @@
+<setup>
+  <block title="Enable the schedule for a search"
+         endpoint="saved/searches" entity="lang Search">
+    <text>
+      &lt;i&gt;Specify the configuration for a single setting in a stanza.&lt;/i&gt;
+    </text>
+    <input field="is_scheduled">
+      <label>Enable Schedule for $name$</label>
+      <type>bool</type>
+    </input>
+  </block>
+
+  <block title="Configure Cron Schedule" 
+       endpoint="saved/searches" entity="*" mode="iter">
+    <text>
+      &lt;i&gt;&lt;b&gt;Iteration mode&lt;/b&gt;:
+      specify the cron schedule for each search in the conf file.&lt;/i&gt;</text>
+    <input field="cron_schedule">
+      <label>$name$</label>
+      <type>text</type>
+    </input>
+  </block>
+
+    <block title="Set earliest dispatch time" 
+         endpoint="saved/searches" entity="*" mode="bulk">
+    <text>
+      &lt;i&gt;&lt;b&gt;Bulk mode&lt;/b&gt;: enable the earliest dispatch time for each search in the conf file.&lt;/i&gt;
+    </text>
+    <input field="dispatch.earliest_time">
+      <label>Set earliest dispatch time for all searches</label>
+      <type>text</type>
+    </input>
+  </block>
+</setup>
