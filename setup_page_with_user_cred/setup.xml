@@ -1,0 +1,16 @@
+<setup>
+<block title="Add new credentials" endpoint="storage/passwords" entity="_new">
+  <input field="name">
+    <label>Username</label>
+    <type>text</type>
+  </input>
+  <input field="password">
+    <label>Password</label>
+    <type>password</type>
+  </input>
+<input field="realm">
+     <label>Realm</label>
+     <type>text</type>
+  </input>
+</block>
+</setup>
