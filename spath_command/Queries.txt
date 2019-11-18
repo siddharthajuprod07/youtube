@@ -1,0 +1,33 @@
+index=main source="raw_nyc_phil_mod.json"
+| spath
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{}
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{0}
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{0} output=programs
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{}.season
+
+index=main source="raw_nyc_phil_mod.json"
+| eval season=spath(_raw,"programs{}.season")
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{}.concerts{}
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{}.works{0}
+
+index=main source="raw_nyc_phil_mod.json"
+| spath path=programs{}.works{}.workTitle
+
+index=main source="test_xml.txt"
+| spath output=yearpublished path=purchases.book.title{@yearPublished}
+
+source="mixed_json_unstructured.json" host="MSI" sourcetype="test"
+| rex field=_raw "com\.abc\.transform\.listeners\.xyz-(?<json_field>.+)"
+| spath input=json_field path={}.timestamp

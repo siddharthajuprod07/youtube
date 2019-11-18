@@ -1,0 +1,204 @@
+{
+	"level": "info",
+	"programs": [{
+		"season": "1842-43",
+		"orchestra": "New York Philharmonic",
+		"concerts": [{
+			"Date": "1842-12-07T05:00:00Z",
+			"eventType": "Subscription Season",
+			"Venue": "Apollo Rooms",
+			"Location": "Manhattan, NY",
+			"Time": "8:00PM"
+		}],
+		"programID": "3853",
+		"works": [{
+			"workTitle": "SYMPHONY NO. 5 IN C MINOR, OP.67",
+			"conductorName": "Hill, Ureli Corelli",
+			"ID": "52446*",
+			"soloists": [],
+			"composerName": "Beethoven,  Ludwig  van"
+		}, {
+			"workTitle": "OBERON",
+			"composerName": "Weber,  Carl  Maria Von",
+			"conductorName": "Timm, Henry C.",
+			"ID": "8834*4",
+			"soloists": [{
+				"soloistName": "Otto, Antoinette",
+				"soloistRoles": "S",
+				"soloistInstrument": "Soprano"
+			}],
+			"movement": "\"Ozean, du Ungeheuer\" (Ocean, thou mighty monster), Reiza (Scene and Aria), Act II"
+		}, {
+			"workTitle": "QUINTET, PIANO, D MINOR, OP. 74",
+			"ID": "3642*",
+			"soloists": [{
+				"soloistName": "Scharfenberg, William",
+				"soloistRoles": "A",
+				"soloistInstrument": "Piano"
+			}, {
+				"soloistName": "Hill, Ureli Corelli",
+				"soloistRoles": "A",
+				"soloistInstrument": "Violin"
+			}, {
+				"soloistName": "Derwort, G. H.",
+				"soloistRoles": "A",
+				"soloistInstrument": "Viola"
+			}, {
+				"soloistName": "Boucher, Alfred",
+				"soloistRoles": "A",
+				"soloistInstrument": "Cello"
+			}, {
+				"soloistName": "Rosier, F. W.",
+				"soloistRoles": "A",
+				"soloistInstrument": "Contrabass"
+			}],
+			"composerName": "Hummel,  Johann"
+		}, {
+			"interval": "Intermission",
+			"ID": "0*",
+			"soloists": []
+		}, {
+			"workTitle": "OBERON",
+			"composerName": "Weber,  Carl  Maria Von",
+			"conductorName": "Etienne, Denis G.",
+			"ID": "8834*3",
+			"soloists": [],
+			"movement": "Overture"
+		}, {
+			"workTitle": "ARMIDA",
+			"composerName": "Rossini,  Gioachino",
+			"conductorName": "Timm, Henry C.",
+			"ID": "8835*1",
+			"soloists": [{
+				"soloistName": "Otto, Antoinette",
+				"soloistRoles": "S",
+				"soloistInstrument": "Soprano"
+			}, {
+				"soloistName": "Horn, Charles Edward",
+				"soloistRoles": "S",
+				"soloistInstrument": "Tenor"
+			}],
+			"movement": "Duet"
+		}, {
+			"workTitle": "FIDELIO, OP. 72",
+			"composerName": "Beethoven,  Ludwig  van",
+			"conductorName": "Timm, Henry C.",
+			"ID": "8837*6",
+			"soloists": [{
+				"soloistName": "Horn, Charles Edward",
+				"soloistRoles": "S",
+				"soloistInstrument": "Tenor"
+			}],
+			"movement": "\"In Des Lebens Fruhlingstagen...O spur ich nicht linde,\" Florestan (aria)"
+		}, {
+			"workTitle": "ABDUCTION FROM THE SERAGLIO,THE, K.384",
+			"composerName": "Mozart,  Wolfgang  Amadeus",
+			"conductorName": "Timm, Henry C.",
+			"ID": "8336*4",
+			"soloists": [{
+				"soloistName": "Otto, Antoinette",
+				"soloistRoles": "S",
+				"soloistInstrument": "Soprano"
+			}],
+			"movement": "\"Ach Ich liebte,\" Konstanze (aria)"
+		}, {
+			"workTitle": "OVERTURE NO. 1, D MINOR, OP. 38",
+			"conductorName": "Timm, Henry C.",
+			"ID": "5543*",
+			"soloists": [],
+			"composerName": "Kalliwoda,  Johann  W."
+		}],
+		"id": "38e072a7-8fc9-4f9a-8eac-3957905c0002"
+	}, {
+		"season": "1843-44",
+		"orchestra": "New York Philharmonic",
+		"concerts": [{
+			"Date": "1844-02-18T05:00:00Z",
+			"eventType": "Subscription Season",
+			"Venue": "Apollo Rooms",
+			"Location": "Manhattan, NY",
+			"Time": "8:00PM"
+		}],
+		"programID": "5178",
+		"works": [{
+			"workTitle": "SYMPHONY NO. 3 IN E FLAT MAJOR, OP. 55 (EROICA)",
+			"conductorName": "Hill, Ureli Corelli",
+			"ID": "52437*",
+			"soloists": [],
+			"composerName": "Beethoven,  Ludwig  van"
+		}, {
+			"workTitle": "I PURITANI",
+			"composerName": "Bellini,  Vincenzo",
+			"conductorName": "Hill, Ureli Corelli",
+			"ID": "8838*2",
+			"soloists": [{
+				"soloistName": "Otto, Antoinette",
+				"soloistRoles": "S",
+				"soloistInstrument": "Soprano"
+			}],
+			"movement": "Elvira (aria): \"Qui la voce...Vien, diletto\""
+		}, {
+			"workTitle": "CELEBRATED ELEGIE",
+			"conductorName": "Hill, Ureli Corelli",
+			"ID": "3659*",
+			"soloists": [{
+				"soloistName": "Boucher, Alfred",
+				"soloistRoles": "S",
+				"soloistInstrument": "Cello"
+			}],
+			"composerName": "Romberg,  Bernhard"
+		}, {
+			"interval": "Intermission",
+			"ID": "0*",
+			"soloists": []
+		}, {
+			"workTitle": "WILLIAM TELL",
+			"composerName": "Rossini,  Gioachino",
+			"conductorName": "Alpers, William",
+			"ID": "8839*2",
+			"soloists": [],
+			"movement": "Overture"
+		}, {
+			"workTitle": "STABAT MATER",
+			"composerName": "Rossini,  Gioachino",
+			"conductorName": "Alpers, William",
+			"ID": "53076*2",
+			"soloists": [{
+				"soloistName": "Otto, Antoinette",
+				"soloistRoles": "S",
+				"soloistInstrument": "Soprano"
+			}],
+			"movement": "Inflammatus et Accensus (Aria with Chorus)"
+		}, {
+			"workTitle": "CONCERTO, PIANO, A-FLAT MAJOR, OP. 113",
+			"composerName": "Hummel,  Johann",
+			"conductorName": "Alpers, William",
+			"ID": "51568*2",
+			"soloists": [{
+				"soloistName": "Timm, Henry C.",
+				"soloistRoles": "S",
+				"soloistInstrument": "Piano"
+			}],
+			"movement": "Romanza: Larghetto con moto"
+		}, {
+			"workTitle": "CONCERTO, PIANO, A-FLAT MAJOR, OP. 113",
+			"composerName": "Hummel,  Johann",
+			"conductorName": "Alpers, William",
+			"ID": "51568*3",
+			"soloists": [{
+				"soloistName": "Timm, Henry C.",
+				"soloistRoles": "S",
+				"soloistInstrument": "Piano"
+			}],
+			"movement": "Rondo alla spagniola: Allegro moderato"
+		}, {
+			"workTitle": "FREISCHUTZ, DER",
+			"composerName": "Weber,  Carl  Maria Von",
+			"conductorName": "Alpers, William",
+			"ID": "6709*16",
+			"soloists": [],
+			"movement": "Overture"
+		}],
+		"id": "c7b2b95c-5e0b-431c-a340-5b37fc860b34"
+	}]
+}

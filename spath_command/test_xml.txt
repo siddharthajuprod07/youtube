@@ -1,0 +1,20 @@
+<?xml version="1.0">
+<purchases>
+   <book>
+         <author>Martin, George R.R.</author>
+         <title yearPublished=1996>A Game of Thrones</title>
+         <title yearPublished=1998>A Clash of Kings</title>
+  </book>
+   <book>
+         <author>Clarke, Susanna</author>
+         <title yearPublished=2004>Jonathan Strange and Mr. Norrell</title>
+   </book>
+   <book>
+         <author>Kay, Guy Gavriel</author>
+         <title yearPublished=1990>Tigana</title>
+   </book>
+   <book>
+         <author>Bujold, Lois McMasters</author>
+         <title yearPublished=1986>The Warrior's Apprentice</title>
+   </book>
+</purchases>
