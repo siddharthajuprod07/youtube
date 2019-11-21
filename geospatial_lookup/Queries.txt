@@ -1,0 +1,22 @@
+| inputlookup india_states
+
+| makeresults 
+| eval latitude="15.317277", longitude="75.713890"
+| lookup india_states latitude, longitude
+| stats count by featureId
+| geom india_states
+
+
+| makeresults 
+| eval latitude="22.978624", longitude="87.747803"
+| lookup india_states latitude, longitude
+| stats count by featureId,featureCollection
+| geom
+
+| makeresults count=2
+| streamstats count
+| eval latitude=if(count=1,"15.317277","22.978624"), longitude=if(count=1,"75.713890","87.747803")
+| lookup india_states latitude, longitude
+| stats count by featureId
+| geom india_states
+
