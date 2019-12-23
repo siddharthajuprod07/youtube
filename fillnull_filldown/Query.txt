@@ -1,0 +1,14 @@
+index=main
+| stats count by _time,projectId,projectName,taskId,taskName
+| bin span=1d _time 
+| makecontinuous _time span=1d
+| filldown projectId,projectName,taskId,taskName,count
+| stats sum(count) as Days by projectName,taskName
+
+
+index=main
+| stats count by _time,projectId,projectName,taskId,taskName
+| bin span=1d _time 
+| makecontinuous _time span=1d
+| fillnull value=1 count
+| stats sum(count) as TotalDays
