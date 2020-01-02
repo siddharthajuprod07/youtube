@@ -1,0 +1,10 @@
+index="main"
+| table Source_airport,Destination_airport
+| stats count by Source_airport,Destination_airport
+| where count > 10
+
+index="main"
+| table Source_airport,Destination_airport
+| stats count by Source_airport,Destination_airport
+| where count > 10
+| eval link_color = if (count > 15, count/2, count/3)
