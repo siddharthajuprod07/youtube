@@ -1,0 +1,55 @@
+--Without subsearch
+index=main sourcetype=access_combined_wcookie action=purchase status=200
+| top limit=1 clientip
+
+index=main sourcetype=access_combined_wcookie action=purchase status=200 clientip=87.194.216.51
+| stats count,dc(productId),values(productId) by clientip
+
+
+--With Subsearch
+index=main sourcetype=access_combined_wcookie action=purchase status=200 
+    [search index=main sourcetype=access_combined_wcookie action=purchase status=200
+| top limit=1 clientip 
+| table clientip]
+| stats count,dc(productId),values(productId) by clientip
+
+--format
+index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| format
+
+--format with search
+index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| rename JSESSIONID as search
+| format
+
+index=main sourcetype=access_combined_wcookie action=purchase status=200 
+    [search index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| where clientip="175.44.3.30" AND JSESSIONID="SD8SL10FF6ADFF51090"
+| dedup clientip,JSESSIONID
+| eval find="purchase"
+| rename find as search]
+
+--format with query
+index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| where clientip="175.44.3.30"
+| rename JSESSIONID as query
+| format
+
+index=main sourcetype=access_combined_wcookie action=purchase status=200 
+    [search index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| where clientip="175.44.3.30" AND JSESSIONID="SD8SL10FF6ADFF51090"
+| dedup clientip,JSESSIONID
+| rename JSESSIONID as query]
+
+index=main sourcetype=access_combined_wcookie action=purchase status=200 
+    [search index=main sourcetype=access_combined_wcookie action=purchase status=200
+| table clientip,JSESSIONID
+| where clientip="175.44.3.30" AND JSESSIONID="SD8SL10FF6ADFF51090"
+| dedup clientip,JSESSIONID
+| eval find="860"
+| rename find as query]
