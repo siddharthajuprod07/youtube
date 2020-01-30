@@ -1,0 +1,1 @@
+index=main | reverse | fields index, host, source, sourcetype, _raw
