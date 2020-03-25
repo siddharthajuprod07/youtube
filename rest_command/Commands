@@ -1,0 +1,21 @@
+| rest /services/saved/searches
+
+| rest /services/saved/searches count=2
+
+| rest /services/saved/searches count=2 splunk_server=local
+
+| rest /services/saved/searches count=2 splunk_server=local timeout=0
+
+| rest /servicesNS/-/-/saved/searches
+
+| rest /services/saved/searches/Errors%20in%20the%20last%2024%20hours
+
+| rest /servicesNS/-/-/saved/searches search="eai:acl.app=search"
+
+| rest /servicesNS/-/-/saved/searches search="disabled=0"
+
+| rest /servicesNS/-/-/saved/searches f="qualifiedSearch"
+
+| rest /servicesNS/-/-/saved/searches f="qualifiedSearch" f=is_scheduled
+
+| rest /servicesNS/-/-/saved/searches sort_dir=asc sort_key=eai:acl.app
