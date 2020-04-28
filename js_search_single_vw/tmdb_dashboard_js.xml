@@ -1,0 +1,11 @@
+<form script="tmdb.js">
+  <label>TMDB_Dashboard_JS</label>
+  <row>
+<panel>
+  <title>Total Movies</title>
+<html>
+  <div id="movie_count"></div>
+</html>
+</panel>
+  </row>
+</form>
