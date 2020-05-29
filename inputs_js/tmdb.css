@@ -1,0 +1,23 @@
+div#movie_dtl_panel th:nth-child(1),
+div#movie_dtl_panel td:nth-child(1) {
+  display: none;
+}
+
+div#movie_dtl_panel th:nth-child(2),
+div#movie_dtl_panel td:nth-child(2) {
+  display: none;
+}
+
+div#movie_dtl_panel th:nth-child(3),
+div#movie_dtl_panel td:nth-child(3) {
+  display: none;
+}
+
+p {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.inline { 
+  display: inline-block; 
+  }
