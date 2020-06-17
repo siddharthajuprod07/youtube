@@ -1,0 +1,4 @@
+[2020-06-10 23:50:15] [info]  values: province.bc.barlow.host-12.node-lat 15 202020
+[2020-06-10 22:50:10] [info] values: province.ab.alberta.host-20.node-lat 17 202025
+[2020-06-10 21:05:15] [info]  values: province.on.ontario.host-18.node-lat 20 202090
+[2020-06-10 20:10:10] [info] values: province.mo.montreal.host-40.node-lat 16 202025
