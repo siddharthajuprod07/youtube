@@ -1,0 +1,6 @@
+08-05-2017 20:26:29.073 -0700	INFO Metrics - group=queue, location=sf, corp=splunk, name=udp_queue, max_size_kb=0, current_size_kb=0, current_size=0, largest_size=0, smallest_size=0
+08-05-2017 20:26:29.073 -0700	INFO Metrics - group=queue, location=sf, corp=splunk, name=aggqueue, max_size_kb=1024, current_size_kb=1, current_size=5, largest_size=35, smallest_size=0
+08-05-2017 20:26:29.073 -0700	INFO Metrics - group=queue, location=sf, corp=splunk, name=auditqueue, max_size_kb=500, current_size_kb=0, current_size=0, largest_size=1, smallest_size=0
+08-05-2017 20:26:29.075 -0700	INFO Metrics - group=pipeline, name=indexerpipe, processor=indexin, cpu_seconds=0, executes=171, cumulative_hits=2214401
+08-05-2017 20:26:29.075 -0700	INFO Metrics - group=pipeline, name=indexerpipe, processor=index_thruput, cpu_seconds=0, executes=171, cumulative_hits=2214401
+08-05-2017 20:26:29.075 -0700	INFO Metrics - group=pipeline, name=indexerpipe, processor=indexandforward, cpu_seconds=0, executes=171, cumulative_hits=2214401

@@ -1,0 +1,35 @@
+| mcatalog values(metric_name) WHERE index=test_metrics_idx
+| mstats count(*) where index=test_metrics_idx
+| mstats count(*) where index=test_metrics_idx span=1d BY metric_name
+| mstats count(*) where index=test_metrics_idx span=1d BY sourcetype
+
+--split=false
+
+index=main sourcetype=test group=pipeline
+| eval "metric_name:pipeline.cpu_seconds" = cpu_seconds, "metric_name:pipeline.executes" = executes, "metric_name:pipeline.cumulative_hits" = cumulative_hits
+| mcollect index=test_metrics_idx
+
+--split=true prefix_field=null
+
+index=main sourcetype=test group=queue
+| mcollect index=test_metrics_idx split=true group,location,corp,name 
+
+--split=true prefix_field=group
+index=main sourcetype=test group=queue
+| fields group,location,corp,name,max_size_kb,current_size_kb,current_size,largest_size,smallest_size
+| mcollect index=test_metrics_idx split=true group,location,corp,name prefix_field=group
+
+--spool=false
+index=main sourcetype=test group=queue
+| fields group,location,corp,name,max_size_kb,current_size_kb,current_size,largest_size,smallest_size
+| mcollect index=test_metrics_idx split=true group,location,corp,name prefix_field=group spool=false
+
+--spool=false file=<file_name>
+index=main sourcetype=test group=queue
+| fields group,location,corp,name,max_size_kb,current_size_kb,current_size,largest_size,smallest_size
+| mcollect index=test_metrics_idx split=true group,location,corp,name prefix_field=group spool=false file=$timestamp$_metrics_sid.csv
+
+--host
+index=main sourcetype=test group=queue
+| fields group,location,corp,name,max_size_kb,current_size_kb,current_size,largest_size,smallest_size
+| mcollect index=test_metrics_idx split=true group,location,corp,name prefix_field=group host=sid
