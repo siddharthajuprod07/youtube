@@ -1,0 +1,18 @@
+wget -O splunk-8.0.4.1-ab7a85abaa98-linux-2.6-amd64.deb 'https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.0.4.1&product=splunk&filename=splunk-8.0.4.1-ab7a85abaa98-linux-2.6-amd64.deb&wget=true'
+
+
+dpkg -i splunk-8.0.4.1-ab7a85abaa98-linux-2.6-amd64.deb
+
+cd /opt/splunk/bin/
+
+./splunk enable boot-start
+
+./splunk start
+
+
+http://35.190.156.54:8000
+http://35.190.156.54/ossec
+
+
+http://35.222.36.55/ossec
+
