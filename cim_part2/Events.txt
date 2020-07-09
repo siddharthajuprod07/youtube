@@ -1,0 +1,11 @@
+Jul  8 06:51:48 127.0.0.1 Jul  8 06:51:46 instance-2 ossec: Alert Level: 7; Rule: 2902 - New dpkg (Debian Package) installed.; Location: instance-2->/var/log/dpkg.log; classification:  syslog,dpkg,config_changed,; 2020-07-08 06:51:45 status installed linux-libc-dev:amd64 4.4.0-185.215
+
+Jul  5 05:17:02 127.0.0.1 Jul  5 05:17:00 instance-1 ossec: Alert Level: 6; Rule: 5706 - SSH insecure connection attempt (scan).; Location: instance-1->/var/log/auth.log; classification:  syslog,sshd,recon,; srcip: 85.209.0.103; Jul  5 05:16:59 instance-1 sshd[27848]: Did not receive identification string from 85.209.0.103
+
+Jul  5 05:11:37 127.0.0.1 Jul  5 05:11:36 instance-1 ossec: Alert Level: 5; Rule: 5710 - Attempt to login using a non-existent user; Location: instance-1->/var/log/auth.log; classification:  syslog,sshd,invalid_login,authentication_failed,; srcip: 80.241.214.166; Jul  5 05:11:34 instance-1 sshd[27574]: Invalid user ljh from 80.241.214.166
+
+Jul  5 05:02:36 127.0.0.1 Jul  5 05:02:35 instance-1 ossec: Alert Level: 5; Rule: 31101 - Web server 400 error code.; Location: instance-1->/var/log/apache2/access.log; classification:  web,accesslog,; srcip: 115.76.90.50; 115.76.90.50 - - [05/Jul/2020:05:02:34 +0000] "GET / HTTP/1.1" 400 0 "-" "-"
+
+Jul  5 04:56:31 127.0.0.1 Jul  5 04:56:27 instance-1 ossec: Alert Level: 5; Rule: 31101 - Web server 400 error code.; Location: instance-1->/var/log/apache2/access.log; classification:  web,accesslog,; srcip: 212.129.251.246; 212.129.251.246 - - [05/Jul/2020:04:56:27 +0000] "GET /index.php HTTP/1.1" 404 455 "-" "Mozilla/5.0 (Windows; U; Windows NT 6.0;en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6)"
+
+Jul  5 08:18:01 127.0.0.1 Jul  5 08:17:59 instance-1 ossec: Alert Level: 5; Rule: 31101 - Web server 400 error code.; Location: instance-1->/var/log/apache2/access.log; classification:  web,accesslog,; srcip: 3.101.0.4; 3.101.0.4 - - [05/Jul/2020:08:17:58 +0000] "GET /en-US/app/search HTTP/1.1" 404 492 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"
