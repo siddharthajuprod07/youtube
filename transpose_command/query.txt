@@ -1,0 +1,15 @@
+index=main
+| table Country,CellPhone,Count
+| xyseries CellPhone,Country,Count
+| eval cellphone_numeric = case(CellPhone="Android",9999,CellPhone="Iphone",9998,CellPhone="Windows",9997)
+| fields - CellPhone
+| transpose
+| addtotals
+| sort - Total
+| transpose header_field=column
+| where column != "Total"
+| fields - column
+| addtotals
+| eval Total = Total - cellphone_numeric
+| eval cellphone_numeric = case(cellphone_numeric="9999","Android",cellphone_numeric="9998","Iphone",cellphone_numeric="9997","Windows")
+| rename cellphone_numeric as CellPhone
