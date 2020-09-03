@@ -1,0 +1,13 @@
+products,quarter,sales,quota
+ProductA,QTR1,1200,1000
+ProductB,QTR1,1400,1550
+ProductC,QTR1,1650,1275
+ProductA,QTR2,1425,1300
+ProductB,QTR2,1175,1425
+ProductC,QTR2,1550,1450
+ProductA,QTR3,1300,1400
+ProductB,QTR3,1250,1125
+ProductC,QTR3,1375,1475
+ProductA,QTR4,1550,1300
+ProductB,QTR4,1700,1225
+ProductC,QTR4,1625,1350
