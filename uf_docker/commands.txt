@@ -1,0 +1,15 @@
+docker version
+
+docker network create --driver bridge --attachable skynet
+
+docker network rm skynet
+
+docker rm --force so1
+
+docker container ls
+
+docker run --network skynet --name so1 --hostname so1 -p 8001:8000 -e "SPLUNK_PASSWORD=sidh1234" -e "SPLUNK_START_ARGS=--accept-license" -it splunk/splunk:latest
+
+
+docker run --network skynet --name uf1 --hostname uf1 -e "SPLUNK_PASSWORD=sidh1234" -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_STANDALONE_URL=so1" -it splunk/universalforwarder:latest
+
