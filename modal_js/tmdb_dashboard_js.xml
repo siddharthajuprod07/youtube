@@ -1,0 +1,54 @@
+<form script="tmdb.js" stylesheet="tmdb.css">
+  <label>TMDB_dashboard_js</label>
+<row>
+    <html>
+      <div class="inline">
+      <p>Release Year</p>
+      <div id="release_year_md"></div>
+      </div>
+      <div class="inline">
+      <p>Genre Id</p>
+      <div id="genre_id_dd"></div>
+      </div>
+      <div class="inline">
+      <p>Original Language</p>
+      <div id="orig_lang_dd"></div>
+      </div>
+    </html>    
+</row>
+<row>
+  <panel>
+    <title>Total Movies</title>
+    <html>
+      <div id="total_movie_count"></div>
+    </html>
+  </panel>
+</row>
+<row>
+  <panel>
+    <title>Year wise Breakup</title>
+    <html>
+      <div id="year_wise_breakup"></div>
+    </html>
+  </panel>
+    <panel>
+    <title>Language Wise Breakup</title>
+    <html>
+      <div id="lang_wise_breakup"></div>
+    </html>
+  </panel>
+    <panel>
+    <title>Genre Wise Breakup</title>
+    <html>
+      <div id="genre_wise_breakup"></div>
+    </html>
+  </panel>
+</row>
+<row>
+  <panel id="movie_dtl_panel">
+    <html>
+      <div id="movie_dtl"></div>
+    </html>
+  </panel>
+</row>
+</form>
