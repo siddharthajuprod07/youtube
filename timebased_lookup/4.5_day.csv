@@ -1,0 +1,20 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2021-02-21T15:02:35.819Z,50.9705,-179.2989,20.75,4.8,mb,,128,0.904,0.52,us,us6000djwu,2021-02-21T15:59:24.040Z,"210 km WSW of Adak, Alaska",earthquake,9.4,5.6,0.038,210,reviewed,us,us
+2021-02-21T14:01:04.837Z,-8.6906,118.0382,129.02,4.5,mb,,79,3.849,0.58,us,us6000djwd,2021-02-21T15:07:42.040Z,"49 km WSW of Dompu, Indonesia",earthquake,8.2,7.8,0.096,32,reviewed,us,us
+2021-02-21T12:08:23.527Z,-44.6235,-81.4857,10,4.7,mb,,186,5.851,0.81,us,us6000djvt,2021-02-21T14:05:21.353Z,"West Chile Rise",earthquake,11.3,1.9,0.138,16,reviewed,us,us
+2021-02-21T08:04:37.637Z,-22.7008,-179.5122,539.41,4.8,mb,,141,5.434,0.94,us,us6000djut,2021-02-21T08:25:08.040Z,"south of the Fiji Islands",earthquake,11.1,9.6,0.154,13,reviewed,us,us
+2021-02-21T05:01:10.106Z,-2.0953,68.2032,10,4.9,mb,,51,5.436,0.46,us,us6000djti,2021-02-21T05:26:18.040Z,"Carlsberg Ridge",earthquake,9.4,1.9,0.072,61,reviewed,us,us
+2021-02-21T04:55:14.918Z,-18.0196,-177.9763,620.65,4.5,mb,,103,3.693,0.79,us,us6000djtf,2021-02-21T05:11:43.040Z,"286 km E of Levuka, Fiji",earthquake,13.3,6.6,0.096,32,reviewed,us,us
+2021-02-21T01:37:08.874Z,52.3399,97.357,15.1,5.1,mb,,48,3.94,0.86,us,us6000djst,2021-02-21T04:39:22.815Z,"85 km E of Toora-Khem, Russia",earthquake,7.8,4.2,0.035,274,reviewed,us,us
+2021-02-21T00:59:38.780Z,54.9008,160.929,48.02,4.6,mb,,109,2.313,0.98,us,us6000djsl,2021-02-21T01:23:39.040Z,"113 km SE of Atlasovo, Russia",earthquake,8,6.1,0.059,86,reviewed,us,us
+2021-02-21T00:41:13.226Z,18.3599,146.5495,61.83,4.9,mb,,78,3.192,0.77,us,us6000djsn,2021-02-21T01:43:36.040Z,"Pagan region, Northern Mariana Islands",earthquake,8.9,6.8,0.047,142,reviewed,us,us
+2021-02-21T00:28:47.615Z,-21.1523,-68.6969,149.9,4.5,mb,,65,0.817,1.14,us,us6000djsf,2021-02-21T01:20:09.886Z,"146 km N of Calama, Chile",earthquake,6.2,6.3,0.163,11,reviewed,us,us
+2021-02-21T00:14:21.210Z,-24.2008,-67.0475,180.26,4.8,mb,,87,1.619,0.97,us,us6000djsc,2021-02-21T00:56:00.397Z,"74 km W of San Antonio de los Cobres, Argentina",earthquake,7.2,10.2,0.196,8,reviewed,us,us
+2021-02-20T22:44:16.878Z,-8.2943,119.4903,164.58,4.6,mb,,97,2.738,0.74,us,us6000djs3,2021-02-21T00:23:53.040Z,"32 km N of Komodo, Indonesia",earthquake,9.9,4.5,0.183,9,reviewed,us,us
+2021-02-20T21:44:36.265Z,-16.2939,166.0325,10,4.8,mb,,115,1.406,1.21,us,us6000djrz,2021-02-20T22:42:46.040Z,"148 km W of Norsup, Vanuatu",earthquake,7.1,1.8,0.127,19,reviewed,us,us
+2021-02-20T21:22:36.211Z,43.6904,-128.0285,10,4.9,mb,,169,2.452,0.76,us,us6000djrq,2021-02-21T04:09:41.809Z,"off the coast of Oregon",earthquake,6.9,1.9,0.029,368,reviewed,us,us
+2021-02-20T21:15:54.418Z,43.6272,-127.8147,10,5.1,mww,,187,2.585,1.25,us,us6000djrl,2021-02-21T15:26:00.150Z,"281 km W of Bandon, Oregon",earthquake,7.7,1.9,0.054,33,reviewed,us,us
+2021-02-20T20:19:55.144Z,-4.6547,153.3606,67.66,4.9,mb,,158,1.279,0.82,us,us6000djra,2021-02-20T22:28:06.974Z,"125 km ESE of Kokopo, Papua New Guinea",earthquake,4.1,8.2,0.108,27,reviewed,us,us
+2021-02-20T20:13:01.564Z,-12.4027,166.3013,69.38,4.8,mb,,213,6.899,0.72,us,us6000djr9,2021-02-20T20:32:56.040Z,"193 km SSE of Lata, Solomon Islands",earthquake,13.7,11.5,0.128,19,reviewed,us,us
+2021-02-20T19:49:46.096Z,-9.1457,-74.8765,10,5,mb,,106,2.567,0.88,us,us6000djr5,2021-02-20T20:22:04.543Z,"30 km SW of Tournavista, Peru",earthquake,6.4,1.9,0.047,146,reviewed,us,us
+2021-02-20T17:25:20.716Z,-17.4806,167.8312,10,5.1,mb,,105,2.109,0.92,us,us6000djqc,2021-02-20T18:25:05.040Z,"58 km WNW of Port-Vila, Vanuatu",earthquake,7.8,1.8,0.086,47,reviewed,us,us
