@@ -1,0 +1,28 @@
+| makeresults
+| eval data_xml= "
+<games>
+<game>
+   <name>Settlers of Catan</name>
+   <category>competitive</category>
+</game>
+<game>
+   <name>Ticket to Ride</name>
+   <category>competitive</category>
+</game>
+</games>
+"
+| xmlkv data_xml
+
+
+---------------------------------------
+
+source="data.txt" host="MSI" sourcetype="xml_demo"
+| xpath outfield=country "//country/@name"
+
+source="data.txt" host="MSI" sourcetype="xml_demo"
+| xpath outfield=gdppc "//country/gdppc"
+
+source="data.txt" host="MSI" sourcetype="xml_demo"  | xpath outfield=direction "//country/neighbor/@direction"
+
+source="data.txt" host="MSI" sourcetype="xml_demo"
+| xpath outfield=country "//country[@name='Singapore']/@name"

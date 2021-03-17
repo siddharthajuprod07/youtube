@@ -1,0 +1,15 @@
+ <DataSet xmlns="">
+        <identity_id>3017669</identity_id>
+        <instrument_id>912383KM1</instrument_id>
+        <transaction_code>SEL</transaction_code>
+        <sname>BARC</sname>
+        <currency_code>USA</currency_code>
+   </DataSet> 
+
+   <DataSet xmlns="">
+        <identity_id>1037669</identity_id>
+        <instrument_id>219383KM1</instrument_id>
+        <transaction_code>SEL</transaction_code>
+        <sname>TARC</sname>
+        <currency_code>USA</currency_code>
+   </DataSet>
