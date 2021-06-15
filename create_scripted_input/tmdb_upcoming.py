@@ -15,7 +15,7 @@ def get_upcoming_movies_by_page(api_key, page_number=1):
     return tmdb_api_call(requestURL, parameters)
     
 def main():
-    api_key = "733ac994290c6f277b11565f26ebe1cb"
+    api_key = "4d7909c2e0cc8bafc3de483ccff30ef0"
     upcoming_movie_list = get_upcoming_movies_by_page(api_key,1)
     data = json.loads(upcoming_movie_list)
     print(json.dumps(data["results"]))
