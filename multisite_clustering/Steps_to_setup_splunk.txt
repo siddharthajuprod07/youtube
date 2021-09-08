@@ -1,0 +1,58 @@
+
+
+-- Create splunk user
+sudo su
+adduser splunk
+usermod -aG sudo splunk
+sudo su - splunk
+
+-- download splunk
+wget -O splunk-8.2.2-87344edfcdb4-linux-2.6-amd64.deb 'https://d7wz6hmoaavd0.cloudfront.net/products/splunk/releases/8.2.2/linux/splunk-8.2.2-87344edfcdb4-linux-2.6-amd64.deb'
+sudo dpkg -i splunk-8.2.2-87344edfcdb4-linux-2.6-amd64.deb
+cd /opt/splunk/bin/
+sudo ./splunk enable boot-start
+sudo ./splunk start
+
+
+-- URLs
+http://34.138.42.34:8000 -- manager-node
+http://35.196.160.91:8000 -- site1-peer1
+http://34.75.222.181:8000 -- site1-peer2
+http://35.237.162.179:8000 -- site1-peer3
+http://35.231.4.5:8000 -- site1-sh
+http://35.247.116.167:8000 -- site2-peer1
+http://35.185.225.107:8000 -- site2-peer2
+http://35.233.208.165:8000 -- site2-peer3
+http://34.82.48.62:8000 -- site2-SH
+
+
+1. Configure the manager node
+
+sudo ./splunk edit cluster-config -mode manager -multisite true -available_sites site1,site2 -site site1 -site_replication_factor origin:2,total:3 -site_search_factor origin:1,total:2 -secret test1234
+
+sudo ./splunk restart
+
+2. Configure the peer nodes 
+
+-- For site1 peers
+sudo ./splunk edit cluster-config -mode peer -site site1 -manager_uri https://34.138.42.34:8089 -replication_port 9887 -secret test1234
+
+sudo ./splunk restart
+
+-- For site2 peers
+sudo ./splunk edit cluster-config -mode peer -site site2 -manager_uri https://34.138.42.34:8089 -replication_port 9887 -secret test1234
+
+sudo ./splunk restart
+
+3. Configure the search heads
+
+-- For site1 SH
+sudo ./splunk edit cluster-config -mode searchhead -site site1 -manager_uri https://34.138.42.34:8089 -secret test1234
+
+sudo ./splunk restart
+
+
+-- For site2 SH
+sudo ./splunk edit cluster-config -mode searchhead -site site2 -manager_uri https://34.138.42.34:8089 -secret test1234
+
+sudo ./splunk restart
