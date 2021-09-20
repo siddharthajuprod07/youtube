@@ -1,0 +1,34 @@
+index=_internal sourcetype=scheduler savedsearch_name=service_health_monitor
+| dedup status
+
+index=_internal sourcetype=scheduler 
+| dedup savedsearch_name,status
+
+index=_internal sourcetype=scheduler 
+| dedup 2 savedsearch_name,status 
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| dedup savedsearch_name,status consecutive=true 
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| dedup  savedsearch_name,lag keepempty=true 
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| fillnull value="NULL" lag
+| dedup  savedsearch_name,lag keepempty=true 
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| dedup  savedsearch_name,status keepevents=true 
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| dedup  savedsearch_name,status sortby - run_time
+| where savedsearch_name="service_health_monitor"
+
+index=_internal sourcetype=scheduler 
+| dedup  savedsearch_name,status sortby - num(run_time)
+| where savedsearch_name="service_health_monitor"
