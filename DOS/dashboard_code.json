@@ -1,0 +1,496 @@
+{
+	"visualizations": {
+		"viz_TebWiiU5": {
+			"type": "splunk.singlevalueicon",
+			"options": {
+				"icon": "splunk-enterprise-kvstore://61ceecdcee69000083000d33",
+				"majorColor": "> majorValue | rangeValue(majorColorEditorConfig)",
+				"iconColor": "> majorValue | rangeValue(iconColorEditorConfig)",
+				"unit": "M",
+				"numberPrecision": 2,
+				"backgroundColor": "#000000"
+			},
+			"dataSources": {
+				"primary": "ds_Folohgq9"
+			},
+			"context": {
+				"iconColorEditorConfig": [
+					{
+						"value": "#088F44",
+						"to": 5
+					},
+					{
+						"value": "#FFD442",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#FE3A3A",
+						"from": 15
+					}
+				],
+				"majorColorEditorConfig": [
+					{
+						"value": "#088F44",
+						"to": 5
+					},
+					{
+						"value": "#FFD442",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#FE3A3A",
+						"from": 15
+					}
+				]
+			}
+		},
+		"viz_EVWgwrwS": {
+			"type": "viz.text",
+			"options": {
+				"content": "Current Active Cases",
+				"textColor": "#53a051",
+				"fontSize": 37,
+				"fontWeight": "bold",
+				"fontFamily": "Splunk Platform Mono"
+			}
+		},
+		"viz_j8kApZIO": {
+			"type": "viz.img",
+			"options": {
+				"preserveAspectRatio": true,
+				"src": "splunk-enterprise-kvstore://61c8b43f8667000050006888"
+			}
+		},
+		"viz_uGYHgPcB": {
+			"type": "viz.img",
+			"options": {
+				"preserveAspectRatio": true,
+				"src": "splunk-enterprise-kvstore://61ceed85ee69000083000d34"
+			}
+		},
+		"viz_OfKMsYlM": {
+			"type": "viz.text",
+			"options": {
+				"content": "Active cases Trend",
+				"textColor": "#ffffff",
+				"fontWeight": "bold"
+			}
+		},
+		"viz_NlZakwFa": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"numberPrecision": 2,
+				"unit": "M",
+				"trendDisplay": "percent",
+				"majorColor": "> majorValue | rangeValue(majorColorEditorConfig)",
+				"trendColor": "> trendValue | rangeValue(trendColorEditorConfig)",
+				"backgroundColor": "transparent",
+				"sparklineStrokeColor": "> majorColor"
+			},
+			"dataSources": {
+				"primary": "ds_UpAG8q9Z"
+			},
+			"context": {
+				"majorColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				],
+				"trendColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				]
+			}
+		},
+		"viz_KrgWqrJJ": {
+			"type": "viz.text",
+			"options": {
+				"content": "India",
+				"textColor": "#ffffff",
+				"fontWeight": "bold",
+				"fontSize": 30,
+				"rotation": -90
+			}
+		},
+		"viz_1R4I6gHi": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"numberPrecision": 2,
+				"unit": "M",
+				"trendDisplay": "percent",
+				"majorColor": "> majorValue | rangeValue(majorColorEditorConfig)",
+				"trendColor": "> trendValue | rangeValue(trendColorEditorConfig)",
+				"backgroundColor": "transparent",
+				"sparklineStrokeColor": "> majorColor"
+			},
+			"dataSources": {
+				"primary": "ds_AQlFKzd1"
+			},
+			"context": {
+				"majorColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				],
+				"trendColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				]
+			}
+		},
+		"viz_abrOhrfC": {
+			"type": "splunk.singlevalue",
+			"options": {
+				"numberPrecision": 2,
+				"unit": "M",
+				"trendDisplay": "percent",
+				"majorColor": "> majorValue | rangeValue(majorColorEditorConfig)",
+				"trendColor": "> trendValue | rangeValue(trendColorEditorConfig)",
+				"backgroundColor": "transparent",
+				"sparklineStrokeColor": "> majorColor"
+			},
+			"dataSources": {
+				"primary": "ds_Mwomf7F6"
+			},
+			"context": {
+				"majorColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				],
+				"trendColorEditorConfig": [
+					{
+						"value": "#118832",
+						"to": 5
+					},
+					{
+						"value": "#CBA700",
+						"from": 5,
+						"to": 15
+					},
+					{
+						"value": "#D41F1F",
+						"from": 15
+					}
+				]
+			}
+		},
+		"viz_9kcXlRfd": {
+			"type": "viz.text",
+			"options": {
+				"content": "USA",
+				"textColor": "#ffffff",
+				"fontWeight": "bold",
+				"fontSize": 28,
+				"rotation": -90
+			}
+		},
+		"viz_Fuek7bAU": {
+			"type": "viz.text",
+			"options": {
+				"content": "Brazil",
+				"textColor": "#ffffff",
+				"fontWeight": "bold",
+				"fontSize": 28,
+				"rotation": -90
+			}
+		},
+		"viz_tlAkWecp": {
+			"type": "viz.singlevalueradial",
+			"options": {
+				"numberPrecision": 2,
+				"unit": "M"
+			},
+			"dataSources": {
+				"primary": "ds_Folohgq9"
+			},
+			"encoding": {
+				"fill": {
+					"field": "primary[0]",
+					"format": {
+						"type": "rangevalue",
+						"ranges": [
+							{
+								"from": 15,
+								"value": "#dc4e41"
+							},
+							{
+								"from": 5,
+								"value": "#f8be34",
+								"to": 15
+							},
+							{
+								"value": "#53a051",
+								"to": 5
+							}
+						]
+					}
+				}
+			}
+		}
+	},
+	"dataSources": {
+		"ds_JeNUKcx2": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=\"covid19\" source=\"worldometer_coronavirus_summary_data.csv\" earliest=0 latest=now\n| table country ,continent, total_confirmed total_deaths, total_recovered active_cases, serious_or_critical, total_cases_per_1m_population, total_deaths_per_1m_population, total_tests total_tests_per_1m_population, population "
+			},
+			"name": "base_search_summary"
+		},
+		"ds_Folohgq9": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_JeNUKcx2",
+				"query": "| stats sum(active_cases) as total_active_cases \n| eval total_active_cases = round(total_active_cases / 1000000,2)"
+			},
+			"name": "current_active_cases"
+		},
+		"ds_2YVlhUM3": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=\"covid19\" source=\"worldometer_coronavirus_daily_data.csv\"\n| table _time,date, country ,cumulative_total_cases, daily_new_cases ,active_cases, cumulative_total_deaths ,daily_new_deaths"
+			},
+			"name": "base_search_daily"
+		},
+		"ds_UpAG8q9Z": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_2YVlhUM3",
+				"query": "| where country = \"India\"\n| timechart max(active_cases) as active_cases\n| eval active_cases = round(active_cases / 1000000,2)\n| fillnull"
+			},
+			"name": "active_cases_trend_india"
+		},
+		"ds_Mwomf7F6": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_2YVlhUM3",
+				"query": "| where country = \"USA\"\n| timechart max(active_cases) as active_cases\n| eval active_cases = round(active_cases / 1000000,2)\n| fillnull"
+			},
+			"name": "active_cases_tren_usa"
+		},
+		"ds_AQlFKzd1": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_2YVlhUM3",
+				"query": "| where country = \"Brazil\"\n| timechart max(active_cases) as active_cases\n| eval active_cases = round(active_cases / 1000000,2)\n| fillnull"
+			},
+			"name": "active_cases_trend_brazil"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "0,"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "absolute",
+		"options": {
+			"display": "auto-scale",
+			"backgroundImage": {
+				"x": 0,
+				"y": 0,
+				"src": "splunk-enterprise-kvstore://61ceec76ee69000083000d31",
+				"w": 1200,
+				"h": 900
+			}
+		},
+		"structure": [
+			{
+				"item": "viz_TebWiiU5",
+				"type": "block",
+				"position": {
+					"x": 10,
+					"y": 20,
+					"w": 1170,
+					"h": 90
+				}
+			},
+			{
+				"item": "viz_EVWgwrwS",
+				"type": "block",
+				"position": {
+					"x": 50,
+					"y": 30,
+					"w": 370,
+					"h": 50
+				}
+			},
+			{
+				"item": "viz_j8kApZIO",
+				"type": "block",
+				"position": {
+					"x": 1070,
+					"y": 20,
+					"w": 100,
+					"h": 90
+				}
+			},
+			{
+				"item": "viz_uGYHgPcB",
+				"type": "block",
+				"position": {
+					"x": 1050,
+					"y": 20,
+					"w": 120,
+					"h": 80
+				}
+			},
+			{
+				"item": "viz_OfKMsYlM",
+				"type": "block",
+				"position": {
+					"x": 110,
+					"y": 110,
+					"w": 300,
+					"h": 50
+				}
+			},
+			{
+				"item": "viz_NlZakwFa",
+				"type": "block",
+				"position": {
+					"x": 120,
+					"y": 170,
+					"w": 280,
+					"h": 150
+				}
+			},
+			{
+				"item": "viz_KrgWqrJJ",
+				"type": "block",
+				"position": {
+					"x": -100,
+					"y": 90,
+					"w": 300,
+					"h": 50
+				}
+			},
+			{
+				"item": "viz_1R4I6gHi",
+				"type": "block",
+				"position": {
+					"x": 120,
+					"y": 580,
+					"w": 280,
+					"h": 150
+				}
+			},
+			{
+				"item": "viz_abrOhrfC",
+				"type": "block",
+				"position": {
+					"x": 110,
+					"y": 400,
+					"w": 280,
+					"h": 150
+				}
+			},
+			{
+				"item": "viz_9kcXlRfd",
+				"type": "block",
+				"position": {
+					"x": -90,
+					"y": 300,
+					"w": 300,
+					"h": 50
+				}
+			},
+			{
+				"item": "viz_Fuek7bAU",
+				"type": "block",
+				"position": {
+					"x": -80,
+					"y": 480,
+					"w": 300,
+					"h": 50
+				}
+			},
+			{
+				"item": "viz_tlAkWecp",
+				"type": "block",
+				"position": {
+					"x": 510,
+					"y": 140,
+					"w": 250,
+					"h": 250
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"description": "",
+	"title": "Covid19 Dashboard"
+}
