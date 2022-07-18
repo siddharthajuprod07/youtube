@@ -1,0 +1,289 @@
+{
+	"visualizations": {
+		"viz_8agi6GbM": {
+			"type": "splunk.singlevalueradial",
+			"title": "Number of apps affected",
+			"dataSources": {
+				"primary": "ds_d2zn0wlW"
+			},
+			"options": {
+				"backgroundColor": "#4fa484"
+			}
+		},
+		"viz_fXhIiHnC": {
+			"type": "splunk.singlevalueradial",
+			"title": "Number of KO affected",
+			"dataSources": {
+				"primary": "ds_Rba2jeUy"
+			},
+			"options": {
+				"backgroundColor": "#f8be44"
+			}
+		},
+		"viz_KaNTTRnw": {
+			"type": "splunk.singlevalueradial",
+			"title": "Number of users involved",
+			"dataSources": {
+				"primary": "ds_guPnUKEg"
+			},
+			"options": {
+				"backgroundColor": "#ec9960"
+			}
+		},
+		"viz_uwvOvMmp": {
+			"type": "splunk.singlevalueradial",
+			"title": "Number of KO type affected",
+			"dataSources": {
+				"primary": "ds_0pNi5hlt"
+			},
+			"options": {
+				"backgroundColor": "#b6c75a"
+			}
+		},
+		"viz_FtLpCUAj": {
+			"type": "splunk.table",
+			"title": "Change Details",
+			"dataSources": {
+				"primary": "ds_DlFbRZ6X"
+			}
+		}
+	},
+	"dataSources": {
+		"ds_tMt8E0wg": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=\"_configtracker\" \n| eval app_context = mvindex(split('data.path',\"\\\\\"),-3) \n| eval ko_type = replace(mvindex(split('data.path',\"\\\\\"),-1),\".conf\",\"\") \n| where app_context = \"tmdb\" \n| table app_context, \"data.action\",\"data.changes{}.properties{}.name\",\"data.changes{}.properties{}.old_value\",\"data.changes{}.properties{}.new_value\", \"data.changes{}.stanza\", ko_type, \"data.modtime\" \n| rename \"data.action\" as action, \"data.changes{}.properties{}.name\" as property_name,\"data.changes{}.properties{}.old_value\" as old_value,\"data.changes{}.properties{}.new_value\" as new_value, \"data.changes{}.stanza\" as knowledge_object, \"data.modtime\" as modified_time \n| eval old_value = mvmap(old_value,if(old_value==\"\",\"NA\",old_value)) \n| eval new_value = mvmap(new_value,if(new_value==\"\",\"NA\",new_value)) \n| eval property_old_new = mvzip(property_name,mvzip(old_value,new_value,\" [sep] \"),\" [sep] \") \n| fields - property_name,old_value,new_value \n| mvexpand property_old_new \n| eval property_old_new = split(property_old_new,\" [sep] \") \n| eval property_name = mvindex(property_old_new,0) \n| eval old_value = mvindex(property_old_new,1) \n| eval new_value = mvindex(property_old_new,2) \n| fields - property_old_new \n| join app_context, knowledge_object, modified_time \n    [ search index=_internal \n    | eval stanza = mvindex(split(uri_path,\"/\"),-1) \n    | eval app_context = mvindex(split(uri_path,\"/\"),-4) \n    | where method=\"POST\" and status=200 \n    | eval modified_time = strftime(_time, \"%a %b %d %H:%M:%S %Y\") \n    | table modified_time, app_context, stanza, user \n    | rename stanza as knowledge_object \n        ] \n| search app_context=\"$app_context$\" user=\"$user$\" knowledge_object=\"$ko$\" ko_type=\"$ko_type$\""
+			},
+			"name": "base_search"
+		},
+		"ds_CW076TSS": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats count by app_context"
+			},
+			"name": "app_context_dd_srch"
+		},
+		"ds_u482bKGi": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats count by user"
+			},
+			"name": "user_dd_srch"
+		},
+		"ds_SazblXWR": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats count by knowledge_object"
+			},
+			"name": "ko_dd_srch"
+		},
+		"ds_h1rgWoRJ": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats count by ko_type"
+			},
+			"name": "ko_type_dd_srch"
+		},
+		"ds_d2zn0wlW": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats dc(app_context)"
+			},
+			"name": "number_of_apps_affected"
+		},
+		"ds_Rba2jeUy": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats dc(knowledge_object)"
+			},
+			"name": "number_of_ko"
+		},
+		"ds_guPnUKEg": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats dc(user)"
+			},
+			"name": "number_of_users"
+		},
+		"ds_0pNi5hlt": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "| stats dc(ko_type)"
+			},
+			"name": "number_of_ko_type_affected"
+		},
+		"ds_DlFbRZ6X": {
+			"type": "ds.chain",
+			"options": {
+				"extend": "ds_tMt8E0wg",
+				"query": "|  table modified_time,app_context,knowledge_object,ko_type,property_name,old_value,new_value,user"
+			},
+			"name": "change_dtl"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		},
+		"input_a96b7wvu": {
+			"options": {
+				"items": [
+					{
+						"label": "All",
+						"value": "*"
+					}
+				],
+				"defaultValue": "*",
+				"token": "app_context"
+			},
+			"title": "App Context",
+			"type": "input.dropdown",
+			"dataSources": {
+				"primary": "ds_CW076TSS"
+			}
+		},
+		"input_O45Ll0Dv": {
+			"options": {
+				"items": [
+					{
+						"label": "All",
+						"value": "*"
+					}
+				],
+				"defaultValue": "*",
+				"token": "user"
+			},
+			"title": "User",
+			"type": "input.dropdown",
+			"dataSources": {
+				"primary": "ds_u482bKGi"
+			}
+		},
+		"input_IzpNyoog": {
+			"options": {
+				"items": [
+					{
+						"label": "All",
+						"value": "*"
+					}
+				],
+				"defaultValue": "*",
+				"token": "ko"
+			},
+			"title": "Knowledge Object",
+			"type": "input.dropdown",
+			"dataSources": {
+				"primary": "ds_SazblXWR"
+			}
+		},
+		"input_YRGy97RE": {
+			"options": {
+				"items": [
+					{
+						"label": "All",
+						"value": "*"
+					}
+				],
+				"defaultValue": "*",
+				"token": "ko_type"
+			},
+			"title": "KO Type",
+			"type": "input.dropdown",
+			"dataSources": {
+				"primary": "ds_h1rgWoRJ"
+			}
+		}
+	},
+	"layout": {
+		"type": "absolute",
+		"options": {
+			"display": "auto-scale"
+		},
+		"structure": [
+			{
+				"item": "viz_8agi6GbM",
+				"type": "block",
+				"position": {
+					"x": 20,
+					"y": 10,
+					"w": 220,
+					"h": 210
+				}
+			},
+			{
+				"item": "viz_fXhIiHnC",
+				"type": "block",
+				"position": {
+					"x": 280,
+					"y": 10,
+					"w": 250,
+					"h": 210
+				}
+			},
+			{
+				"item": "viz_KaNTTRnw",
+				"type": "block",
+				"position": {
+					"x": 570,
+					"y": 10,
+					"w": 250,
+					"h": 210
+				}
+			},
+			{
+				"item": "viz_uwvOvMmp",
+				"type": "block",
+				"position": {
+					"x": 870,
+					"y": 10,
+					"w": 250,
+					"h": 210
+				}
+			},
+			{
+				"item": "viz_FtLpCUAj",
+				"type": "block",
+				"position": {
+					"x": 20,
+					"y": 240,
+					"w": 1090,
+					"h": 300
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp",
+			"input_a96b7wvu",
+			"input_O45Ll0Dv",
+			"input_IzpNyoog",
+			"input_YRGy97RE"
+		]
+	},
+	"description": "",
+	"title": "Splunk Knowledge Object change tracker"
+}
