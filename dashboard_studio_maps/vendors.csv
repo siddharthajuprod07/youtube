@@ -1,0 +1,462 @@
+Vendor,VendorCity,VendorID,VendorLatitude,VendorLongitude,VendorStateProvince,VendorCountry,Weight
+Anchorage Gaming,Anchorage,1001,61.17440033,-149.9960022,Alaska,United States,3
+Games of Salt Lake,Salt Lake City,1002,40.78839874,-111.9779968,Utah,United States,3
+New Jack Games,New York,1003,40.63980103,-73.77890015,New York,United States,4
+Seals Gaming,San Francisco,1004,37.61899948,-122.375,California,United States,5
+Lost Angels Games,Los Angeles,1005,33.94250107,-118.4079971,California,United States,5
+Flyin Hawaiian Hobbyist,Honolulu,1006,21.31870079,-157.9219971,Hawaii,United States,3
+Flyin Hawaiian Hobbyist,Kahului,1007,20.89859962,-156.4299927,Hawaii,United States,2
+Phoenix Games,Phoenix,1008,33.43429947,-112.012001,Arizona,United States,3
+Mile High Games,Denver,1009,39.86169815,-104.6729965,Colorado,United States,4
+Beantown Games,Boston,1010,42.36429977,-71.00520325,Massachusetts,United States,5
+Seattle Games,Seattle,1011,47.44900131,-122.3089981,Washington,United States,3
+Vegas Games,Las Vegas,1012,36.08010101,-115.1520004,Nevada,United States,2
+Flyin Hawaiian Hobbyist,Kona,1013,19.73880005,-156.0460052,Hawaii,United States,2
+Mickey's House of Games,Orlando,1014,28.42939949,-81.30899811,Florida,United States,3
+Sactown Games,Sacramento,1015,38.69540024,-121.5910034,California,United States,4
+Alice's Games,Dallas,1016,32.89680099,-97.03800201,Texas,United States,2
+Flyin Hawaiian Hobbyist,Lihue,1017,21.97599983,-159.3390045,Hawaii,United States,2
+Petro Games,Houston,1018,29.9843998,-95.34140015,Texas,United States,3
+Atlanta Hobby Warehouse,Atlanta,1019,33.63669968,-84.42810059,Georgia,United States,5
+Games of Portlandia,Portland,1020,45.58869934,-122.5979996,Oregon,United States,4
+Padre Games,San Diego,1021,32.73360062,-117.1900024,California,United States,4
+Capone Games,Chicago,1022,41.97859955,-87.90480042,Illinois,United States,4
+San Jose Games,San Jose,1023,37.36259842,-121.9290009,California,United States,4
+Liberty Gaming,Philadelphia,1024,39.87189865,-75.2410965,Pennsylvania,United States,5
+Panther Games,Charlotte,1025,35.2140007,-80.94309998,North Carolina,United States,4
+Frozen Games,Fairbanks,1026,64.81510162,-147.8560028,Alaska,United States,3
+Beach Games,Miami,1027,25.79319954,-80.29060364,Florida,United States,4
+June Cleaver Games,Juneau,1028,58.35499954,-134.576004,Alaska,United States,2
+Oaksterdam Games,Oakland,1029,37.72129822,-122.2210007,California,United States,2
+Hilo Entertainment,Hilo,1030,19.72139931,-155.0480042,Hawaii,United States,2
+Automatic Games,Washington,1031,38.94449997,-77.45580292,Virginia,United States,3
+San Juan Gaming,San Juan,1032,18.43939972,-66.00180054,Puerto Rico,United States,3
+Federal Games,Washington,1033,38.85210037,-77.03769684,Virginia,United States,3
+Newark Games,Newark,1034,40.69250107,-74.16870117,New Jersey,United States,4
+Brooklyn Gamesters,New York,1035,40.77719879,-73.87259674,New York,United States,4
+Brewing Hobby Warehouse,Milwaukee,1036,42.94720078,-87.89659882,Wisconsin,United States,4
+Number 9 Games,Dallas,1037,32.8470993,-96.85179901,Texas,United States,3
+Raven Gaming,Baltimore,1038,39.17539978,-76.66829681,Maryland,United States,4
+Beach Games,Fort Lauderdale,1039,26.07259941,-80.15270233,Florida,United States,2
+Motown Games,Detroit,1040,42.21239853,-83.35340118,Michigan,United States,4
+Mini-apple Games,Minneapolis,1041,44.88199997,-93.22180176,Minnesota,United States,4
+Saintly Games,New Orleans,1042,29.99340057,-90.25800323,Louisiana,United States,3
+Studio Gaming,Burbank,1043,34.20069885,-118.3590012,California,United States,2
+Windy Games,Santa Ana,1044,33.67570114,-117.8679962,California,United States,3
+Long Games,Long Beach,1045,33.81769943,-118.1520004,California,United States,3
+Rocky Games,Rock Springs,1046,41.59420013,-109.0650024,Wyoming,United States,1
+Tempest Games,Tampa,1047,27.97550011,-82.53320313,Florida,United States,3
+Gangsta Games,Chicago,1048,41.7859993,-87.75240326,Illinois,United States,3
+Elf Games,Santa Barbara,1049,34.42620087,-119.8399963,California,United States,3
+Sir Walter's House of Games,Raleigh,1050,35.87760162,-78.78749847,North Carolina,United States,3
+Leaping Stag Toys,Hartford,1051,41.93889999,-72.68319702,Connecticut,United States,3
+Nome Alone Games,Nome,1052,64.5121994,-165.4450073,Alaska,United States,2
+SOHO Games,Houston,1053,29.64539909,-95.27890015,Texas,United States,3
+Wolfie's Games,Cleveland,1054,41.4117012,-81.84980011,Ohio,United States,4
+Kansas Kitchen Games,Kansas City,1055,39.29759979,-94.71389771,Missouri,United States,4
+YeeHaw Games,Reno,1056,39.49909973,-119.7679977,Nevada,United States,2
+West Beach Games,West Palm Beach,1057,26.68320084,-80.09559631,Florida,United States,2
+Shuffle Off Games,Buffalo,1058,42.94049835,-78.73220062,New York,United States,3
+Columbia Games,Columbia,1059,33.93880081,-81.11949921,South Carolina,United States,3
+Austin Games,Austin,1060,30.19449997,-97.66989899,Texas,United States,5
+Gonzalez Games,Fort Myers,1061,26.53619957,-81.75520325,Florida,United States,2
+Pelican Games,Rhinelander,1062,45.63119888,-89.46749878,Wisconsin,United States,2
+Train Games,Brainerd,1063,46.39830017,-94.13809967,Minnesota,United States,2
+Ontario Games,Ontario,1064,34.05599976,-117.6009979,California,United States,3
+El Centro Games,El Centro,1065,32.83420181,-115.5790024,California,United States,3
+Kit & Carboodle Trains & Games,Cincinnati,1066,39.04880142,-84.6678009,Kentucky,United States,4
+Phat Games,Fresno,1067,36.77619934,-119.7180023,California,United States,2
+Louis' Games,St. Louis,1068,38.74869919,-90.37000275,Missouri,United States,4
+Boise Scale Model Shack,Boise,1069,43.56439972,-116.2229996,Idaho,United States,3
+White Plains Games,White Plains,1070,41.06700134,-73.70760345,New York,United States,3
+BBQ & Games,Albuquerque,1071,35.04019928,-106.6090012,New Mexico,United States,3
+Redding Games,Redding,1072,40.50899887,-122.2929993,California,United States,2
+Slow Gaming,San Luis Obispo,1073,35.23680115,-120.6419983,California,United States,4
+El Paso Model Shack,El Paso,1074,31.80719948,-106.3779984,Texas,United States,4
+Games of Divine Providence,Providence,1075,41.73260117,-71.42040253,Rhode Island,United States,3
+Wayne's World of Hobbies,Fort Wayne,1076,40.97850037,-85.19509888,Indiana,United States,2
+Hobby and RC Stuff,San Antonio,1077,29.53370094,-98.46980286,Texas,United States,4
+Monty's Games,Monterey,1078,36.5870018,-121.8430023,California,United States,3
+Jack's Games,Jacksonville,1079,30.49410057,-81.68789673,Florida,United States,3
+Sage's Games,Saginaw,1080,43.53290176,-84.07959747,Michigan,United States,2
+Ketchme Shop,Ketchikan,1081,55.35559845,-131.7140045,Alaska,United States,2
+Shell Games,Shreveport,1082,32.44660187,-93.82559967,Louisiana,United States,3
+Odessa RC Emporium,Odessa,1083,31.94249916,-102.2020035,Texas,United States,3
+Nash's Games,Nashville,1084,36.12450027,-86.67819977,Tennessee,United States,3
+Ghostly Games,Casper,1085,42.90800095,-106.4639969,Wyoming,United States,1
+Middle Earth Games,Richmond,1086,37.50519943,-77.31970215,Virginia,United States,3
+Savoy Games,Savannah,1087,32.12760162,-81.20210266,Georgia,United States,3
+Folkies Games,Norfolk,1088,36.89459991,-76.20120239,Virginia,United States,3
+Yokut Games,Bakersfield,1089,35.43360138,-119.0569992,California,United States,3
+Flubber Games,Lubbock,1090,33.66360092,-101.822998,Texas,United States,3
+Boothill Games,Tucson,1091,32.11610031,-110.9410019,Arizona,United States,3
+Cadillac Games,Amarillo,1092,35.2193985,-101.7060013,Texas,United States,3
+Bill's Games,Pittsburgh,1093,40.49150085,-80.23290253,Pennsylvania,United States,4
+Green Games,Greensboro,1094,36.09780121,-79.93730164,North Carolina,United States,3
+Sue's Land O' Games,Sioux Falls,1095,43.58200073,-96.74189758,South Dakota,United States,2
+Little Games,Little Rock,1096,34.72940063,-92.22429657,Arkansas,United States,3
+Daylong Games,Dayton,1097,39.90240097,-84.2193985,Ohio,United States,4
+Forest Gaming,Aspen,1098,39.22320175,-106.8690033,Colorado,United States,3
+Minor Games,Minot,1099,48.25939941,-101.2799988,North Dakota,United States,2
+Christopher's Games,Columbus,1100,39.9980011,-82.89189911,Ohio,United States,3
+George's Games,St. George,1101,37.03638889,-113.5103056,Utah,United States,2
+Okster Games,Oklahoma City,1102,35.39310074,-97.60070038,Oklahoma,United States,3
+Yepper Games,Fargo,1103,46.92070007,-96.81580353,North Dakota,United States,3
+Playtime Game & Hobby Shop,Pago Pago,1104,-14.33100033,-170.7100067,U.S. Territories,United States,1
+Stars and Bars War Store,Vicksburg,1105,32.31119919,-90.07589722,Mississippi,United States,3
+Yumster Games,Yuma,1106,32.65660095,-114.6060028,Arizona,United States,3
+Speedster Games,Indianapolis,1107,39.71730042,-86.29440308,Indiana,United States,3
+Dolly's Games,Madison,1108,43.13990021,-89.33750153,Wisconsin,United States,2
+Playtime Game & Hobby Shop,Memphis,1109,35.04240036,-89.97669983,Tennessee,United States,3
+Bouncing Games,Akron,1110,40.91609955,-81.44219971,Ohio,United States,3
+Slugger Games,Louisville,1111,38.17440033,-85.73600006,Kentucky,United States,3
+Doodlebug Hobbies,Charleston,1112,32.89860153,-80.04049683,South Carolina,United States,3
+Mountain Games,Colorado Springs,1113,38.80580139,-104.7009964,Colorado,United States,3
+Vern's Games,Fayetteville,1114,36.2818985,-94.30680084,Arkansas,United States,2
+The Iron Chancellor,Bismarck,1115,46.77270126,-100.7460022,North Dakota,United States,3
+Steak Games,Omaha,1116,41.30319977,-95.89409637,Nebraska,United States,4
+Chill Game Shack,Burlington,1117,44.47190094,-73.15329742,Vermont,United States,3
+Playtime Game & Hobby Shop,Medford,1118,42.37419891,-122.8730011,Oregon,United States,3
+Lost Keys Games,Key West,1119,24.55610085,-81.75959778,Florida,United States,2
+Fast Games and Hobbies,Cedar Rapids,1120,41.88470078,-91.71080017,Iowa,United States,3
+Desmond's Games,Des Moines,1121,41.5340004,-93.6631012,Iowa,United States,3
+Children of Boudicca Games,Corpus Christi,1122,27.77039909,-97.50119781,Texas,United States,3
+Musky Hobbies,Muskegon,1123,43.2341813,-86.2483921,Michigan,United States,2
+Tallullah's Games,Tallahassee,1124,30.39649963,-84.35030365,Florida,United States,3
+Batty Times Gaming,Carlsbad,1125,33.1580933,-117.3505939,California,United States,3
+Balsa Games,Tulsa,1126,36.19839859,-95.88809967,Oklahoma,United States,3
+Empire State RC and Games,Syracuse,1127,43.11119843,-76.10630035,New York,United States,3
+Lancelot Games,Lansing,1128,42.77870178,-84.58740234,Michigan,United States,3
+Genny's Screamin Games,Rochester,1129,43.1189003,-77.67240143,New York,United States,3
+Lex's Games,Lexington,1130,38.03649902,-84.60590363,Kentucky,United States,4
+Rodeo Hobbies & Toys,Laredo,1131,27.54380035,-99.46160126,Texas,United States,2
+Palmster games,Palm Springs,1132,33.82970047,-116.5070038,California,United States,3
+Red Games,Baton Rouge,1133,30.53319931,-91.14959717,Louisiana,United States,3
+Children of the Corn Toys,Brownsville,1134,25.90679932,-97.42590332,Texas,United States,2
+Games of Ham,Birmingham,1135,33.56290054,-86.75350189,Alabama,United States,3
+Mouse Hobbies & Toys,Mosinee,1136,44.7930232,-89.7031784,Wisconsin,United States,2
+Playtime Game & Hobby Shop,Lafayette,1137,30.20529938,-91.98760223,Louisiana,United States,2
+Making a Killeen Games,Killeen,1138,31.06719971,-97.8289032,Texas,United States,1
+Silly Hobbies & Toys,Lawton,1139,34.6035669,-98.3959291,Oklahoma,United States,2
+Cola Games,Pensacola,1140,30.47340012,-87.18659973,Florida,United States,3
+King's Games,Kingsport,1141,36.47520065,-82.40740204,Tennessee,United States,2
+Bilbos Game Hovel,Biloxi,1142,30.40730095,-89.07009888,Mississippi,United States,2
+Newbie Games,Newport News,1143,37.13190079,-76.49299622,Virginia,United States,2
+Golden Games,Eureka,1144,40.97809982,-124.1090012,California,United States,3
+Wow Games,Waco,1145,31.61129951,-97.23049927,Texas,United States,2
+Smitty's Games,Fort Smith,1146,35.33660126,-94.36740112,Arkansas,United States,2
+Portal Games,Portland,1147,43.64619827,-70.30930328,Maine,United States,3
+Double Games,Duluth,1148,46.84209824,-92.19360352,Minnesota,United States,3
+Choo Choo Games,Chattanooga,1149,35.03530121,-85.20379639,Tennessee,United States,3
+Just Trains and Games,Manchester,1150,42.93259811,-71.43569946,New Hampshire,United States,3
+The Collegium,College Station,1151,30.58860016,-96.36380005,Texas,United States,3
+September Games,Augusta,1152,33.36989975,-81.96450043,Georgia,United States,3
+Great Nails Games,Knoxville,1153,35.81100082,-83.9940033,Tennessee,United States,3
+Tippy Games,Tyler,1154,32.35409927,-95.40239716,Texas,United States,2
+Playin Peoria Games,Peoria,1155,40.66419983,-89.69329834,Illinois,United States,3
+Playtime Game & Hobby Shop,Harrisburg,1156,40.19350052,-76.76339722,Pennsylvania,United States,3
+Hobbies on a Mission ,Mission,1157,26.17580032,-98.23860168,Texas,United States,2
+Which Way RC & Trains,Wichita,1158,37.64989853,-97.43309784,Kansas,United States,3
+Red Games,Green Bay,1159,44.48509979,-88.12960052,Wisconsin,United States,2
+Growin Games,Greer,1160,34.89569855,-82.21890259,South Carolina,United States,2
+Turkey Games,Eagle,1161,39.64260101,-106.9179993,Colorado,United States,3
+Big Lake games,Grand Rapids,1162,42.88079834,-85.52279663,Michigan,United States,3
+Playtime Game & Hobby Shop,Charleston,1163,38.37310028,-81.59320068,West Virginia,United States,3
+Moving Games,Mobile,1164,30.69120026,-88.24279785,Alabama,United States,3
+Playtime Game & Hobby Shop,Albany,1165,42.74829865,-73.80169678,New York,United States,3
+Settle for Games,Sitka,1166,57.04710007,-135.3619995,Alaska,United States,1
+Yakitup Games,Yakutat,1167,59.50329971,-139.6600037,Alaska,United States,1
+Private Games,Idaho Falls,1168,43.51459885,-112.0709991,Idaho,United States,2
+Soda Games,Sarasota,1169,27.39539909,-82.55439758,Florida,United States,2
+Val's Games,Valparaiso,1170,30.48320007,-86.52539825,Florida,United States,2
+Rowin Diversions,Roanoke,1171,37.32550049,-79.97540283,Virginia,United States,3
+Lincoln's Games,Springfield,1172,39.84410095,-89.67790222,Illinois,United States,3
+Playtime Game & Hobby Shop,Evansville,1173,38.03699875,-87.53240204,Indiana,United States,3
+Conjunction Games,Grand Junction,1174,39.12239838,-108.5270004,Colorado,United States,3
+Speaking Games,Spokane,1175,47.61989975,-117.5339966,Washington,United States,4
+Arlen Toys and Games,Harlingen,1176,26.22850037,-97.65440369,Texas,United States,2
+Sunny Games,Sun Valley,1177,43.50439835,-114.2959976,Idaho,United States,2
+Orange Games,Appleton,1178,44.2619309,-88.4153847,Wisconsin,United States,1
+Show Me Games,Springfield,1179,37.24570084,-93.38860321,Missouri,United States,3
+Angel's Games,San Angelo,1180,31.35770035,-100.4960022,Texas,United States,2
+Flintstone Games,Flint,1181,42.9654007,-83.74359894,Michigan,United States,3
+Woody's Games,Cedar City,1182,37.70100021,-113.098999,Utah,United States,2
+Huntin-for-a-Game,Huntsville,1183,34.6371994,-86.77510071,Alabama,United States,2
+Betty's Games,Bethlehem,1184,40.65209961,-75.44080353,Pennsylvania,United States,4
+Poking Games,Pocatello,1185,42.90980148,-112.5960007,Idaho,United States,2
+Double Trouble Games,Twin Falls,1186,42.48180008,-114.487999,Idaho,United States,2
+Jarhead Game Store,Camp Lejeune,1187,34.82920074,-77.61209869,North Carolina,United States,3
+Long Games,Longview,1188,32.38399887,-94.71150208,Texas,United States,1
+Fay's Games,Fayetteville,1189,34.99119949,-78.88030243,North Carolina,United States,2
+Chico's Giant Games,Chico,1190,39.7284944,-121.8374777,California,United States,4
+Alex's Games,Alexandria,1191,31.32740021,-92.54979706,Louisiana,United States,2
+Playtime Game & Hobby Shop,Adak Island,1192,51.87799835,-176.6459961,Alaska,United States,1
+Myrtle's Games,Myrtle Beach,1193,33.67969894,-78.92829895,South Carolina,United States,2
+Bendable Games,South Bend,1194,41.70869827,-86.31729889,Indiana,United States,3
+Monty's RC and Trains,Montgomery,1195,32.30059814,-86.39399719,Alabama,United States,2
+Avalon Ville Games,Asheville,1196,35.43619919,-82.54180145,North Carolina,United States,2
+Daylong Toys and RC Shop,Daytona Beach,1197,29.17989922,-81.05809784,Florida,United States,3
+Flaggin Games,Flagstaff,1198,35.13850021,-111.6709976,Arizona,United States,3
+Eugene's Games,Eugene,1199,44.12459946,-123.211998,Oregon,United States,3
+Santa's Toy Shoppe,Santa Maria,1200,34.89889908,-120.4570007,California,United States,2
+Moonshine Games,Crescent City,1201,41.78020096,-124.2369995,California,United States,2
+Wilma's Crafts and Hobbies,Wilmington,1202,34.27059937,-77.90260315,North Carolina,United States,2
+Genesse Screamer Games,Rochester,1203,43.90829849,-92.5,Minnesota,United States,3
+Voldemort Games,Valdosta,1204,30.78249931,-83.27670288,Georgia,United States,3
+Aussie Games,Melbourne,1205,28.10280037,-80.64530182,Florida,United States,3
+Praline Games,Moline,1206,41.44850159,-90.50749969,Illinois,United States,2
+Bozo Games,Bozeman,1207,45.77750015,-111.1529999,Montana,United States,2
+Great Trains & RC Planes,Great Falls,1208,47.48199844,-111.3710022,Montana,United States,3
+Bubbly Games,Champaign,1209,40.03919983,-88.27809906,Illinois,United States,2
+Slip games,Islip,1210,40.79520035,-73.10019684,New York,United States,1
+Red Games,Panama City,1211,30.1588129,-85.6602058,Florida,United States,3
+Web of Games,Charlotte Amalie,1212,18.33729935,-64.9733963,U.S. Virgin Islands,United States,2
+Zulu! Games,Missoula,1213,46.91630173,-114.0910034,Montana,United States,3
+Gainesville Games,Gainesville,1214,29.69009972,-82.27179718,Florida,United States,3
+Christopher's Games,Columbus,1215,32.5163002,-84.93890381,Georgia,United States,3
+Saucy Hobbies,Worcester,1216,42.263571,-71.79721,Massachusetts,United States,3
+The Armchair General,Helena,1217,46.60680008,-111.9830017,Montana,United States,3
+The Armchair General,Billings,1218,45.80770111,-108.5429993,Montana,United States,2
+Bloomin Games,Bloomington,1219,40.47710037,-88.91590118,Illinois,United States,3
+Kazoo Games,Kalamazoo,1220,42.23490143,-85.55210114,Michigan,United States,2
+Bowser's House of Fun,Lincoln,1221,40.85100174,-96.75920105,Nebraska,United States,3
+Beauty Games,Butte,1222,45.95479965,-112.4970016,Montana,United States,2
+Games People Play,Canton,1223,42.158432,-71.144773,Massachusetts,United States,3
+The War Emporium,Marquette,1224,46.543544,-87.395417,Michigan,United States,1
+Razor Edge Games,Gillette,1225,44.2910915,-105.5022205,Wyoming,United States,1
+Mufflers & Games,Monroe,1226,32.51089859,-92.03769684,Louisiana,United States,2
+Pony Games,Abilene,1227,32.41130066,-99.68190002,Texas,United States,3
+Santa's Games,Santa Fe,1228,35.61709976,-106.0889969,New Mexico,United States,3
+Al's Games,Albany,1229,31.53549957,-84.19450378,Georgia,United States,3
+Tiny's games,Texarkana,1230,33.45370102,-93.99099731,Arkansas,United States,2
+Water Games,Watertown,1231,43.9919014,-76.021698,New York,United States,2
+The Collegium ,State College,1232,40.84930038,-77.84870148,Pennsylvania,United States,3
+Elmo's Games,Elmira,1233,42.15990067,-76.89160156,New York,United States,3
+Which Way Games,Wichita Falls,1234,33.98880005,-98.49189758,Texas,United States,2
+Eric's RC and Trains,Erie,1235,42.08312701,-80.17386675,Pennsylvania,United States,3
+Jack's Games,Jackson,1236,43.6072998,-110.737999,Wyoming,United States,1
+Grizzly Games,Kodiak,1237,57.788026,-152.4940033,Alaska,United States,1
+Area 51 Games,Roswell,1238,33.30160141,-104.5309982,New Mexico,United States,2
+Lawrence's Games,Elko,1239,40.82490158,-115.7919998,Nevada,United States,2
+Live Pony Hobbies,Deadhorse,1240,70.19470215,-148.4649963,Alaska,United States,1
+Great Ulysses Hobbies,Ithaca,1241,42.49100113,-76.45839691,New York,United States,3
+Beads & Games,Ft. Riley,1242,39.14099884,-96.67079926,Kansas,United States,2
+Freezin Games,Williston,1243,48.17789841,-103.6419983,North Dakota,United States,2
+Giant Spoon Games,Grand Forks,1244,47.94929886,-97.17610168,North Dakota,United States,3
+Spelling Games,Kalispell,1245,48.3105011,-114.2559967,Montana,United States,1
+Web of Games,Charlottesville,1246,38.1385994,-78.45290375,Virginia,United States,2
+Bingo Games,Binghamton,1247,42.20869827,-75.97979736,New York,United States,3
+Shot and Pike Games,Lake Charles,1248,30.12610054,-93.22329712,Louisiana,United States,2
+Broom's Craft & Hobby Warehouse,Brunswick,1249,31.25880051,-81.46649933,Georgia,United States,3
+Napoleon's Games,Waterloo,1250,42.55709839,-92.40029907,Iowa,United States,2
+Morehead Games,New Berne,1251,35.07300186,-77.04290009,North Carolina,United States,3
+Playtime Game & Hobby Shop,Wilkes-Barre,1252,41.33850098,-75.7233963,Pennsylvania,United States,3
+Del's Games,Del Rio,1253,29.37420082,-100.927002,Texas,United States,1
+Giant Games,Mammoth Lakes,1254,37.648546,-118.972079,California,United States,2
+Tabasco Hobby Emporium,Pasco,1255,46.26470184,-119.1190033,Washington,United States,2
+Bridge Games,Poughkeepsie,1256,41.5041008,-74.10479736,New York,United States,3
+Games Shoppe of Richmond,Redmond,1257,44.2541008,-121.1500015,Oregon,United States,3
+The Marquise of Montrose,Montrose,1258,38.50979996,-107.8939972,Colorado,United States,2
+Haystack Game Shack,Hayden,1259,40.4894302,-107.2636842,Colorado,United States,3
+Modest Hobby Merchants,Modesto,1260,37.62580109,-120.9540024,California,United States,3
+Studly Games,Christiansted,1261,17.70190048,-64.79859924,U.S. Virgin Islands,United States,1
+Playtime Game & Hobby Shop,Dothan,1262,31.32130051,-85.44960022,Alabama,United States,2
+Chris & Isabella's Games,Columbus,1263,33.45029831,-88.59140015,Mississippi,United States,3
+Slow Games Warehouse,Rapid City,1264,44.04529953,-103.0569992,South Dakota,United States,2
+Ringabell Games,Bellingham,1265,48.7928009,-122.538002,Washington,United States,2
+Janice's Games,Joplin,1266,37.15179825,-94.49829865,Missouri,United States,2
+Star Games,La Crosse,1267,43.87900162,-91.25669861,Wisconsin,United States,1
+Incan Crafts and Hobbies,Peru,1268,42.438142,-73.045934,Massachusetts,United States,1
+Cowboy Games,Durango,1269,37.27528,-107.8800667,Colorado,United States,2
+Playtime Game & Hobby Shop,Escanaba,1270,45.7452466,-87.0645801,Michigan,United States,1
+Holster Games,Gunnison,1271,38.5458246,-106.9253207,Colorado,United States,4
+Clay's Games,Eau Claire,1272,44.86579895,-91.48429871,Wisconsin,United States,1
+Small Beach Games,Grand Island,1273,40.96749878,-98.30960083,Nebraska,United States,2
+Dean's Games,Aberdeen,1274,45.44910049,-98.42179871,South Dakota,United States,2
+Paddy's Games,Paducah,1275,37.06079865,-88.77380371,Kentucky,United States,2
+Fleming Games,Sioux City,1276,42.40259933,-96.38439941,Iowa,United States,3
+Backyard Enthusiast,Garden City,1277,37.92750168,-100.723999,Kansas,United States,2
+Trending Games,Trenton,1278,40.27669907,-74.81349945,New Jersey,United States,3
+John's Games,Hancock,1279,47.16839981,-88.4890976,Michigan,United States,1
+Salty Games,Sault Ste. Marie,1280,46.25080109,-84.47239685,Michigan,United States,3
+Hubba  Hubba Games,Hibbing,1281,47.38660049,-92.83899689,Minnesota,United States,2
+Bayside Games,North Bend,1282,43.417099,-124.2460022,Oregon,United States,3
+Larry's Games,Laramie,1283,41.31209946,-105.6750031,Wyoming,United States,3
+Steel Valley Games,Iron Mountain,1284,45.8202334,-88.0659603,Michigan,United States,2
+Local Hobby Shop,International Falls,1285,48.56620026,-93.40309906,Minnesota,United States,2
+Saddle Up Games,Cody,1286,44.5263422,-109.0565308,Wyoming,United States,1
+Middle Earth Games,Bemidji,1287,47.4736111,-94.8802778,Minnesota,United States,1
+Christopher's Games,Columbia,1288,38.81809998,-92.21959686,Missouri,United States,2
+Yokel Games,Inyokern,1289,35.6468991,-117.8125674,California,United States,3
+Calvins Playful Hobbies,Hobbs,1290,32.7026116,-103.1360403,New Mexico,United States,3
+Playtime Game & Hobby Shop,Lewiston,1291,46.37450027,-117.0149994,Idaho,United States,2
+Richard's Games,Branson,1292,36.6436731,-93.2185144,Missouri,United States,2
+Playtime Game & Hobby Shop,Aguadilla,1293,18.49489975,-67.12940216,Puerto Rico,United States,2
+Secrets of Ham Railroad & RC Shop,Guam,1294,13.48340034,144.7960052,U.S. Territories,United States,1
+Playtime Game & Hobby Shop,Bangor,1295,44.80739975,-68.82810211,Maine,United States,3
+Rising Games,Phoenix,1296,33.30780029,-111.6549988,Arizona,United States,3
+Playtime Game & Hobby Shop,Rockford,1297,42.19540024,-89.09719849,Illinois,United States,2
+Oyster Games,Klamath Falls,1298,42.15610123,-121.7330017,Oregon,United States,2
+El Moro Toys and Hobby Shop ,Ponce,1299,18.00830078,-66.56300354,Puerto Rico,United States,3
+Woody's Games,Staunton,1300,38.149576,-79.0716958,Virginia,United States,2
+Gwildors Games,Parry Sound,3100,45.345656,-80.032589,Ontario,Canada,3
+Maple Leaves Hobbies & Toys,Toronto,3101,43.647343,-79.351394,Ontario,Canada,3
+Le Jeu dGuerre Echoppe,Trois-Rivieres,3102,46.345797,-72.542489,Quebec,Canada,3
+Old MacDonalds Toy Shoppe,Calgary,3103,50.990358,-114.048944,Alberta,Canada,4
+Model Railroading & Hobbies,Edmonton,3104,53.519381,-113.456969,Alberta,Canada,4
+Royal Mounted Toys,Brampton,3105,43.679997,-79.754734,Ontario,Canada,3
+Kids of All Ages Toys,Vancouver,3106,49.255869,-123.134487,British Columbia,Canada,4
+Ye Olde Game Shoppe,Portage la Prairie,3107,49.953728,-98.279722,Manitoba,Canada,2
+Newfoundland Trains & Games,Moose Jaw,3108,50.395629,-105.537136,Saskatchewan,Canada,3
+Reserved Scotsman Hobbies,St. John,3109,45.268221,-66.055727,New Brunswick,Canada,3
+Games People Play,Stratford,3110,46.217336,-63.089161,Pr Edwards Island,Canada,2
+The Wee Game Shoppe,Winnepeg,3111,49.828451,-97.139869,Manitoba,Canada,3
+Territory Model & RR,Yellowknife,3112,62.451303,-114.367869,Northwest Territory,Canada,1
+Eh! Hobbies,Ottawa,3113,45.322441,-75.651598,Ontario,Canada,4
+Games of War Warehouse,Halifax,3114,44.644562,-63.574169,Nova Scotia,Canada,3
+Model Railroading & Hobbies,Whitehouse,3115,60.700863,-135.062699,Yukon,Canada,1
+Bloody Marys Hobbies,Hamilton,4100,32.294816,-64.781375,Hamilton,Bermuda,1
+Tommys Playland,New Providence,4101,25.051928,-77.40134,Nassau,The Bahamas_,2
+Hobby y Modelo de Tren,Bogota,4102,4.598056,-74.075833,Cundinamarca,Colombia,3
+Faithful Toys,Havana,4103,23.1168,-82.388557,Havana,Cuba,2
+Hobby en Modeltrein Winkel,Willemstad,4104,19.173773,-96.134224,Willemstad,Curacao,2
+Hobby y Modelo de Tren,Santo Domingo,4105,18.5,-69.983333,Santo Domingo Este,Dominican Republic_,1
+Passe-temps et Trains Miniatures,Port-au-Prince,4106,18.539692,-72.336205,Ouest,Haiti_,1
+The Pirate Booty,Spanish Town,4107,17.994761,-76.951599,Middlesex,Jamaica_,2
+Vive Zapata! Modelo de Tren,Ecatepec de Morelos,4108,19.601841,-99.050674,Mexico,Mexico_,4
+Vive Zapata! Modelo de Tren,Veracruz,4109,19.173773,-96.134224,Veracruz de Ignacio de la Llave,Mexico_,3
+Hobby y Modelo de Tren,Managua,4110,12.136389,-86.251389,Managua,Nicaragua_,2
+Two Oceans Pastimes,Panama City,4111,8.994269,-79.518792,Panama,Panama_,2
+Hobby en Modeltrein Winkel,Philipsburg,4112,18.027328,-63.050709,Sint Maarten,St Maarten,2
+Hobby y Modelo de Tren,Maracaibo,4113,10.64504,-71.637154,Zulia,Venezuela,3
+Passatempo e Jogo Importacao,Sao Paulo,4114,-23.548943,-46.638818,Sao Paulo,Brazil,5
+Passatempo e Jogo Importacao,Sao Paulo,4115,-23.577231,-46.563921,Sao Paulo,Brazil,4
+Casa de Pasatiempos y Juegos,Rio de Janeiro,4116,-22.896274,-43.187728,Rio de Janeiro,Brazil,3
+Generales de Sillon,Rio de Janeiro,4117,-22.880538,-43.242402,Rio de Janeiro,Brazil,3
+Passatempo e Jogo Importacao,Salvador,4118,-12.970382,-38.512382,Bahia,Brazil,3
+San Martin Hobby Club,Buenos Aires,4119,-34.603723,-58.381593,Buenos Aires,Argentina,3
+Generales de Sillon,Santa Fe de la Vera Cruz,4120,-31.632389,-60.699459,Santa Fe,Argentina,3
+Tupac Amaru  Juegos,Trujillo,4121,-8.112,-79.0288,La Libertad,Peru,3
+Casa de Pasatiempos y Juegos,Santiago,4122,-33.468594,-70.639075,Santiago,Chile,2
+Jugadores de Guerra de Guayaquil,Guayaquil,4123,-2.203816,-79.897453,Guayas,Ecuador,2
+Casa de Pasatiempos y Juegos,Santa Cruz de la Sierra,4124,-17.866667,-63,Santa Cruz,Bolivia,2
+Casa de Pasatiempos y Juegos,Aregua,4125,-25.295278,-57.414722,Central,Paraguay,2
+Videos de Montana y Juegos,Montevideo,4126,-34.883611,-56.181944,Montevideo,Uruguay,2
+Goose Green Scale Modeler,Goose Green,4127,-51.707779,-57.826538,Stanley,Falkland Islands,1
+EuroToys Emporium,Andorra la Vella,5001,42.505813,1.52651,Andorra la Vella,Andorra,1
+Der Kriegsspiel,Graz,5002,47.040523,15.463386,Steiermark,Austria,3
+Giochi di Minsk,Minsk,5003,53.899378,27.57283,Minsk,Belarus,2
+Long Walls RC and Game Centre,Pireas,5004,37.944381,23.643812,Salamis,Greece,3
+Anneaux du Temps,Chareleroi,5005,50.403797,4.440161,Hainaut,Belgium,3
+Green Line Games,Nikosia,5006,35.169683,33.369266,Nikosia,Cyprus,3
+EuroToys Emporium,Prague,5007,50.074037,14.432448,Central Bohemia,Czech Republic,3
+Copenhagen Hobby Import,Copenhagen,5008,55.616137,12.646809,Hovedstaden,Denmark,3
+Hobby Tarl_s,Budapest,5009,47.461687,19.098573,Central Hungary,Hungary,3
+RC Hobbyist,Tallinn,5010,59.441355,24.766166,Harjumaa,Estonia,3
+Telegames Games,Helsinki,5011,60.155794,24.953647,Southern Finland,Finland,3
+Paris Teleguide & Modeliste Inc,Paris,5012,48.855988,2.313319,Ile-de-France,France,5
+Passe-Temps,Nantes,5013,47.193785,-1.553235,Loire-Atlantique,France,4
+Centre du Hobby,Nancy,5014,48.684966,6.187159,Meurthe-et-Moselle,France,3
+Der Kriegsspiel,Bremen,5015,53.080354,8.824468,Bremen,Germany,3
+Der Kriegsspiel,Starnberg,5016,47.996838,11.357224,Munich,Germany,4
+Der Kriegsspiel,Cologne,5017,50.941222,6.988893,North Rhine-Westphalia,Germany,3
+Der Kriegsspiel,Berlin,5018,52.517914,13.404844,Berlin,Germany,4
+EuroToys Emporium,Reykjavik,5019,64.06133,-21.989458,Greater Reykjav_k,Iceland,2
+EuroToys Emporium,Dublin,5020,53.350854,-6.22927,Dublin,Ireland,3
+Giochi di Guerra del Nord,Turin,5021,45.082106,7.727079,Turin,Italy,3
+Giochi di Guerra del Sud,Avellino,5022,40.912926,14.78454,Avellino,Italy,3
+Giochi di Guerra di Roma,Rome,5023,41.893322,12.533813,Rome,Italy,4
+EuroToys Emporium,Luxembourg City,5024,49.615071,6.137216,Luxembourg,Luxembourg,2
+Giochi di Guerra di Malta,Malta,5025,35.901406,14.51846,Malta,Malta,2
+Klompen Ambachten en Hobby,Haarlem,5026,52.385575,4.64668,North Holland,Netherlands,2
+EuroToys Emporium,Oslo,5027,59.897329,10.764649,Oslo,Norway,2
+Pociagi i Gry,Warsaw,5028,52.23041,21.045771,Masovia,Poland,3
+Pociagi i Gry,Gdansk,5029,54.35214,18.64411,Pomerania,Poland,3
+The Hobbyist,Comibra,5030,40.202605,-8.443969,Beira Litoral,Portugal,3
+EuroToys Emporium,Bucharest,5031,44.430132,26.091215,Bucharest,Romania,3
+Red Guard Games,Moscow,5032,55.730456,37.638726,Moscow,Russia,4
+Giochi di Guerra di San Marino,San Marino Citta,5033,43.934776,12.447899,San Marino,San Marino,2
+Juegos de Guerra,Cadiz,5034,36.527806,-6.28742,Cadiz,Spain,3
+Pablo Modelismo,Madrid,5035,40.397641,-3.709409,Madrid,Spain,3
+No Pasaran!,Bilbao,5036,43.255638,-2.919681,Biscay,Spain,2
+EuroToys Emporium,Stockholm,5037,59.310235,18.091264,Stockholm,Sweden,3
+Giochi di Guerra di Svizzera,Lugano,5038,46.005485,8.95552,Ticino,Switzerland,3
+Topkapi Games,Istanbul,5039,41.013338,28.980185,Istanbul,Turkey,3
+Foursquare Hobby Shops,Sevastopol,5040,44.613872,33.525443,Crimea,Ukraine,3
+The Armchair General,Cambridge,5041,52.196505,0.112385,Cambridgeshire,United Kingdom,3
+Red Rose White Rose Gaming,Lancaster,5052,54.044811,-2.799207,Lancashire,United Kingdom,3
+Shot & Pike Games,Birmingham,5053,52.48163,-1.862183,Warwickshire,United Kingdom,3
+The Toy Emporium,London,5054,51.509675,-0.087086,Greater London,United Kingdom,4
+Bannockburn Hobbies,Glasgow,5055,55.851985,-4.238824,Glasgow,United Kingdom,3
+King Fahd Games,Isa Town,5056,26.174771,50.548621,Al Wustaa,Bahrain,3
+Upper Kingdom Hobbies,Giza,5057,30.014663,31.209948,Giza,Egypt,2
+House of Senemut Games,Cairo,5058,30.042532,31.236373,Cairo,Egypt,3
+Dam Games,Aswan,5059,24.084599,32.898039,Aswan,Egypt,2
+House of Senemut Games,Alexandria,5060,31.167713,29.895623,Alexandria,Egypt,2
+Fedayeen Games,Tabriz,5061,38.062852,46.322243,East Azerbaijan,Iran,1
+11th of February Game,Tehran,5062,35.695498,51.418784,Tehran,Iran,1
+House of Maccabee Games,Haifa,5063,32.830299,34.970062,Haifa,Israel,3
+Hobby Shop  Tel Aviv,Tel Aviv,5064,32.066763,34.764385,Tel Aviv,Israel,4
+Arab Legion Workshop,Amman,5065,31.951449,35.939509,Amman,Jordan,2
+Flying Carpet RC and Games,Muscat,5069,23.613658,58.546523,Muscat,Oman,2
+Games of the Desert,Jeddah,5070,21.512866,39.208027,Kekkah,Saudi Arabia,3
+Fedayeen Games,Damascus,5072,33.495112,36.322807,Rif Dimashq,Syria,2
+Lawrences Hobby Shop,Abu Dhabi,5073,24.44448,54.377217,Abu Dhabi,United Arab Emirates,2
+EuroToys Emporium,Yerevan,7001,40.182428,44.517535,Yerevan,Armenia,2
+Geppettos Toys,Melbourne,7002,-37.814107,144.96328,Victoria,Australia,3
+Devilish Diversions,Hobart,7003,-42.87858,147.33608,Tasmania,Australia,2
+Games Down Under,Sydney,7004,-33.867566,151.207125,New South Wales,Australia,2
+Hobbies of the Wasteland,Perth,7005,-33.866018,151.203429,Western Australia,Australia,2
+Golden Hordes Games,Beijing,7006,39.904361,116.407053,Beijing,China (PRC),5
+Golden Hordes Games,Tianjin,7007,39.08282,117.203296,Tianjin,China (PRC),3
+House of Peoples Diversions ,Nanjing,7008,32.063494,118.802805,Jiangsu,China (PRC),4
+House of Peoples Diversions ,Hangzhou,7009,30.27477,120.162406,Zhejiang,China (PRC),3
+House of Peoples Diversions ,Haikou,7010,20.032081,110.329181,Hainan,China (PRC),4
+House of Peoples Diversions ,Syanley,7011,22.219466,114.212977,Hong Kong,China (PRC),4
+House of Peoples Diversions,Xi'an,7012,34.342999,108.943648,Shaanxi,China (PRC),2
+Tbilisi RC and Trains,Tbilisi,7013,41.708113,44.792215,Tbilisi,Georgia,2
+Games Indians Play,Delhi,7014,28.635813,77.226301,Delhi,India,5
+The Hobby Store,Hyderabad,7015,17.399067,78.535906,Andhra Pradesh,India,4
+Kyber Rifles Hobbyists,Raipur,7016,21.25186,81.628895,Chhattisgarh,India,3
+Games Indians Play,Bangalore,7017,12.97202,77.594043,Karnataka,India,3
+Tiger of Mysore Hobbies,Mysore,7018,12.295368,76.641961,Karnataka,India,3
+Marquis Dupleix Hobbies,Puducherry,7019,11.912408,79.814311,Puducherry,India,3
+Games Indians Play,Mumbai,7020,19.075968,72.877437,Maharashtra,India,2
+Models and Games of Indonesia,Bali,7021,-8.405605,115.197251,Bali,Indonesia,2
+Mr Sparkles Wonderful House of Fun,Tokyo,7022,35.684687,139.793258,Tokyo,Japan,5
+Happy Fun Games,Sapporo,7023,43.062096,141.354376,Hokkaido,Japan,3
+Happy Fun Games,Kyoto,7024,35.011636,135.768029,Kyoto,Japan,3
+Happy Fun Games,Hiroshima,7026,34.397789,132.47661,Hiroshima,Japan,4
+Island Gaming,Kuching,7027,1.535881,110.34094,Sarawak,Malaysia,2
+Golden Hordes Games,Ulaanbaatar,7028,47.921867,106.906143,Ulaanbaatar,Mongolia,1
+Top of the World Games,Kathmandu,7029,27.7,85.333333,Kathmandu,Nepal,2
+Mahmuds Kites & Games,Karachi,7031,24.89062,67.032078,Sindh,Pakistan,3
+Mahmuds Kites & Games,Hyderbad,7032,25.400936,68.350883,Sindh,Pakistan,3
+I Shall Return Hobbies,Manila,7033,14.602954,120.985104,Merto Manila,Philippines,3
+Sling Toy Warehouse,Singapore,7034,1.352083,103.819836,Singapore,Singapore,3
+Scale Modeler of Seoul,Seoul,7035,37.567097,126.977202,Gyeonggi,South Korea,4
+Hams House of Fantastic Fun,Hongseong,7039,36.601325,126.659565,South Chungcheong,South Korea,3
+Happy Fun Games,Suwon,7040,37.263573,127.028601,Gyeonggi,South Korea,2
+Falks Toy Store,Colombo,7041,6.934444,79.842778,Western,Sri Lanka,2
+New China Toys and Hobbies,Danshui,7042,25.18718,121.459522,New Taipei City,Taiwan (ROC),3
+ILA Games,Nha Trang,7043,12.230257,109.19348,Khanh Hoa,Vietnam,2
+Kiwi Game Warehouse ,Christchurch,7044,-43.529854,172.637888,Canterbury,New Zealand,2
+Kiwi Game Warehouse,Auckland,7045,-36.84846,174.763332,Auckland,New Zealand,3
+Rainbow Games of Cape Town,Cape Town,9100,-33.924868,18.424055,Western Cape,South Africa,4
+Rainbow Games of Pietermaritzburg,Pietermaritzburg,9101,-29.600607,30.379412,KwaZulu-Natal,South Africa,3
+Rainbow Games of Johannesburg,Johannesburg,9102,-26.204103,28.047305,Gauteng,South Africa,2
+Sweepstake Games,Lagos,9103,6.441158,3.417977,Lagos,Nigeria,3
+Lavals Joke and Toy Store,Oran,9104,35.696944,-0.633056,Oran,Algeria,3
+Ricks Toy Shop and Cafe,Casablanca,9105,33.533333,-7.583333,Grand Casablanca,Morocco,3
+RTL Boutique de Train Miniature,Tunis,9106,36.81881,10.16596,Tunis,Tunisia,2
+Adowa Games Warehouse,Addis Ababa,9107,9.022736,38.746799,Oromia,Ethiopia,2
+Pan-African RC and Toys,Accra,9108,5.555717,-0.196306,Greater Accra,Ghana,2
+Pan-African RC and Toys,Mombasa,9109,-4.043477,39.668207,Mombasa,Kenya,2
+African Rifles Amusements,Dar es Salaam,9110,-6.822921,39.269661,Dar es Salaam,Tanzania,2
+Pan-African RC and Toys,Yaounde,9111,3.866667,11.516667,Centre Region,Cameroon,2
+African Rifles Amusements,Kampala,9112,0.313611,32.581111,Kampala,Uganda,2
+Kadaffys Amazements,Tripoli,9113,5.560735,-0.193087,Tripoli,Libya,1
+Passe-Temps,Yamoussoukro,9114,6.816667,-5.283333,Lacs,Cote dIvoire,1
+Pan-African RC and Toys,Ouagadougou,9115,12.364637,-1.533864,Nord Region,Burkina Faso,1
+Jeremys House of Hobbies,Fort-Lamy,9116,12.134846,15.055742,Chari-Baguirmi,Chad,1
+Frozen Fun General Store,Amundsen-Scott Station,9999,90,139.2667,Antarctica,Antarctica,0

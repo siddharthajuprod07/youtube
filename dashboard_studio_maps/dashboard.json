@@ -1,0 +1,73 @@
+{
+	"visualizations": {
+		"viz_y44ECpf6": {
+			"type": "splunk.map",
+			"options": {
+				"layers": [
+					{
+						"type": "marker",
+						"latitude": "> primary | seriesByName('VendorLatitude')",
+						"longitude": "> primary | seriesByName('VendorLongitude')"
+					}
+				]
+			},
+			"dataSources": {
+				"primary": "ds_HvH9RVxk"
+			}
+		}
+	},
+	"dataSources": {
+		"ds_HvH9RVxk": {
+			"type": "ds.search",
+			"options": {
+				"query": "index=main\n```| geostats longfield=VendorLongitude latfield=VendorLatitude count by Vendor```\n|  table Venfor, VendorLongitude, VendorLatitude"
+			},
+			"name": "Search_1"
+		}
+	},
+	"defaults": {
+		"dataSources": {
+			"ds.search": {
+				"options": {
+					"queryParameters": {
+						"latest": "$global_time.latest$",
+						"earliest": "$global_time.earliest$"
+					}
+				}
+			}
+		}
+	},
+	"inputs": {
+		"input_global_trp": {
+			"type": "input.timerange",
+			"options": {
+				"token": "global_time",
+				"defaultValue": "-24h@h,now"
+			},
+			"title": "Global Time Range"
+		}
+	},
+	"layout": {
+		"type": "absolute",
+		"options": {
+			"display": "auto-scale"
+		},
+		"structure": [
+			{
+				"item": "viz_y44ECpf6",
+				"type": "block",
+				"position": {
+					"x": 50,
+					"y": 10,
+					"w": 800,
+					"h": 600
+				}
+			}
+		],
+		"globalInputs": [
+			"input_global_trp"
+		]
+	},
+	"description": "",
+	"title": "Maps Demo"
+}
